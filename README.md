@@ -1,6 +1,6 @@
 ﻿# Universal Literature Screening Toolkit v2.0
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17063676.svg)](https://doi.org/10.5281/zenodo.17063676)
 [![License: MIT](https##  Contributing
 
 We welcome contributions from researchers and developers alike! See our [Contributing Guidelines](CONTRIBUTING.md) for details on how to participate.

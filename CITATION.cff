@@ -20,7 +20,7 @@ authors:
     email: "ulrike.hiltner@usys.ethz.ch"
 repository-code: "https://github.com/yourusername/universal-literature-screening-toolkit"  # Replace with your GitHub URL
 url: "https://github.com/yourusername/universal-literature-screening-toolkit"  # Replace with your GitHub URL
-# doi: "10.5281/zenodo.XXXXXXX"  # Uncomment and add DOI once available from Zenodo
+doi: doi: 10.5281/zenodo.17063676
 license: MIT
 keywords:
   - "systematic review"
