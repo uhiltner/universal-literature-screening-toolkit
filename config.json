@@ -1,0 +1,29 @@
+{
+  "validation_logic": {
+    "default_operator": "AND",
+    "description": "Default logic for combining blocks (AND = all blocks must pass, OR = any block can pass)",
+    "block_combinations": {
+      "description": "Special combinations for specific blocks (e.g., BES blocks in DSS4ES)",
+      "blocks": ["3A", "3B"],
+      "operator": "AND",
+      "combined_name": "BES (Biodiversity & Ecosystem Services)"
+    }
+  },
+  "output_settings": {
+    "include_folder": "include",
+    "exclude_folder": "exclude", 
+    "maybe_folder": "maybe",
+    "html_report": true,
+    "json_results": true
+  },
+  "text_processing": {
+    "case_sensitive": false,
+    "whole_word_matching": true,
+    "encoding": "utf-8"
+  },
+  "domain_info": {
+    "research_area": "Generic Literature Review",
+    "description": "Configurable toolkit for systematic literature screening",
+    "version": "2.0"
+  }
+}

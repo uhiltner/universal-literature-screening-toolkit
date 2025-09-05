@@ -1,0 +1,24 @@
+{
+  "validation_logic": {
+    "default_operator": "AND",
+    "description": "Medical research typically requires ALL criteria (treatment + condition + study design + outcomes)",
+    "block_combinations": {}
+  },
+  "output_settings": {
+    "include_folder": "relevant_studies",
+    "exclude_folder": "excluded_studies",
+    "maybe_folder": "for_manual_review",
+    "html_report": true,
+    "json_results": true
+  },
+  "text_processing": {
+    "case_sensitive": false,
+    "whole_word_matching": true,
+    "encoding": "utf-8"
+  },
+  "domain_info": {
+    "research_area": "Medical Literature Review",
+    "description": "Systematic review configuration for clinical and medical research",
+    "version": "2.0"
+  }
+}

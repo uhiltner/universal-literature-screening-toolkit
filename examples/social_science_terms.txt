@@ -1,0 +1,24 @@
+﻿# Social Science Literature Review Example
+#
+# Example search criteria for social and behavioral research
+# Focus: Youth behavior and intervention studies
+
+BLOCK 1: Population/Demographics
+adolescent*, teenager*, youth*, "young adult*", student*
+"school age*", juvenile*, "age* 12-18", "age* 13-19"
+child*, "young people", "school children"
+
+BLOCK 2: Behavior/Phenomena
+behavior*, behaviour*, attitude*, perception*, "social behavior*"
+"risk behavior*", "health behavior*", "academic performance"
+"peer influence", "social interaction*", "psychological well-being"
+
+BLOCK 3: Research Methods
+survey*, interview*, questionnaire*, "mixed method*", "qualitative"
+"quantitative", "longitudinal study", "cross-sectional"
+"experimental design", "observational study", "case study"
+
+BLOCK 4: Interventions/Outcomes
+intervention*, program*, "prevention program*", education*
+"behavior change", "skill development", "social skill*"
+effectiveness*, outcome*, result*, improvement*, "program evaluation"

@@ -1,0 +1,94 @@
+﻿# Universal Literature Screening Search Terms Template
+#
+# This is a generic template for defining search criteria for systematic literature reviews.
+# Customize these blocks for your specific research domain.
+#
+# SYNTAX:
+# - BLOCK N: Block Name
+# - Terms separated by commas
+# - Use * for wildcards (e.g., model* matches model, models, modeling)
+# - Use "quotes" for exact phrases
+# - Each block represents one validation criterion
+# - Papers must match criteria according to your config.json settings
+
+# =================================================================
+# EXAMPLE: Generic Research Template
+# =================================================================
+
+BLOCK 1: Primary Research Domain
+# Define your main research area/field
+research*, study*, analysis*, investigation*
+"systematic review", "literature review", method*
+
+BLOCK 2: Specific Context  
+# Define your specific context/subject area
+context*, domain*, field*, area*
+subject*, topic*, theme*
+
+BLOCK 3: Methodology
+# Define required methodological approaches
+method*, approach*, technique*, framework*
+model*, simulation*, analysis*, evaluation*
+
+BLOCK 4: Outcomes/Objects
+# Define what you're studying (outcomes, objects, phenomena)
+outcome*, result*, effect*, impact*
+system*, process*, phenomenon*, factor*
+
+# =================================================================
+# EXAMPLE: Medical Literature Template
+# =================================================================
+
+# BLOCK 1: Medical Condition
+# diabetes*, "type 2 diabetes", "diabetes mellitus"
+# hypertension*, "high blood pressure", cardiovascular*
+
+# BLOCK 2: Treatment/Intervention  
+# treatment*, therapy*, intervention*, medication*
+# drug*, pharmaceutical*, "clinical trial", procedure*
+
+# BLOCK 3: Study Design
+# "randomized controlled trial", "systematic review", "meta-analysis"
+# "cohort study", "case-control study", "cross-sectional"
+
+# BLOCK 4: Outcomes
+# mortality*, morbidity*, "quality of life", efficacy*
+# "adverse effect*", safety*, "side effect*"
+
+# =================================================================
+# EXAMPLE: Environmental Science Template  
+# =================================================================
+
+# BLOCK 1: Environmental Context
+# climate*, environment*, ecosystem*, biodiversity*
+# "environmental impact", sustainability*, conservation*
+
+# BLOCK 2: Assessment Methods
+# assessment*, evaluation*, monitoring*, measurement*
+# "remote sensing", "GIS", model*, simulation*
+
+# BLOCK 3: Impact/Change
+# impact*, effect*, change*, variation*
+# trend*, pattern*, "long-term", temporal*
+
+# BLOCK 4: Management/Policy
+# management*, policy*, governance*, regulation*
+# planning*, strategy*, "decision making", conservation*
+
+# =================================================================
+# INSTRUCTIONS FOR CUSTOMIZATION:
+# =================================================================
+
+# 1. DELETE the example blocks above
+# 2. DEFINE your own blocks based on your research question
+# 3. USE domain-specific terminology
+# 4. INCLUDE multiple languages if needed
+# 5. TEST with a few papers first
+# 6. ADJUST terms based on initial results
+
+# TIPS:
+# - Start with broad terms, then refine
+# - Include synonyms and variations
+# - Consider different spellings (e.g., analyze vs analyse)
+# - Use wildcard (*) for word variations
+# - Test your patterns with sample abstracts

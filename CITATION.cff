@@ -1,0 +1,46 @@
+# Citation File Format for Universal Literature Screening Toolkit
+# https://citation-file-format.github.io/
+
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "Universal Literature Screening Toolkit"
+version: "2.0.0"
+date-released: "2025-09-05"
+abstract: >
+  A domain-agnostic automated literature screening toolkit for systematic reviews 
+  and meta-analyses. Supports multi-language pattern matching, configurable 
+  validation logic, and real PDF text extraction for efficient large-scale 
+  literature processing across multiple research domains.
+authors:
+  - family-names: "Hiltner"
+    given-names: "Ulrike"
+    orcid: "https://orcid.org/0000-0001-5663-7068"
+    affiliation: "Forest Ecology, Institute of Terrestrial Ecosystems, Department Environmental Systems Science, ETH Zurich"
+    email: "ulrike.hiltner@usys.ethz.ch"
+repository-code: "https://github.com/yourusername/universal-literature-screening-toolkit"  # Replace with your GitHub URL
+url: "https://github.com/yourusername/universal-literature-screening-toolkit"  # Replace with your GitHub URL
+# doi: "10.5281/zenodo.XXXXXXX"  # Uncomment and add DOI once available from Zenodo
+license: MIT
+keywords:
+  - "systematic review"
+  - "literature screening"
+  - "meta-analysis"
+  - "research automation"
+  - "PDF processing"
+  - "multi-language"
+  - "decision support systems"
+  - "forest research"
+  - "ecosystem services"
+  - "open science"
+preferred-citation:
+  type: software
+  title: "Universal Literature Screening Toolkit: Automated Multi-Domain Literature Processing"
+  authors:
+    - family-names: "Hiltner"
+      given-names: "Ulrike"
+      orcid: "https://orcid.org/0000-0001-5663-7068"
+  version: "2.0.0"
+  date-released: "2025-09-05"
+  # doi: "10.5281/zenodo.XXXXXXX"  # Uncomment and add DOI once available from Zenodo
+  url: "https://github.com/yourusername/universal-literature-screening-toolkit"  # Replace with your GitHub URL

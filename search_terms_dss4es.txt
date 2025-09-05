@@ -1,0 +1,71 @@
+# Literature Screening Search Terms Configuration - DSS4ES Compatible
+# 
+# This configuration matches the proven DSS4ES 6-block validation system
+# Each block represents one validation criterion that papers must meet.
+# Papers must match ALL blocks to be included (Boolean AND logic)
+
+BLOCK 1: Forest Context
+Wald*, Forst*, Holz*, Waldbau*, Silvikultur*, forêt*, forestier*
+bois*, sylvicultur*, foresta*, forestale*, legno*, selvicoltur*
+forest*, wood*, silvicultur*
+
+BLOCK 2: Management Context
+Management*, Bewirtschaft*, Plan*, Planung*, Revitalisier*, Renaturier*
+Wiederherstell*, Erhalt*, Verwalt*, "nachhaltig* Plan*", Steuer*, Lenkung*
+Gesetz*, Regul*, gestion*, aménagement*, planific*, revitalis*, restaur*
+réhabilit*, "plan* durable*", gouvernance*, réglement*, gestione*, piano*
+rivitalizza*, ripristin*, riqualificazione*, "piano* sostenibil*", normativ*
+manag*, revital*, restor*, "sustain* plan*", govern*, leg*
+
+BLOCK 3A: BES Concepts
+Biodiversität*, Artenvielfalt*, "biolog* Vielfalt*", Ökolog*, Natur*, Umwelt*
+Landschaft*, Bereitstell*, Versorg*, Regulier*, kulturell*, biodiversité*
+"diversité biolog*", écolog*, environnement*, paysage*, approvisionnement*
+régulation*, soutien*, biodiversità*, "diversità biolog*", ecolog*, ambiente*
+paesaggio*, fornitura*, regolazione*, cultural*, supporto*, biodivers*
+biolog*, diversit*, ecolo*, natur*, environment*, landscape*, provision*
+regulat*, cultur*, support*
+
+BLOCK 3B: BES Objects
+Dienstleistung*, Ökosystemleistung*, Leistung*, Nutzen*, Gut*, Güter*
+Beitrag*, Funktion*, Ressource*, service*, "service écosystémi*"
+bénéfice*, bien*, contribution*, ressource*, servizi*, "servizi ecosistemi*"
+benefici*, bene*, beni*, funzion*, risors*, benefit*, good*, capital*
+
+BLOCK 4: Decision Support
+Entscheidungsunterstützung*, Entscheidungsfindung*, Entscheidungshilfe*
+Problemlös*, Lösung*, "aide à la décision", "système d'aide à la décision"
+"prise de décision", "outil d'aide à la décision", "outil de décision"
+"résolution de problème*", solution*, "supporto alle decisioni"
+"sistema di supporto alle decisioni", "processo decisional*"
+"strumento decisional*", "strumento di supporto", "risoluzione dei problemi"
+soluzion*, decision-support*, "decision support*", decision-mak*
+"decision mak*", "decision tool*", "decision guid*", "decision aid"
+choice-mak*, "choice mak*", "problem solv*", problem-solv*
+
+BLOCK 5: Scenarios and Simulations
+Szenario*, Szenarienentwicklung*, Simulation*, Alternativ*, Projektion*
+Prognose*, Vorhersage*, "Landnutzungsoption*", scénario*
+"développement de scénario*", alternative*, prévision*, "option d'usage du sol"
+scenario*, "sviluppo di scenari*", simulazion*, proiezion*
+"opzione d'uso del suolo", "scenario* develop*", simulat*, project*
+forecast*, "land* use option*"
+
+BLOCK 6: Models and Quantitative Methods
+Waldmodell*, Forstmodell*, Vegetationsmodell*, Wachstumsmodell*
+Waldwachstumsmodell*, Ertragsmodell*, "ökophysiologisch* Modell*"
+Prozessmodell*, "prozessbasiert* Modell*", "individuenbasiert* Modell*"
+Lückenmodell*, Landschaftsmodell*, Kohlenstoffmodell*, "hydrologisch* Modell*"
+"ökohydrologisch* Modell*", "modèle* forestier*", "modèle* de végétation"
+"modèle* de croissance", "modèle* de rendement", "modèle* mécaniste"
+"modèle* basé sur les processus", "modèle* individu-centré", "modèle* de trouée"
+"modèle* de paysage", "modèle* hydrologique", "modèle* écohydrologique"
+"modello forestale", "modello di vegetazione", "modello di crescita"
+"modello di rendimento", "modello di processo", "modello basato sui processi"
+"modello a individui", "modello di gap", "modello di paesaggio"
+"modello idrologico", "modello ecoidrologico", "quantitative forest* model*"
+"Vegetat* model*", "Forest* model*", "Tree growth model*", "Forest* growth model*"
+"Yield* model*", "Ecophysiolog* model*", "Eco-physiolog* model*"
+"Process-based model*", "Individual-based model*", "Process model*"
+"Individual model*", "Gap* model*", "Landscape* model*", "Carbon cycle* model*"
+"Hydrolog* model*", "Eco-hydrologic* model*", "Eco* hydrologic* model*"
