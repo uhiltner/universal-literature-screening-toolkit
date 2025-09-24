@@ -60,6 +60,38 @@ Next, we need to set up a clean, private workspace for the toolkit. This ensures
         pip install -r requirements.txt
         ```
 
+## Windows Fast Start (Recommended)
+
+These two scripts set up a safe, short-path Python environment at C:\uls_env and run the toolkit without touching global Python.
+
+1) Open Windows PowerShell
+2) Allow scripts for this session only:
+    - Run: Set-ExecutionPolicy Bypass -Scope Process
+3) From the repository root, run setup:
+    - .\scripts\setup_windows.ps1
+4) Run the toolkit with defaults:
+    - .\scripts\run_tool.ps1
+
+Defaults used by run_tool.ps1:
+- --input .\input_pdfs
+- --output .\results
+- --search-terms .\search_terms.txt
+- --config .\config.json
+
+Tip: You can pass custom paths, e.g.:
+- .\scripts\run_tool.ps1 -Input .\input_pdfs -Output .\results -SearchTerms .\search_terms.txt -Config .\config.json
+
+Troubleshooting (plain language):
+- “Python not found”: Install from python.org; or try `py -V`. Then re-run setup.
+- Long path/ensurepip errors: The setup uses C:\uls_env to avoid this; just re-run setup.
+- “pip not recognized”: Re-run .\scripts\setup_windows.ps1 (it repairs pip inside the venv).
+- Script policy blocked: Use `Set-ExecutionPolicy Bypass -Scope Process` and try again.
+
+Double-click option (Windows):
+- You can use `run.bat` in the repo root. It runs setup and then the tool. PowerShell scripts are still recommended for clearer error messages.
+
+---
+
 ### Step 3: Add Your PDF Files
 
 This is where you put the papers you want to screen.
@@ -91,7 +123,7 @@ Now, tell the toolkit what to look for.
 
 **Pro Tip:** We've included templates! You can copy the contents from one of the files in the `examples/` folder (e.g., `medical_literature_terms.txt`) and paste them into your `search_terms.txt` to get started quickly.
 
-### Step 5: Run the Screening!
+### Step 5: Run the Screening! (Alternative to Windows scripts)
 
 You're ready to go! Run the main command to start the process.
 
@@ -116,6 +148,17 @@ Once the tool is finished, a new folder named `results` will appear. Inside, you
 *   **Organized PDF Folders**: The toolkit also creates sub-folders and sorts your original PDFs into `included` and `excluded` piles for you (if it can find the original PDF files).
 
 ---
+
+## macOS and Linux (Brief)
+
+Use your system Python without touching global packages in other projects:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+python3 run_screening.py --input input_pdfs --output results --search-terms search_terms.txt --config config.json
+```
 
 ## 🆘 Need More Help?
 

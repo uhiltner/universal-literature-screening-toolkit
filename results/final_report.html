@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Literature Screening Results</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+        .header { background: #f0f8ff; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .summary { background: #f9f9f9; padding: 15px; margin: 20px 0; border-radius: 5px; }
+        .block { margin: 10px 0; padding: 10px; border-left: 4px solid #007acc; background: #fafafa; }
+        .included { color: green; font-weight: bold; }
+        .excluded { color: red; font-weight: bold; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        .criteria-list { list-style-type: none; padding: 0; }
+        .criteria-list li { padding: 2px 0; }
+        .pass { color: green; }
+        .fail { color: red; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌲 Literature Screening Results</h1>
+        <p><strong>Generated:</strong> 2025-09-24 23:10:57</p>
+        <p><strong>Toolkit Version:</strong> 1.0.0</p>
+    </div>
+    
+    <div class="summary">
+        <h2>📊 Summary Statistics</h2>
+        <p><strong>Total Papers Analyzed:</strong> 2</p>
+        <p><strong>Papers Included:</strong> <span class="included">0 (0.0%)</span></p>
+        <p><strong>Papers Excluded:</strong> <span class="excluded">2 (100.0%)</span></p>
+    </div>
+    
+    <div class="block">
+        <h2>🔍 Search Criteria Applied</h2>
+        <p><strong>Validation Logic:</strong> Boolean AND (all blocks must pass)</p>
+        <ul class="criteria-list"><li><strong>Block 1:</strong> Primary Research Domain (7 terms)</li><li><strong>Block 2:</strong> Specific Context (7 terms)</li><li><strong>Block 3:</strong> Methodology (8 terms)</li><li><strong>Block 4:</strong> Outcomes/Objects (8 terms)</li>        </ul>
+    </div>
+    
+    <h2>📋 Detailed Results by Paper</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Filename</th>
+                <th>Overall Result</th>
+                <th>Blocks Passed</th>
+                <th>Block Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>40_Thrippleton.pdf</td>
+                <td class="excluded">EXCLUDED</td>
+                <td>0/4</td>
+                <td><span class="fail">❌ Primary Research Domain</span><br><span class="fail">❌ Specific Context</span><br><span class="fail">❌ Methodology</span><br><span class="fail">❌ Outcomes/Objects</span><br></td>
+            </tr>
+            <tr>
+                <td>Hiltner_NaiS_Steinschlagprofil_Bericht_update_final.pdf</td>
+                <td class="excluded">EXCLUDED</td>
+                <td>0/4</td>
+                <td><span class="fail">❌ Primary Research Domain</span><br><span class="fail">❌ Specific Context</span><br><span class="fail">❌ Methodology</span><br><span class="fail">❌ Outcomes/Objects</span><br></td>
+            </tr>        </tbody>
+    </table>
+    
+    <div style="margin-top: 30px; padding: 15px; background: #f0f0f0; border-radius: 5px;">
+        <h3>📁 Output Files</h3>
+        <ul>
+            <li><strong>results/sorted_pdfs/include/</strong> - Papers meeting all criteria</li>
+            <li><strong>results/sorted_pdfs/exclude/</strong> - Papers missing one or more criteria</li>
+            <li><strong>results/validation_results.json</strong> - Raw validation data</li>
+            <li><strong>results/summary_statistics.json</strong> - Summary statistics</li>
+        </ul>
+    </div>
+</body>
+</html>

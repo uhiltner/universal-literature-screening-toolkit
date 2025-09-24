@@ -34,6 +34,12 @@ def generate_reports(validation_results, search_blocks, input_pdf_dir, output_di
 def sort_pdf_files(validation_results, input_dir, output_dir):
     """Sort PDF files into include/exclude folders."""
     
+    # Ensure destination folders exist
+    include_dir = Path(output_dir) / "sorted_pdfs" / "include"
+    exclude_dir = Path(output_dir) / "sorted_pdfs" / "exclude"
+    include_dir.mkdir(parents=True, exist_ok=True)
+    exclude_dir.mkdir(parents=True, exist_ok=True)
+
     included_count = 0
     excluded_count = 0
     missing_count = 0
@@ -48,10 +54,10 @@ def sort_pdf_files(validation_results, input_dir, output_dir):
             continue
         
         if result["overall_result"]:
-            dest_path = Path(output_dir) / "sorted_pdfs" / "include" / filename
+            dest_path = include_dir / filename
             included_count += 1
         else:
-            dest_path = Path(output_dir) / "sorted_pdfs" / "exclude" / filename
+            dest_path = exclude_dir / filename
             excluded_count += 1
         
         try:
@@ -163,10 +169,11 @@ def generate_html_report(validation_results, search_blocks, output_dir):
 </body>
 </html>"""
     
-    with open(f"{output_dir}/final_report.html", "w", encoding="utf-8") as f:
+    # Align with run_screening messaging and common expectations
+    with open(f"{output_dir}/validation_report.html", "w", encoding="utf-8") as f:
         f.write(html_content)
     
-    print(f"HTML report generated: {output_dir}/final_report.html")
+    print(f"HTML report generated: {output_dir}/validation_report.html")
 
 def generate_summary_stats(validation_results, output_dir):
     """Generate summary statistics file."""
