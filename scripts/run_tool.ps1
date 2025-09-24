@@ -4,7 +4,7 @@ ULST Runner Script (Windows)
 Uses the short-path venv at C:\uls_env to run run_screening.py with sensible defaults.
 
 Usage (PowerShell):
-  .\scripts\run_tool.ps1 [-Input <path>] [-Output <path>] [-SearchTerms <path>] [-Config <path>]
+  .\scripts\run_tool.ps1 [-InputPath <path>] [-OutputPath <path>] [-SearchTermsPath <path>] [-ConfigPath <path>]
 
 Defaults:
   Input:       .\input_pdfs
@@ -14,8 +14,12 @@ Defaults:
 #>
 
 param(
-  [string]$InDir = ".\input_pdfs",
-  [string]$OutDir = ".\results",
+  [Alias('InDir')]
+  [string]$InputPath = ".\input_pdfs",
+
+  [Alias('OutDir')]
+  [string]$OutputPath = ".\results",
+
   [string]$SearchTermsPath = ".\search_terms.txt",
   [string]$ConfigPath = ".\config.json"
 )
@@ -46,26 +50,26 @@ if (-not (Test-Path $Entry)) {
 }
 
 # Normalize output directory and ensure it exists
-if (-not (Test-Path $OutDir)) {
-  New-Item -ItemType Directory -Path $OutDir -Force *> $null | Out-Null
+if (-not (Test-Path $OutputPath)) {
+  New-Item -ItemType Directory -Path $OutputPath -Force *> $null | Out-Null
 }
 
 Write-Info "Running ULST with:";
-Write-Host "  --input        $InDir" -ForegroundColor DarkGray
-Write-Host "  --output       $OutDir" -ForegroundColor DarkGray
+Write-Host "  --input        $InputPath" -ForegroundColor DarkGray
+Write-Host "  --output       $OutputPath" -ForegroundColor DarkGray
 Write-Host "  --search-terms $SearchTermsPath" -ForegroundColor DarkGray
 Write-Host "  --config       $ConfigPath" -ForegroundColor DarkGray
 
-& $PyExe $Entry --input $InDir --output $OutDir --search-terms $SearchTermsPath --config $ConfigPath
+& $PyExe $Entry --input $InputPath --output $OutputPath --search-terms $SearchTermsPath --config $ConfigPath
 
 if ($LASTEXITCODE -ne 0) {
   Write-Err "run_screening.py exited with code $LASTEXITCODE"
   exit $LASTEXITCODE
 }
 
-$html = Join-Path $OutDir 'validation_report.html'
-$htmlAlt = Join-Path $OutDir 'final_report.html'
-$json = Join-Path $OutDir 'validation_results.json'
+$html = Join-Path $OutputPath 'validation_report.html'
+$htmlAlt = Join-Path $OutputPath 'final_report.html'
+$json = Join-Path $OutputPath 'validation_results.json'
 
 if (Test-Path $html) {
   Write-Ok "HTML report: $html"

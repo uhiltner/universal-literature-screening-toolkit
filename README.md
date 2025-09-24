@@ -1,104 +1,132 @@
-# Universal Literature Screening Toolkit v2.0# Universal Literature Screening Toolkit v2.0# Universal Literature Screening Toolkit v2.0
-
-
+# Universal Literature Screening Toolkit v2.0
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17063676.svg)](https://doi.org/10.5281/zenodo.17063676)
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-[![JOSS Status](https://joss.theoj.org/papers/10.21105/joss.XXXXX/status.svg)](https://joss.theoj.org/papers/10.21105/joss.XXXXX)[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17063676.svg)](https://doi.org/10.5281/zenodo.17063676)[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17063676.svg)](https://doi.org/10.5281/zenodo.17063676)
-
+[![JOSS Status](https://joss.theoj.org/papers/10.21105/joss.XXXXX/status.svg)](https://joss.theoj.org/papers/10.21105/joss.XXXXX)
 [![PyPI version](https://badge.fury.io/py/universal-literature-screening-toolkit.svg)](https://badge.fury.io/py/universal-literature-screening-toolkit)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)[![License: MIT]( https##  Contributing
+A configurable, cross-platform tool for systematic literature review and automated paper screening. This toolkit can be adapted for any research domain and supports multiple languages.
 
+> Accelerate your systematic reviews: Process hundreds of papers in minutes while maintaining research rigor.
 
+## Citation
 
-A configurable, cross-platform tool for systematic literature review and automated paper screening. This toolkit can be adapted for any research domain and supports multiple languages.[![JOSS Status](https://joss.theoj.org/papers/10.21105/joss.XXXXX/status.svg)](https://joss.theoj.org/papers/10.21105/joss.XXXXX)
+If you use this toolkit in your research, please cite it as:
 
-
-
-> **Accelerate your systematic reviews**: Process hundreds of papers in minutes instead of days while maintaining research rigor.[![PyPI version](https://badge.fury.io/py/universal-literature-screening-toolkit.svg)](https://badge.fury.io/py/universal-literature-screening-toolkit)We welcome contributions from researchers and developers alike! See our [Contributing Guidelines](CONTRIBUTING.md) for details on how to participate.
-
-
-
-## 📖 Citation[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-
-
-
-If you use this toolkit in your research, please cite it as:This toolkit is designed to be extended and customized:
-
-
-
-```bibtexA configurable, cross-platform tool for systematic literature review and automated paper screening. This toolkit can be adapted for any research domain and supports multiple languages.
-
+```bibtex
 @software{hiltner2025universal,
-
-  author       = {Hiltner, Ulrike},1. **Add new output formats** in `report_generator.py`
-
+  author       = {Hiltner, Ulrike},
   title        = {Universal Literature Screening Toolkit},
-
-  month        = sep,> **Accelerate your systematic reviews**: Process hundreds of papers in minutes instead of days while maintaining research rigor.2. **Enhance language support** in `search_parser.py`
-
+  month        = sep,
   year         = 2025,
-
-  publisher    = {Zenodo},3. **Implement new validation logic** in `validator.py`
-
+  publisher    = {Zenodo},
   version      = {2.0.0},
-
-  doi          = {10.5281/zenodo.17063676},## 📖 Citation4. **Create domain templates** in additional configuration files
-
+  doi          = {10.5281/zenodo.17063676},
   url          = {https://doi.org/10.5281/zenodo.17063676}
-
 }
+```bash
+# Setup (automated)
+./scripts/setup_unix.sh        # Linux/Mac
+# OR
+.\scripts\setup_windows.ps1    # Windows
 
+# Run with example data
+./scripts/run_tool.sh --input input_pdfs --output results --search-terms examples/search_terms_dss4es.txt
+
+# Use your own data
+./scripts/run_tool.sh --input /path/to/your/pdfs --output /path/to/results --search-terms your_search_terms.txt
 ```
 
-If you use this toolkit in your research, please cite it as:Please see our [Code of Conduct](CODE_OF_CONDUCT.md) for community guidelines.adge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## Configuration
 
-See [CITATION.cff](CITATION.cff) for other citation formats.
+Search terms format (search_terms.txt):
 
-[![JOSS Status](https://joss.theoj.org/papers/10.21105/joss.XXXXX/status.svg)](https://joss.theoj.org/papers/10.21105/joss.XXXXX)
+```
+BLOCK 1: Primary Concept
+keyword1*, keyword2, "exact phrase", concept*
 
-## ✨ Key Features
+BLOCK 2: Secondary Concept
+term1, term2*, "another exact phrase"
 
-```bibtex[![PyPI version](https://badge.fury.io/py/universal-literature-screening-toolkit.svg)](https://badge.fury.io/py/universal-literature-screening-toolkit)
+BLOCK 3: Context
+context1*, environment*, domain*
+```
 
-- **Domain Agnostic**: Works with any research field and search criteria
+Configuration file (config.json):
 
-- **Multi-language Support**: Handles Unicode text in any language@software{hiltner2025universal,[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+```json
+{
+  "validation_logic": {
+    "default_operator": "AND"
+  },
+  "domain_info": {
+    "research_area": "Your Research Domain",
+    "description": "Description of your review"
+  }
+}
+```
 
-- **Configurable Logic**: Choose AND/OR validation logic per your needs
+## Output
 
-- **Cross-platform**: Runs on Windows, macOS, and Linux  author       = {Hiltner, Ulrike},
+- HTML report with statistics
+- JSON results for integration
+- Sorted PDFs into include/exclude
 
-- **Professional Reports**: Generates HTML reports and organizes PDFs
+## Project Structure
 
-- **Easy Customization**: Simple text-based configuration files  title        = {Universal Literature Screening Toolkit},A configurable, cross-platform tool for systematic literature review and automated paper screening. This toolkit can be adapted for any research domain and supports multiple languages.
+```
+universal-literature-screening-toolkit/
+├── run_screening.py
+├── config.json
+├── search_terms.txt
+├── requirements.txt
+├── scripts/
+│   ├── search_parser.py
+│   ├── validator.py
+│   ├── pdf_extractor.py
+│   └── report_generator.py
+├── tests/
+├── examples/
+├── input_pdfs/
+├── CITATION.cff
+├── LICENSE
+├── CODE_OF_CONDUCT.md
+└── CONTRIBUTING.md
+```
 
+## Testing
 
+```bash
+pip install pytest
+pytest tests/ -v
+```
 
-## 🚀 Quick Start  month        = sep,
+## Contributing
 
+Contributions are welcome. See CONTRIBUTING.md and CODE_OF_CONDUCT.md.
 
+## License
 
-**New to Python or command-line tools?** 👉 See [QUICK_START.md](QUICK_START.md) for a detailed beginner's guide!  year         = 2025,> **Accelerate your systematic reviews**: Process hundreds of papers in minutes instead of days while maintaining research rigor.
+MIT License (see LICENSE).
 
+## Quick Start
 
+New to Python or command line? Start with QUICK_START.md for a step-by-step guide.
 
-### Experienced Users - Fast Track:  publisher    = {Zenodo},
+Experienced users:
 
-
-
-```bash  version      = {2.0.0},## 📖 Citation
-
-# 1. Setup (automated)
-
-./scripts/setup_unix.sh        # Linux/Mac  doi          = {10.5281/zenodo.17063676},
-
+```bash
+# Setup (automated)
+./scripts/setup_unix.sh        # Linux/Mac
 # OR
+.\scripts\setup_windows.ps1    # Windows
 
-.\scripts\setup_windows.ps1    # Windows  url          = {https://doi.org/10.5281/zenodo.17063676}If you use this toolkit in your research, please cite it as:
+# Run with example data
+./scripts/run_tool.sh --input input_pdfs --output results --search-terms examples/search_terms_dss4es.txt
+
+# Use your own data
+./scripts/run_tool.sh --input /path/to/your/pdfs --output /path/to/results --search-terms your_search_terms.txt
 
 
 
