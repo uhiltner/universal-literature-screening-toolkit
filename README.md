@@ -1,7 +1,7 @@
-﻿# Universal Literature Screening Toolkit v2.0
+# Universal Literature Screening Toolkit v2.0
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17063676.svg)](https://doi.org/10.5281/zenodo.17063676)
-[![License: MIT](https##  Contributing
+[![License: MIT]( https##  Contributing
 
 We welcome contributions from researchers and developers alike! See our [Contributing Guidelines](CONTRIBUTING.md) for details on how to participate.
 
@@ -33,8 +33,8 @@ If you use this toolkit in your research, please cite it as:
   year         = 2025,
   publisher    = {Zenodo},
   version      = {2.0.0},
-  doi          = {10.5281/zenodo.XXXXXXX},
-  url          = {https://doi.org/10.5281/zenodo.XXXXXXX}
+  doi          = {10.5281/zenodo.17063676},
+  url          = https://doi.org/10.5281/zenodo.17063676}
 }
 ```
 
@@ -53,6 +53,7 @@ See [CITATION.cff](CITATION.cff) for other citation formats or [PUBLICATION.md](
 
 ### 1. Setup
 `ash
+
 # Create Python virtual environment
 python -m venv venv
 
