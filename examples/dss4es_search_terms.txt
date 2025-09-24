@@ -1,0 +1,20 @@
+BLOCK 1: Forest Context
+forest*, wood*, silvicultur*, forestry, woodland*
+
+BLOCK 2: Management Context
+manag*, plan*, revital*, restor*, "sustain* plan*", govern*, leg*, planning, governance, legislation
+
+BLOCK 3: BES Concepts
+biodivers*, "biolog* diversit*", ecolo*, natur*, environment*, landscape*, provision*, regulat*, cultur*, support*
+
+BLOCK 4: BES Objects
+service*, benefit*, good*, contribution*, capital*, function*, resource*
+
+BLOCK 5: Decision Support
+decision-support*, "decision support*", decision-mak*, "decision mak*", "decision tool*", "decision guid*", "decision aid", choice-mak*, "choice mak*", "problem solv*", problem-solv*, solution*
+
+BLOCK 6: Scenarios and Simulations
+"scenario* develop*", scenario*, simulat*, alternative*, project*, forecast*, "land* use option*"
+
+BLOCK 7: Models and Quantitative Methods
+"quantitative forest* model*", "forest* model*", "vegetat* model*", "tree growth model*", "yield* model*", "ecophysiolog* model*", "eco-physiolog* model*", "process-based model*", "individual-based model*", "process model*", "individual model*", "gap* model*", "landscape* model*", "carbon cycle* model*", "hydrolog* model*", "eco-hydrologic* model*", "eco* hydrologic* model*"

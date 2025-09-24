@@ -1,0 +1,72 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# PyTest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Project specific
+results/
+test_results/
+debug_test.json
+fixed_json/
+
+# JOSS submission files (keep local only until ready)
+paper.bib
+paper.md
+
+# Development and debugging files
+github_setup.md
+PDF_WORKFLOW.md
+PUBLICATION.md
+QUICK_START.md
+RELEASE_SUMMARY.md
+TOOLKIT_SUMMARY.md
+prompts/
+
+# Windows batch files
+run.bat

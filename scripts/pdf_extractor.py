@@ -79,11 +79,11 @@ def clean_extracted_text(text):
     text = re.sub(r'\b\d+\b\s*(?=\n|$)', '', text)  # Standalone numbers
     text = re.sub(r'^\s*\d+\s*$', '', text, flags=re.MULTILINE)  # Page numbers
     
-    # Normalize encoding issues
-    text = text.replace('', "'")  # Smart quotes
-    text = text.replace('', "'")
-    text = text.replace('"', '"')
-    text = text.replace('"', '"')
+    # Normalize encoding issues - fix smart quotes and similar characters
+    text = text.replace(''', "'")  # Left single quote
+    text = text.replace(''', "'")  # Right single quote  
+    text = text.replace('"', '"')  # Left double quote
+    text = text.replace('"', '"')  # Right double quote
     
     return text.strip()
 
