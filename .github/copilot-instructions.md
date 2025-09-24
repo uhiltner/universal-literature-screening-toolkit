@@ -1,10 +1,187 @@
-# Scientific Research Assistant for Paper Screening - DSS4ES Literature Review
+# Universal Literature Screening Toolkit - Development Assistant
 
-## Role
-You are a specialized scientific research assistant focused on systematic literature review and paper screening for forest ecosystem research, specifically concerning decision support systems for ecosystem services (DSS4ES). You use intelligent content analysis with multi-language support to provide high-quality, contextual interpretations similar to advanced AI systems.
+## Overview
+You are a specialized AI assistant for the Universal Literature Screening Toolkit (ULST), a cross-platform Python tool for systematic literature review and automated paper screening. This toolkit is designed to be domain-agnostic and can be adapted for any research field with custom search criteria.
 
-## Primary Task
-Screen PDF documents in the `/pdfs` folder according to specific research criteria using intelligent analysis of title, abstract, and keywords only (no full-text analysis, no author information) and populate results in `./data/screening_results.json` with structured, interpretive data.
+## Repository Structure & Context
+
+### Published JOSS Repository (Clean for Publication)
+The main repository contains only publication-essential files:
+```
+universal-literature-screening-toolkit/
+├── README.md              # Professional overview
+├── QUICK_START.md         # Beginner-friendly guide  
+├── USER_GUIDE.md          # Advanced documentation
+├── CITATION.cff           # Citation information
+├── LICENSE               # MIT License
+├── CODE_OF_CONDUCT.md    # Community guidelines
+├── CONTRIBUTING.md       # Contribution guidelines
+├── run_screening.py      # Main CLI entry point
+├── config.json           # Default configuration
+├── search_terms.txt      # Generic search template
+├── requirements.txt      # Python dependencies
+├── scripts/              # Core functionality
+│   ├── search_parser.py  # Search term processing
+│   ├── validator.py      # Validation logic
+│   ├── pdf_extractor.py  # PDF content extraction
+│   ├── report_generator.py # HTML/JSON output
+│   ├── setup_windows.ps1   # Windows setup automation
+│   ├── setup_unix.sh       # Unix setup automation
+│   ├── run_tool.ps1        # Windows execution
+│   └── run_tool.sh         # Unix execution
+├── tests/                # Comprehensive test suite (38 tests)
+│   ├── test_search_parser.py
+│   ├── test_validator.py
+│   ├── test_pdf_extractor.py
+│   ├── test_report_generator.py
+│   ├── test_cli_integration.py
+│   └── test_toolkit.py
+├── examples/             # Working examples
+│   ├── README.md
+│   ├── dss4es_config.json
+│   ├── dss4es_search_terms.txt
+│   └── env_config.json
+└── input_pdfs/          # Sample PDFs for testing
+    ├── 40_Thrippleton.pdf
+    └── Hiltner_NaiS_Steinschlagprofil_Bericht_update_final.pdf
+```
+
+### Development Files (Local Only - Not Published)
+These files exist locally but are excluded from publication via .gitignore:
+
+#### `/prompts/` - Agent Development System
+Contains specialized AI agent prompts for toolkit development:
+- **`code_reviewer.prompt.md`** - Code review and quality assurance agent
+- **`forclim-architectural-leader.md`** - Architecture and design decisions agent  
+- **`forclim-programmer.md`** - Python implementation specialist
+- **`forclim-quality-reviewer.md`** - Quality assurance and testing agent
+- **`forclim-test-generator.md`** - Test generation and validation agent
+- **`student-proof-ulst.md`** - Beginner-friendly documentation and setup agent
+
+#### Other Development Files
+- **`paper.bib`** & **`paper.md`** - JOSS submission drafts (kept local until ready)
+- **`results/`** - Generated output directory (created during runs)
+- **Python cache files** - `__pycache__/`, `*.pyc` files
+- **Testing artifacts** - `.pytest_cache/`, temporary test files
+
+## Core Functionality
+
+### Primary Purpose
+Automated systematic literature screening with:
+- **PDF content extraction** using PyMuPDF/pdfplumber
+- **Configurable search criteria** via text-based blocks
+- **Multi-language support** (English, German, French, Italian, etc.)
+- **Boolean logic validation** (AND/OR operations between blocks)
+- **Professional reporting** (HTML reports, JSON data, PDF sorting)
+- **Cross-platform compatibility** (Windows, macOS, Linux)
+
+### Technical Architecture
+**Language**: Python 3.8+
+**Core Dependencies**: PyMuPDF, pdfplumber, jinja2, pytest
+**Architecture**: Modular pipeline with pure functions
+**Testing**: Comprehensive pytest suite with 38+ test cases
+**Documentation**: Multi-level (README → QUICK_START → USER_GUIDE)
+
+## Development Workflow
+
+### For Code Development
+1. **Use agent prompts** in `/prompts/` directory for specialized assistance
+2. **Run comprehensive tests** via `pytest tests/ -v`
+3. **Cross-OS testing** using setup scripts in `/scripts/`
+4. **Validation** with sample PDFs in `/input_pdfs/`
+
+### For User Support
+1. **Beginners**: Direct to `QUICK_START.md` (step-by-step, assumes no Python experience)
+2. **Advanced users**: Reference `USER_GUIDE.md` and `examples/`
+3. **Developers**: Point to test suite and agent prompts
+4. **Researchers**: Show domain customization examples
+
+## Agent Specializations
+
+When working with development tasks, use the appropriate agent context:
+
+### Architecture & Design (`forclim-architectural-leader.md`)
+- System design decisions
+- API design and module interfaces
+- Cross-platform compatibility planning
+- Performance and scalability considerations
+
+### Implementation (`forclim-programmer.md`)
+- Python code implementation
+- Function composition and purity
+- Error handling and edge cases
+- CLI interface development
+
+### Quality Assurance (`forclim-quality-reviewer.md`)
+- Code review and best practices
+- Test coverage analysis  
+- Documentation quality
+- Cross-platform validation
+
+### Testing (`forclim-test-generator.md`)
+- Test case generation
+- Edge case identification
+- Integration testing
+- Validation benchmarks
+
+### User Experience (`student-proof-ulst.md`)
+- Beginner-friendly documentation
+- Setup automation and troubleshooting
+- Cross-OS compatibility
+- Student/researcher workflow optimization
+
+## Key Technical Concepts
+
+### Search Term Processing
+- **Block-based validation**: Each BLOCK represents one criterion
+- **Wildcard support**: `term*` matches variations
+- **Exact phrases**: `"term phrase"` for precise matching
+- **Multi-language**: Same concepts in different languages
+- **Boolean logic**: AND/OR operations configurable
+
+### PDF Processing Pipeline
+1. **Extraction**: PyMuPDF → pdfplumber fallback
+2. **Cleaning**: Unicode normalization, whitespace handling
+3. **Analysis**: Pattern matching against search blocks
+4. **Validation**: Boolean logic evaluation
+5. **Reporting**: HTML generation + PDF organization
+
+### Cross-Platform Support
+- **Windows**: PowerShell scripts (`.ps1`)
+- **Unix/Linux/macOS**: Shell scripts (`.sh`)
+- **Python environments**: Isolated virtual environments
+- **Dependency management**: pip + requirements.txt
+
+## Common Development Tasks
+
+### Adding New Features
+1. Update relevant core module in `/scripts/`
+2. Add comprehensive tests in `/tests/`
+3. Update documentation in README/USER_GUIDE
+4. Test cross-platform compatibility
+5. Validate with sample PDFs
+
+### Bug Fixes
+1. Reproduce with test cases
+2. Fix in core modules
+3. Verify with existing test suite
+4. Add regression test if needed
+5. Test on multiple platforms
+
+### Documentation Updates
+- **README.md**: Professional overview for all users
+- **QUICK_START.md**: Absolute beginner step-by-step
+- **USER_GUIDE.md**: Detailed reference documentation
+- **examples/**: Working configurations with explanations
+
+## Success Metrics
+- **Functionality**: All tests pass on Windows/macOS/Linux
+- **Usability**: Beginners can complete setup in 15 minutes
+- **Accuracy**: Sample PDFs correctly classified (validated benchmarks)
+- **Maintainability**: Clean code with comprehensive test coverage
+- **Documentation**: Multi-level docs serve different user types
+
+This toolkit bridges the gap between manual literature screening and fully automated systems, providing researchers with configurable, reliable, and user-friendly systematic review capabilities.
 
 ## Advanced Technical Approach
 
