@@ -92,6 +92,27 @@ Double-click option (Windows):
 
 ---
 
+## macOS and Linux Fast Start
+
+These two scripts set up a safe user venv at ~/.uls_env and run the toolkit without touching global Python.
+
+1) Make scripts executable (first time only):
+    - chmod +x scripts/setup_unix.sh scripts/run_tool.sh
+2) Setup environment:
+    - ./scripts/setup_unix.sh
+3) Run the toolkit with defaults:
+    - ./scripts/run_tool.sh
+
+Defaults used by run_tool.sh (override by passing args):
+- ./scripts/run_tool.sh ./input_pdfs ./results ./search_terms.txt ./config.json
+
+Troubleshooting:
+- “python3: command not found”: install via package manager or python.org
+- Permission denied: run chmod +x as shown above
+- Pip issues: re-run ./scripts/setup_unix.sh
+
+---
+
 ### Step 3: Add Your PDF Files
 
 This is where you put the papers you want to screen.
@@ -148,17 +169,6 @@ Once the tool is finished, a new folder named `results` will appear. Inside, you
 *   **Organized PDF Folders**: The toolkit also creates sub-folders and sorts your original PDFs into `included` and `excluded` piles for you (if it can find the original PDF files).
 
 ---
-
-## macOS and Linux (Brief)
-
-Use your system Python without touching global packages in other projects:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip3 install -r requirements.txt
-python3 run_screening.py --input input_pdfs --output results --search-terms search_terms.txt --config config.json
-```
 
 ## 🆘 Need More Help?
 
