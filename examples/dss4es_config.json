@@ -1,0 +1,30 @@
+{
+  "validation_logic": {
+    "default_operator": "AND",
+    "description": "AND logic ensures papers address forest management AND biodiversity/ecosystem services AND decision support",
+    "block_combinations": {
+      "description": "BES blocks (3 & 4) can be combined with OR logic - papers need either BES concepts OR BES objects",
+      "blocks": ["BLOCK 3", "BLOCK 4"],
+      "operator": "OR",
+      "combined_name": "BES (Biodiversity & Ecosystem Services)"
+    }
+  },
+  "output_settings": {
+    "include_folder": "include",
+    "exclude_folder": "exclude",
+    "maybe_folder": "maybe",
+    "html_report": true,
+    "json_results": true
+  },
+  "text_processing": {
+    "case_sensitive": false,
+    "whole_word_matching": true,
+    "encoding": "utf-8"
+  },
+  "domain_info": {
+    "research_area": "DSS4ES - Decision Support Systems for Ecosystem Services",
+    "description": "Systematic review of decision support tools for forest ecosystem service management",
+    "version": "2.0",
+    "search_focus": "Forest management tools that integrate biodiversity/ecosystem services considerations with quantitative modeling approaches"
+  }
+}
