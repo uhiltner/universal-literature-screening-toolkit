@@ -10,7 +10,7 @@ import os
 from pathlib import Path
 from datetime import datetime
 
-def generate_reports(validation_results, search_blocks, input_pdf_dir, output_dir):
+def generate_reports(validation_results, search_blocks, input_pdf_dir, output_dir, query_string: str | None = None):
     """Generate all reports and sort files."""
     
     # Create output directories
@@ -26,7 +26,7 @@ def generate_reports(validation_results, search_blocks, input_pdf_dir, output_di
     sort_pdf_files(validation_results, input_pdf_dir, output_dir)
     
     # Generate HTML report
-    generate_html_report(validation_results, search_blocks, output_dir)
+    generate_html_report(validation_results, search_blocks, output_dir, query_string=query_string)
     
     # Generate summary statistics
     generate_summary_stats(validation_results, output_dir)
@@ -69,8 +69,11 @@ def sort_pdf_files(validation_results, input_dir, output_dir):
     if missing_count > 0:
         print(f"Warning: {missing_count} PDF files were missing")
 
-def generate_html_report(validation_results, search_blocks, output_dir):
-    """Generate HTML report with detailed results."""
+def generate_html_report(validation_results, search_blocks, output_dir, query_string: str | None = None):
+    """Generate HTML report with detailed results.
+
+    When query_string is provided, it will be displayed instead of legacy block list.
+    """
     
     total_papers = len(validation_results)
     included_papers = sum(1 for r in validation_results if r["overall_result"])
@@ -113,13 +116,16 @@ def generate_html_report(validation_results, search_blocks, output_dir):
     
     <div class="block">
         <h2>🔍 Search Criteria Applied</h2>
-        <p><strong>Validation Logic:</strong> Boolean AND (all blocks must pass)</p>
-        <ul class="criteria-list">"""
+        """
+    if query_string:
+        html_content += f"<p><strong>Query:</strong> {query_string}</p>"
+    else:
+        html_content += "<p><strong>Validation Logic:</strong> Boolean AND (all blocks must pass)</p>\n        <ul class=\"criteria-list\">"
+        for i, block in enumerate(search_blocks or [], 1):
+            html_content += f"<li><strong>Block {i}:</strong> {block['name']} ({len(block['terms'])} terms)</li>"
+        html_content += "        </ul>"
     
-    for i, block in enumerate(search_blocks, 1):
-        html_content += f"<li><strong>Block {i}:</strong> {block['name']} ({len(block['terms'])} terms)</li>"
-    
-    html_content += """        </ul>
+    html_content += """
     </div>
     
     <h2>📋 Detailed Results by Paper</h2>

@@ -21,7 +21,8 @@ param(
   [string]$OutputPath = ".\results",
 
   [string]$SearchTermsPath = ".\search_terms.txt",
-  [string]$ConfigPath = ".\config.json"
+  [string]$ConfigPath = ".\config.json",
+  [string]$QueryFile = ""
 )
 
 Set-StrictMode -Version Latest
@@ -57,10 +58,18 @@ if (-not (Test-Path $OutputPath)) {
 Write-Info "Running ULST with:";
 Write-Host "  --input        $InputPath" -ForegroundColor DarkGray
 Write-Host "  --output       $OutputPath" -ForegroundColor DarkGray
-Write-Host "  --search-terms $SearchTermsPath" -ForegroundColor DarkGray
+if ($QueryFile) {
+  Write-Host "  --query-file   $QueryFile" -ForegroundColor DarkGray
+} else {
+  Write-Host "  --search-terms $SearchTermsPath" -ForegroundColor DarkGray
+}
 Write-Host "  --config       $ConfigPath" -ForegroundColor DarkGray
 
-& $PyExe $Entry --input $InputPath --output $OutputPath --search-terms $SearchTermsPath --config $ConfigPath
+if ($QueryFile) {
+  & $PyExe $Entry --input $InputPath --output $OutputPath --query-file $QueryFile --config $ConfigPath
+} else {
+  & $PyExe $Entry --input $InputPath --output $OutputPath --search-terms $SearchTermsPath --config $ConfigPath
+}
 
 if ($LASTEXITCODE -ne 0) {
   Write-Err "run_screening.py exited with code $LASTEXITCODE"
