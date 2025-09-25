@@ -1,5 +1,14 @@
 ﻿# Universal Literature Screening Search Terms Template
 #
+# ⚠️ DEPRECATION NOTICE: This BLOCK-based format is deprecated in v1.0.0
+# Use --query-file with a simple Boolean query string instead.
+#
+# Example query.txt:
+#   ((research* OR study*) AND (method* OR approach*)) AND NOT (economics)
+#
+# This template is maintained for backward compatibility only and will be
+# removed in a future release. Please migrate to the new query format.
+#
 # This is a generic template for defining search criteria for systematic literature reviews.
 # Customize these blocks for your specific research domain.
 #

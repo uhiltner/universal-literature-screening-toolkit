@@ -35,11 +35,10 @@ if (-not (Test-Path $ReqFile)) {
 
 $VenvPath   = 'C:\uls_env'
 $PyExe      = Join-Path $VenvPath 'Scripts\python.exe'
-$PipCmd     = "$PyExe -m pip"
 
 function Test-PyLauncher {
   try {
-    $ver = & py -3 -V 2>$null
+    & py -3 -V 2>$null
     return $LASTEXITCODE -eq 0
   } catch { return $false }
 }
@@ -48,7 +47,7 @@ function Test-Python {
   try { & python -V *> $null; return $LASTEXITCODE -eq 0 } catch { return $false }
 }
 
-function Ensure-Venv {
+function Initialize-Venv {
   if (Test-Path $PyExe) {
     Write-Info "Existing venv detected at $VenvPath"
     return
@@ -73,7 +72,7 @@ function Ensure-Venv {
   }
 }
 
-function Ensure-Pip {
+function Initialize-Pip {
   Write-Info "Upgrading pip in venv"
   try {
     & $PyExe -m ensurepip --upgrade *> $null
@@ -149,8 +148,8 @@ function Run-SmokeTest {
 
 try {
   Write-Info "Starting ULST Windows setup"
-  Ensure-Venv
-  Ensure-Pip
+  Initialize-Venv
+  Initialize-Pip
   Install-Requirements
   Verify-Environment
   Write-Ok "Environment ready at $VenvPath"

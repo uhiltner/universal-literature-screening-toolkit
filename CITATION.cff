@@ -5,8 +5,8 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 type: software
 title: "Universal Literature Screening Toolkit"
-version: "0.90.0"
-date-released: "2025-09-05"
+version: "1.0.0"
+date-released: "2025-09-25"
 abstract: >
   A domain-agnostic automated literature screening toolkit for systematic reviews 
   and meta-analyses. Supports multi-language pattern matching, configurable 
@@ -18,9 +18,9 @@ authors:
     orcid: "https://orcid.org/0000-0001-5663-7068"
     affiliation: "Forest Ecology, Institute of Terrestrial Ecosystems, Department Environmental Systems Science, ETH Zurich"
     email: "ulrike.hiltner@usys.ethz.ch"
-repository-code: "https://github.com/yourusername/universal-literature-screening-toolkit"  # Replace with your GitHub URL
-url: "https://github.com/yourusername/universal-literature-screening-toolkit"  # Replace with your GitHub URL
-doi: doi: 10.5281/zenodo.17063676
+repository-code: "https://github.com/uhiltner/universal-literature-screening-toolkit"
+url: "https://github.com/uhiltner/universal-literature-screening-toolkit"
+doi: 10.5281/zenodo.17063676
 license: MIT
 keywords:
   - "systematic review"
@@ -40,7 +40,7 @@ preferred-citation:
     - family-names: "Hiltner"
       given-names: "Ulrike"
       orcid: "https://orcid.org/0000-0001-5663-7068"
-  version: "2.0.0"
-  date-released: "2025-09-05"
+  version: "1.0.0"
+  date-released: "2025-09-25"
   # doi: "10.5281/zenodo.XXXXXXX"  # Uncomment and add DOI once available from Zenodo
-  url: "https://github.com/yourusername/universal-literature-screening-toolkit"  # Replace with your GitHub URL
+  url: "https://github.com/uhiltner/universal-literature-screening-toolkit"
