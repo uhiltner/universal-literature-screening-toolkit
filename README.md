@@ -1,6 +1,6 @@
 # Universal Literature Screening Toolkit (ULST)
 
-[![DOI](https://zenodo.org/badge/1051066565.svg)](https://doi.org/10.5281/zenodo.17063675)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17063676.svg)](https://doi.org/10.5281/zenodo.17063676)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![JOSS Status](https://joss.theoj.org/papers/10.21105/joss.XXXXX/status.svg)](https://joss.theoj.org/papers/10.21105/joss.XXXXX)
 [![PyPI version](https://badge.fury.io/py/universal-literature-screening-toolkit.svg)](https://badge.fury.io/py/universal-literature-screening-toolkit)
@@ -85,8 +85,8 @@ If you use this toolkit in your research, please cite it as:
   year         = 2025,
   publisher    = {Zenodo},
   version      = {1.0.0},
-  doi          = {10.5281/zenodo.17063675},
-  url          = {https://doi.org/10.5281/zenodo.17063675}
+  doi          = {10.5281/zenodo.17063676},
+  url          = {https://doi.org/10.5281/zenodo.17063676}
 }
 ```
 
