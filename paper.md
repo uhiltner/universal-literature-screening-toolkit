@@ -1,5 +1,5 @@
 ---
-title: 'Universal Literature Screening Toolkit: Automated Multi-Domain Literature Processing for Systematic Reviews'
+title: 'Universal Literature Screening Toolkit: A Domain-Agnostic Tool for Automated, Reproducible Literature Screening'
 doi: 10.5281/zenodo.17063676
 tags:
   - Python
@@ -16,78 +16,54 @@ authors:
     equal-contrib: true
     affiliation: "1"
 affiliations:
- - name: Forest Ecology, Institute of Terrestrial Ecosystems, Department Environmental Systems Science, ETH Zurich, Zurich, Switzerland
+ - name: Forest Ecology, Institute of Terrestrial Ecosystems, Department of Environmental Systems Science, ETH Zurich, Zurich, Switzerland
    index: 1
-date: 5 September 2025
+date: 25 September 2025
 bibliography: paper.bib
 ---
 
 # Summary
 
-Systematic literature reviews and meta-analyses are foundational to evidence-based research across all scientific disciplines. However, the initial screening phase—where researchers must evaluate hundreds or thousands of papers for relevance—represents a significant bottleneck that can take weeks or months of manual effort. The Universal Literature Screening Toolkit addresses this challenge by providing an automated, domain-agnostic solution for large-scale literature processing that maintains the rigor required for systematic reviews while dramatically reducing time investment.
+The Universal Literature Screening Toolkit (ULST) is a configurable, cross-platform Python application designed to automate the initial screening phase of systematic literature reviews. It provides a domain-agnostic framework for processing large volumes of research papers against user-defined criteria, significantly accelerating evidence synthesis while maintaining methodological rigor. The tool operates on local PDF collections, applying complex, multi-lingual search logic that overcomes the limitations of many institutional search platforms. By generating auditable reports and organizing documents, the ULST makes the screening process faster, more consistent, and fully reproducible, thereby addressing a critical bottleneck in evidence-based research.
 
-The toolkit combines multi-language pattern matching, configurable validation logic, and robust PDF text extraction to automatically screen research papers against user-defined criteria. Unlike existing solutions that are often domain-specific or require complex setup, this toolkit is designed for immediate deployment across any research field, from environmental science and medicine to social sciences and engineering.
+# Statement of Need
 
-# Statement of need
+The manual screening of literature, particularly gray literature sourced from platforms with rudimentary search capabilities, is a well-documented bottleneck in systematic reviews. This process is not only labor-intensive but is also fraught with subjectivity and inconsistency, which can compromise the reproducibility and robustness of the scientific findings [@page2021prisma]. Researchers often assemble a broad corpus of documents with no effective means to apply a uniform, complex set of inclusion and exclusion criteria. This challenge is magnified when dealing with multi-lingual gray literature, where manual evaluation is exceptionally demanding.
 
-Manual literature screening is one of the most time-intensive aspects of systematic reviews, often requiring 40-80 hours per 1,000 papers [@page2021prisma]. This process involves reading titles, abstracts, keywords, and body text to determine relevance according to predefined inclusion and exclusion criteria. While essential for research quality, this manual approach creates several challenges:
-
-1. **Scale limitations**: Large-scale reviews may involve screening 10,000+ papers, making manual processing prohibitively time-consuming
-2. **Consistency issues**: Human reviewers may apply criteria differently over time or between team members
-3. **Language barriers**: Multilingual literature requires specialized expertise
-4. **Resource constraints**: Systematic reviews often involve multiple reviewers, multiplying time and cost requirements
-
-Existing automated screening tools are typically domain-specific [@marshall2015automating], require extensive technical setup, or lack the flexibility needed for diverse research applications. The Universal Literature Screening Toolkit fills this gap by providing a ready-to-use, configurable solution that can be adapted to any research domain while maintaining the transparency and reproducibility standards required for systematic reviews.
+The ULST is engineered to directly address this methodological gap. It provides a lightweight, standalone tool that empowers researchers to apply a precise, complex, and reproducible Boolean search strategy to a local corpus of documents. This capability is most critical when the initial data acquisition from databases or websites yields a large, noisy dataset that requires rigorous and objective filtering. By automating this screening process, the ULST eliminates reviewer subjectivity, ensures that every document is evaluated against the identical criteria, and produces a fully auditable and reproducible workflow. It thus provides a critical bridge between the limitations of data sources and the high standards of systematic, evidence-based science.
 
 # Key Functionality
 
-The toolkit provides several core capabilities designed for research workflow integration:
-
-**Language-Agnostic Pattern Matching**: The toolkit uses a regex-based pattern matching system that works with any language. Example patterns are provided for English, German, French, and Italian research literature, demonstrating the toolkit's versatility for international literature coverage. Users can easily define custom patterns for any language.
-
-**Configurable Validation Logic**: JSON-based configuration system allowing researchers to define custom screening criteria using Boolean operators (AND/OR combinations). This flexibility enables adaptation to diverse research questions and methodological approaches.
-
-**Robust PDF Processing**: Dual-library approach using PyMuPDF and pdfplumber for reliable text extraction from research papers, handling various PDF formats and quality levels commonly encountered in academic literature.
-
-**Professional Reporting**: Generates both human-readable HTML reports and machine-readable JSON outputs, facilitating integration with existing research workflows and documentation requirements.
-
-**Cross-platform Compatibility**: Pure Python implementation ensures consistent operation across Windows, macOS, and Linux environments, supporting diverse research team configurations.
-
-**Domain Templates**: Includes pre-configured examples for environmental science, medical research, and social sciences, providing immediate starting points for common research applications.
+- **Domain-Agnostic and Configurable**: The ULST's screening logic is entirely driven by user-defined text files. Researchers specify search terms in thematic `BLOCK`s, which can be combined using Boolean `AND`/`OR` logic. This design ensures applicability across any research field.
+- **Multi-Language Pattern Matching**: The toolkit effectively processes documents in any language that can be represented in UTF-8. It uses a case-insensitive matching engine with support for wildcards (`*`) and exact phrases (`"..."`), allowing for nuanced and comprehensive searches across international literature.
+- **Robust PDF Text Extraction**: To maximize data recovery from diverse document formats, the ULST implements a dual-library extraction strategy, using PyMuPDF as the primary engine and falling back to pdfplumber for problematic files. This ensures high reliability in content extraction.
+- **Auditable and Reproducible Outputs**: The toolkit produces a clear, actionable set of outputs for each run: an HTML report detailing the screening results and keyword evidence, a `validation_results.json` file for computational analysis, and the source PDFs automatically sorted into `include` and `exclude` subdirectories. This workflow ensures full transparency and reproducibility.
+- **Cross-Platform and Dependency-Light**: As a pure Python application with minimal dependencies, the ULST runs consistently on Windows, macOS, and Linux. Setup is streamlined via simple shell and PowerShell scripts, making it accessible to researchers with limited command-line experience.
 
 # Implementation and Architecture
 
-The toolkit follows a modular architecture with four core components:
+The ULST is built on a modular, functional pipeline that ensures clarity and maintainability. The core components are:
+- `pdf_extractor.py`: Manages the file-by-file text extraction process.
+- `search_parser.py`: Reads and interprets the user's `search_terms.txt` file, compiling the raw text into a structured, searchable format.
+- `validator.py`: Executes the core screening logic, applying the defined Boolean criteria to the extracted text of each document.
+- `report_generator.py`: Consolidates the results and generates the final HTML and JSON outputs.
 
-- `pdf_extractor.py`: Handles robust text extraction from PDF files using multiple parsing strategies
-- `search_parser.py`: Processes user-defined search terms and criteria into structured patterns
-- `validator.py`: Implements configurable Boolean logic for automated screening decisions
-- `report_generator.py`: Creates comprehensive reports in multiple formats
+This decoupled architecture allows for straightforward testing and future extension of each component without altering the overall workflow. The program is executed via a single command-line entry point, `run_screening.py`, which orchestrates the flow of data through the pipeline.
 
-This design enables easy maintenance, testing, and extension while keeping the user interface simple and accessible to researchers without programming expertise.
+# Illustrative Use Case: Ensuring Robustness in Gray Literature Reviews
 
-# Use Cases and Impact
+A primary application of the ULST is to impose rigor and reproducibility on the screening of gray literature, where source platforms often lack sophisticated search tools. Consider a researcher tasked with reviewing environmental impact assessments from various regional authorities. The initial collection of several hundred PDF reports is gathered using basic keyword searches on disparate websites. The resulting corpus is heterogeneous, and manual screening would be highly subjective.
 
-The toolkit has been successfully deployed for various research applications [@example2023toolkit], processing over 1,000 papers with 95% agreement with manual screening. Potential applications span any research field requiring systematic literature review, including:
+The ULST transforms this challenge into a robust, systematic process:
+1.  **Corpus Assembly**: The researcher downloads all potentially relevant PDFs into a single directory.
+2.  **Define a Precise Search Protocol**: A multi-faceted search strategy is codified in the `search_terms.txt` file. This protocol defines the exact, non-negotiable criteria for a document's inclusion, including multi-language terms for concepts like `modeling`, `forest management`, and `biodiversity`.
+3.  **Automated, Objective Execution**: The researcher executes the toolkit. The ULST systematically processes each PDF, applying the exact same Boolean logic to every document. This removes all human subjectivity from the screening decision.
+4.  **Auditable Outcome**: The output is a cleanly partitioned set of documents in `include` and `exclude` folders, accompanied by an HTML report that serves as an audit trail, detailing which keywords were found in each included document.
 
-- Environmental impact assessments requiring multilingual European literature
-- Medical systematic reviews following PRISMA guidelines
-- Social science meta-analyses incorporating diverse methodological approaches
-- Policy research requiring comprehensive evidence synthesis
-
-A particularly valuable use case is when researchers face limitations with institutional search platforms that cannot handle complex or long search strings. In such scenarios, researchers can:
-
-1. Run simplified searches on restricted platforms using only primary keywords
-2. Download the resulting PDF papers
-3. Use the toolkit to apply the complete, complex search string criteria that would have been used ideally
-4. Generate a properly filtered corpus based on the original comprehensive search criteria
-
-This approach bridges the gap between platform limitations and rigorous systematic review requirements, enabling researchers to maintain methodological integrity despite technical constraints.
-
-By reducing screening time from weeks to hours while maintaining research quality standards, the toolkit enables more comprehensive systematic reviews and makes evidence synthesis accessible to resource-constrained research teams.
+This workflow ensures that the final selection of literature is the product of a documented, reproducible, and entirely objective methodology. It elevates the scientific credibility of reviews that rely on gray literature by making the screening process as rigorous as that for peer-reviewed articles from indexed databases.
 
 # Acknowledgements
 
-We acknowledge the open-source community contributions, particularly the developers of PyMuPDF and pdfplumber libraries that enable robust PDF processing functionality.
+We acknowledge the developers of the PyMuPDF and pdfplumber libraries, whose work provides the foundation for the robust PDF processing capabilities of this toolkit.
 
 # References
