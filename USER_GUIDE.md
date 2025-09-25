@@ -1,21 +1,21 @@
 # Universal Literature Screening Toolkit — Comprehensive User Guide
 
-Complete documentation for researchers and students using the Universal Literature Screening Toolkit v0.90.0 (query-first workflow).
+Complete documentation for researchers and students using the Universal Literature Screening Toolkit v1.0.1 (query-first workflow).
 
 ---
 
 ## 📚 Table of Contents
 
 1. [Introduction](#introduction)
-2. Installation & Setup
-3. Testing Your Installation
-4. Basic Usage (query.txt)
-5. Boolean Query Syntax and Tips
-6. Advanced Configuration
-7. Understanding Results
-8. Troubleshooting
-9. Research Workflows
-10. FAQ
+2. [Installation & Setup](#installation--setup)
+3. [Testing Your Installation](#testing-your-installation)
+4. [Basic Usage (query.txt)](#basic-usage-query-first)
+5. [Boolean Query Syntax and Tips](#boolean-query-syntax-and-tips)
+6. [Advanced Configuration](#advanced-configuration)
+7. [Understanding Results](#understanding-results)
+8. [Troubleshooting](#troubleshooting)
+9. [Research Workflows](#research-workflows)
+10. [FAQ](#frequently-asked-questions)
 
 ---
 
@@ -204,7 +204,7 @@ If you use --query-file, this section does not apply. For legacy --search-terms 
   "domain_info": {
     "research_area": "Medical AI Literature Review",
     "description": "Systematic review of AI applications in healthcare",
-    "version": "0.90.0"
+    "version": "1.0.1"
   }
 }
 ```
