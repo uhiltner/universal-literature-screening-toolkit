@@ -1,20 +1,25 @@
-BLOCK 1: Forest Context
-forest*, wood*, silvicultur*, forestry, woodland*
+# DSS4ES Search Terms - Aligned with complex Boolean query
+#
+# This file is structured to reflect the five core concepts of the original search string,
+# where each block represents a concept that MUST be found (combined with AND).
+# Within each block, terms are combined with OR.
 
-BLOCK 2: Management Context
-manag*, plan*, revital*, restor*, "sustain* plan*", govern*, leg*, planning, governance, legislation
+BLOCK 1: Forest Context & Management
+# Combines Forest* AND Manag* concepts from the original query
+forest*, wood*, silvicultur*, forestry, woodland*, manag*, plan*, revital*, restor*, "sustain* plan*", govern*, leg*, planning, governance, legislation
 
-BLOCK 3: BES Concepts
-biodivers*, "biolog* diversit*", ecolo*, natur*, environment*, landscape*, provision*, regulat*, cultur*, support*
+BLOCK 2: Biodiversity & Ecosystem Services (BES)
+# Combines BES Concepts AND BES Objects from the original query
+biodivers*, "biolog* diversit*", ecolo*, natur*, environment*, landscape*, provision*, regulat*, cultur*, support*, service*, benefit*, good*, contribution*, capital*, function*, resource*
 
-BLOCK 4: BES Objects
-service*, benefit*, good*, contribution*, capital*, function*, resource*
-
-BLOCK 5: Decision Support
+BLOCK 3: Decision Support
+# Represents the Decision-support* concept
 decision-support*, "decision support*", decision-mak*, "decision mak*", "decision tool*", "decision guid*", "decision aid", choice-mak*, "choice mak*", "problem solv*", problem-solv*, solution*
 
-BLOCK 6: Scenarios and Simulations
+BLOCK 4: Scenarios and Simulations
+# Represents the Scenario* concept
 "scenario* develop*", scenario*, simulat*, alternative*, project*, forecast*, "land* use option*"
 
-BLOCK 7: Models and Quantitative Methods
+BLOCK 5: Models and Quantitative Methods
+# Represents the Models* concept
 "quantitative forest* model*", "forest* model*", "vegetat* model*", "tree growth model*", "yield* model*", "ecophysiolog* model*", "eco-physiolog* model*", "process-based model*", "individual-based model*", "process model*", "individual model*", "gap* model*", "landscape* model*", "carbon cycle* model*", "hydrolog* model*", "eco-hydrologic* model*", "eco* hydrologic* model*"
