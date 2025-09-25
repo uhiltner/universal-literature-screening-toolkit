@@ -5,7 +5,7 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 type: software
 title: "Universal Literature Screening Toolkit"
-version: "2.0.0"
+version: "0.90.0"
 date-released: "2025-09-05"
 abstract: >
   A domain-agnostic automated literature screening toolkit for systematic reviews 

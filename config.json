@@ -24,6 +24,6 @@
   "domain_info": {
     "research_area": "Generic Literature Review",
     "description": "Configurable toolkit for systematic literature screening",
-    "version": "2.0"
+    "version": "0.90.0"
   }
 }

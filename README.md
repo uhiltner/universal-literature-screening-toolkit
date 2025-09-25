@@ -84,7 +84,7 @@ If you use this toolkit in your research, please cite it as:
   month        = sep,
   year         = 2025,
   publisher    = {Zenodo},
-  version      = {2.0.0},
+  version      = {0.90.0},
   doi          = {10.5281/zenodo.17063676},
   url          = {https://doi.org/10.5281/zenodo.17063676}
 }
