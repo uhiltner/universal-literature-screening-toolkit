@@ -16,7 +16,7 @@ If you find a bug, please create an issue on GitHub with:
 
 ### Suggesting Features
 
-We welcome feature suggestions! Please create an issue with:
+I welcome feature suggestions! Please create an issue with:
 
 - **Clear description** of the proposed feature
 - **Use case** explaining why this feature would be valuable
@@ -71,7 +71,7 @@ python -m pytest tests/ -v
 
 ## Domain-Specific Contributions
 
-We especially welcome contributions that:
+I especially welcome contributions that:
 
 - **Add new language support** (search patterns for additional languages)
 - **Provide domain templates** for new research fields

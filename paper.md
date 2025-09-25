@@ -64,7 +64,7 @@ This workflow ensures that the final selection of literature is the product of a
 
 # Acknowledgements
 
-We acknowledge the developers of the PyMuPDF and pdfplumber libraries, whose work provides the foundation for the robust PDF processing capabilities of this toolkit.
+I acknowledge the developers of the PyMuPDF and pdfplumber libraries, whose work provides the foundation for the robust PDF processing capabilities of this toolkit.
 
 # References
 
