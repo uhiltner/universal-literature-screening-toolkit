@@ -1,6 +1,6 @@
 # Universal Literature Screening Toolkit — Comprehensive User Guide
 
-Complete documentation for researchers and students using the Universal Literature Screening Toolkit v2.1 (query-first workflow).
+Complete documentation for researchers and students using the Universal Literature Screening Toolkit v0.90.0 (query-first workflow).
 
 ---
 
