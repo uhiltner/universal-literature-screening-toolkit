@@ -24,7 +24,7 @@
   "domain_info": {
     "research_area": "DSS4ES - Decision Support Systems for Ecosystem Services",
     "description": "Systematic review of decision support tools for forest ecosystem service management",
-    "version": "2.0",
+    "version": "0.90.0",
     "search_focus": "Forest management tools that integrate biodiversity/ecosystem services considerations with quantitative modeling approaches"
   }
 }

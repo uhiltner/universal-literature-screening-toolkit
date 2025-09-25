@@ -204,7 +204,7 @@ If you use --query-file, this section does not apply. For legacy --search-terms 
   "domain_info": {
     "research_area": "Medical AI Literature Review",
     "description": "Systematic review of AI applications in healthcare",
-    "version": "1.0"
+    "version": "0.90.0"
   }
 }
 ```
@@ -498,4 +498,4 @@ A: Keep case_sensitive: false (default) for most research applications.
 
 ---
 
-*This guide covers the complete functionality of the Universal Literature Screening Toolkit v2.0. For the latest updates and community contributions, visit the [GitHub repository](https://github.com/uhiltner/universal-literature-screening-toolkit).*
+*This guide covers the complete functionality of the Universal Literature Screening Toolkit v0.90.0. For the latest updates and community contributions, visit the [GitHub repository](https://github.com/uhiltner/universal-literature-screening-toolkit).*

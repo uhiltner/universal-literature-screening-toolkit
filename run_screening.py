@@ -1,6 +1,6 @@
 ﻿#!/usr/bin/env python3
 """
-Universal Literature Screening Toolkit v2.0
+Universal Literature Screening Toolkit v0.90.0
 ===========================================
 
 A configurable tool for systematic literature review and paper screening.
