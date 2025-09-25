@@ -20,7 +20,7 @@ authors:
     email: "ulrike.hiltner@usys.ethz.ch"
 repository-code: "https://github.com/uhiltner/universal-literature-screening-toolkit"
 url: "https://github.com/uhiltner/universal-literature-screening-toolkit"
-doi: 10.5281/zenodo.17063676
+doi: 10.5281/zenodo.17063675
 license: MIT
 keywords:
   - "systematic review"
@@ -42,5 +42,5 @@ preferred-citation:
       orcid: "https://orcid.org/0000-0001-5663-7068"
   version: "1.0.0"
   date-released: "2025-09-25"
-  # doi: "10.5281/zenodo.XXXXXXX"  # Uncomment and add DOI once available from Zenodo
+  doi: "10.5281/zenodo.17063675"
   url: "https://github.com/uhiltner/universal-literature-screening-toolkit"
