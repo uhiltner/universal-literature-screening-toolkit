@@ -226,3 +226,57 @@ impact, change, management
             # Should have one included and one excluded
             included_count = sum(1 for r in results if r["overall_result"])
             assert included_count == 1
+
+    def test_query_file_mode_end_to_end(self):
+        """End-to-end run using --query-file should succeed and report the query."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            input_dir = Path(temp_dir) / "input"
+            output_dir = Path(temp_dir) / "output"
+            query_file = Path(temp_dir) / "query.txt"
+            config_file = Path(temp_dir) / "config.json"
+
+            input_dir.mkdir()
+
+            # Create sample JSON files
+            json1 = {
+                "filename": "included.pdf",
+                "full_text": "This document discusses forest management and ecosystem services with simulation.",
+                "text_length": 90
+            }
+            json2 = {
+                "filename": "excluded.pdf",
+                "full_text": "This document is about urban planning only.",
+                "text_length": 60
+            }
+            (input_dir / "included.json").write_text(json.dumps(json1, indent=2), encoding='utf-8')
+            (input_dir / "excluded.json").write_text(json.dumps(json2, indent=2), encoding='utf-8')
+
+            # Write a query that should include only the first document
+            query_file.write_text('forest AND (management OR simulation) AND "ecosystem service*"', encoding='utf-8')
+            config_file.write_text('{}', encoding='utf-8')
+
+            repo_root = Path(__file__).parent.parent
+            script_path = repo_root / "run_screening.py"
+
+            result = subprocess.run([
+                sys.executable, str(script_path),
+                "--input", str(input_dir),
+                "--output", str(output_dir),
+                "--query-file", str(query_file),
+                "--config", str(config_file)
+            ], capture_output=True, text=True)
+
+            assert result.returncode == 0
+            # Outputs exist
+            assert (output_dir / "validation_report.html").exists()
+            assert (output_dir / "validation_results.json").exists()
+
+            # Verify query echoed in HTML report
+            html_text = (output_dir / "validation_report.html").read_text(encoding='utf-8')
+            assert "Query:" in html_text and "ecosystem service" in html_text
+
+            # Verify results: one included
+            results = json.loads((output_dir / "validation_results.json").read_text(encoding='utf-8'))
+            assert len(results) == 2
+            included = [r for r in results if r["overall_result"]]
+            assert len(included) == 1

@@ -17,7 +17,7 @@ The ULST is engineered to solve this problem. It empowers researchers to apply a
 ## Core Functionality
 
 - **Domain-Agnostic by Design**: The toolkit is not bound to any specific field. Its screening logic is defined by simple text files, allowing for complete customization for any research domain (e.g., medicine, environmental science, social sciences).
-- **Configurable Boolean Logic**: Researchers can define complex inclusion and exclusion criteria using `BLOCK`-based search terms with `AND`/`OR` operators, mirroring the logic of advanced database searches.
+- **Configurable Boolean Logic (query mode)**: Define complex inclusion/exclusion criteria with a single raw Boolean query string (AND/OR/NOT, parentheses, quotes, wildcards) provided via `--query-file`. This mirrors database search syntax and is now the recommended workflow. Note: legacy block-based `search_terms.txt` is deprecated and will be removed in a future release.
 - **Multi-Language Content Processing**: The tool seamlessly processes and analyzes content in multiple languages, including English, German, and French, by leveraging case-insensitive and wildcard-enabled pattern matching.
 - **Robust PDF Text Extraction**: A dual-library approach (PyMuPDF and pdfplumber) ensures reliable extraction of text from a wide variety of PDF formats and qualities.
 - **Reproducible, Auditable Outputs**: The toolkit generates a professional HTML report, a `results.json` file for data analysis, and automatically sorts the source PDFs into `include` and `exclude` folders, ensuring a fully documented and reproducible workflow.
@@ -26,30 +26,27 @@ The ULST is engineered to solve this problem. It empowers researchers to apply a
 
 To illustrate its core strength, consider a review of regional environmental impact reports—a classic form of gray literature. These reports are often sourced from various governmental and non-governmental websites that lack advanced search capabilities. A researcher might download hundreds of PDF reports based on simple title searches. The challenge is to then screen this diverse collection against a precise, multi-faceted search string to ensure every included report meets the specific criteria for the review.
 
-**1. Defining the Search Criteria**
+**1. Defining the Search Criteria (Boolean query)**
 
-The researcher establishes a robust search strategy in `dss4es_search_terms.txt`, defining the essential concepts for inclusion:
+Create a text file (for example `query.txt`) containing one Boolean query, e.g.:
 
 ```
-BLOCK 1: Modeling Context
-model*, simulation, "decision support system", optimi*
-
-BLOCK 2: Forest Context
-forest*, wald, forst, forêt, woodland, silvicultur*
-
-BLOCK 3: Management Context
-management, plan*, bewirtschaftung, gestion, aménagement
-
-BLOCK 4: Biodiversity & Ecosystem Services (BES)
-biodiversity*, "ecosystem service*", ökosystemleistung*, schutzwald
+((forest* OR wood*) AND (management OR planning))
+  AND ("ecosystem service*" OR biodiversity)
+  AND NOT (economics)
 ```
+Notes:
+- Use parentheses for grouping; NOT has highest precedence, then AND, then OR.
+- Use quotes for exact phrases (optionally with trailing wildcard on the last term inside the phrase).
+- Use trailing `*` to match word stems (e.g., `model*` matches model, models, modeling, modelling).
+- Lines starting with `#` are treated as comments and ignored.
 
 **2. Automated, Reproducible Screening**
 
 The toolkit processes the entire collection of PDF reports. For a German-language report like `Hiltner_NaiS_Steinschlagprofil_Bericht_update_final.pdf`, the process is objective and reproducible:
 - The tool extracts all text from the PDF.
-- It systematically validates the content against the four search blocks using strict `AND` logic.
-- The paper is confirmed to contain terms matching all four blocks: "modell" (BLOCK 1), "wald" and "forst" (BLOCK 2), "bewirtschaftung" (BLOCK 3), and "schutzwald" (a term for protection forests, conceptually linked to ecosystem services, in BLOCK 4).
+- It evaluates the full text against your Boolean query.
+- For the example above, inclusion requires both a forest context and management context, plus an ecosystem services concept, and excludes economics-focused documents.
 
 **3. Objective and Auditable Outcome**
 
@@ -70,9 +67,11 @@ For a gentle introduction, please see the [**QUICK_START.md**](QUICK_START.md). 
 
 2.  **Run Screening**:
     ```bash
-    # Execute the tool with your data
-    python run_screening.py --input /path/to/your/pdfs --output /path/to/results --search-terms your_search_terms.txt
+  # Execute the tool with your data (recommended query mode)
+  python run_screening.py --input /path/to/your/pdfs --output /path/to/results --query-file /path/to/query.txt
     ```
+
+Deprecation note: `--search-terms` and the block-based `search_terms.txt` file format are supported for one transition release and will be removed. When you use query mode, any `validation_logic` in `config.json` is ignored.
 
 ## Citation
 

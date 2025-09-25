@@ -1,0 +1,4 @@
+# Example Boolean query for ULST Raw Search String Engine
+# Lines starting with # are comments and will be ignored if you copy just the query line.
+
+((forest* OR wood*) AND (management OR planning)) AND ("ecosystem service*" OR biodiversity) AND NOT (economics)

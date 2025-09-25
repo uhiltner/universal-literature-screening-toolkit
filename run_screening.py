@@ -8,6 +8,7 @@ Supports any research domain with customizable search criteria and validation lo
 
 Usage:
     python run_screening.py --input <pdf_folder> --output <results_folder> --search-terms <search_file> [--config <config_file>]
+    python run_screening.py --input <pdf_folder> --output <results_folder> --query-file <query_txt> [--config <config_file>]
 
 Examples:
     # Basic usage
@@ -27,6 +28,13 @@ sys.path.append(str(Path(__file__).parent / "scripts"))
 from search_parser import parse_search_terms
 from validator import validate_papers, load_config
 from report_generator import generate_html_report, sort_pdf_files
+
+# Optional: new query parser
+try:
+    from query_parser import parse_query, pretty_print
+except Exception:
+    parse_query = None  # type: ignore
+    pretty_print = None  # type: ignore
 
 def print_banner():
     """Print toolkit banner."""
@@ -56,12 +64,19 @@ def check_prerequisites(args):
         else:
             errors.append(f"❌ No PDF or JSON files found in {input_path}")
     
-    # Check search terms file
-    search_file = Path(args.search_terms)
-    if not search_file.exists():
-        errors.append(f"❌ Search terms file not found: {search_file}")
+    # Check query or search file
+    if getattr(args, "query_file", None):
+        qf = Path(args.query_file)
+        if not qf.exists():
+            errors.append(f"❌ Query file not found: {qf}")
+        else:
+            print(f"✅ Query file: {qf}")
     else:
-        print(f"✅ Search terms file: {search_file}")
+        search_file = Path(args.search_terms)
+        if not search_file.exists():
+            errors.append(f"❌ Search terms file not found: {search_file}")
+        else:
+            print(f"✅ Search terms file: {search_file}")
     
     # Check config file
     config_file = Path(args.config)
@@ -105,6 +120,31 @@ def load_and_validate_search_terms(search_file):
         print(f" Error loading search terms: {e}")
         return None
 
+def load_query_string(query_file: Path) -> str | None:
+    """Load a raw Boolean query string from file.
+
+    Supports comment lines starting with '#'. Blank lines are ignored.
+    Remaining lines are joined with single spaces.
+    """
+    try:
+        lines = Path(query_file).read_text(encoding="utf-8").splitlines()
+        filtered = []
+        for line in lines:
+            stripped = line.strip()
+            if not stripped:
+                continue
+            if stripped.startswith("#"):
+                continue
+            filtered.append(stripped)
+        text = " ".join(filtered).strip()
+        if not text:
+            print(" Error: Query file is empty or contains only comments")
+            return None
+        return text
+    except Exception as e:
+        print(f" Error reading query file: {e}")
+        return None
+
 def display_configuration(config):
     """Display current configuration settings."""
     print("  Configuration settings:")
@@ -119,7 +159,7 @@ def display_configuration(config):
     print(f"   Case sensitive: {text_proc.get('case_sensitive', False)}")
     print(f"   Encoding: {text_proc.get('encoding', 'utf-8')}")
 
-def run_validation(input_dir, search_blocks, config):
+def run_validation(input_dir, search_blocks, config, *, query_node=None):
     """Run the validation process."""
     print("🔍 Starting validation process...")
     
@@ -154,7 +194,7 @@ def run_validation(input_dir, search_blocks, config):
             print(f"📝 Using existing JSON files ({len(json_files)} found)")
         
         # Step 2: Run validation on JSON files
-        results = validate_papers(json_source_dir, search_blocks, "config.json")
+        results = validate_papers(json_source_dir, search_blocks, "config.json", query_node=query_node)
         
         # Statistics
         total_papers = len(results)
@@ -172,7 +212,7 @@ def run_validation(input_dir, search_blocks, config):
         print(f"❌ Validation failed: {e}")
         return None
 
-def generate_outputs(results, output_dir, search_blocks, config):
+def generate_outputs(results, output_dir, search_blocks, config, *, query_string: str | None = None):
     """Generate all output files and reports."""
     print(" Generating reports and organizing results...")
     
@@ -182,7 +222,7 @@ def generate_outputs(results, output_dir, search_blocks, config):
         # Generate HTML report
         if config.get("output_settings", {}).get("html_report", True):
             html_file = output_path / "validation_report.html"
-            generate_html_report(results, search_blocks, output_path)
+            generate_html_report(results, search_blocks, output_path, query_string=query_string)
             print(f" HTML report: {html_file}")
         
         # Save JSON results
@@ -221,8 +261,11 @@ Examples:
                        help="Directory containing JSON files from PDF extraction")
     parser.add_argument("--output", required=True,
                        help="Output directory for results and reports")
-    parser.add_argument("--search-terms", required=True,
-                       help="File containing search terms configuration")
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--search-terms",
+                       help="(Deprecated) File containing block-based search terms configuration")
+    group.add_argument("--query-file",
+                       help="File containing a raw Boolean query string")
     parser.add_argument("--config", default="config.json",
                        help="Configuration file (default: config.json)")
     
@@ -243,22 +286,45 @@ Examples:
     
     print()
     
-    # Load search terms
-    search_blocks = load_and_validate_search_terms(args.search_terms)
-    if not search_blocks:
-        sys.exit(1)
+    # Resolve search criteria (query preferred)
+    query_node = None
+    search_blocks = None
+    query_str_for_report = None
+    if getattr(args, "query_file", None):
+        if parse_query is None:
+            print("❌ Query mode requested but query parser is unavailable")
+            sys.exit(1)
+        query_str = load_query_string(Path(args.query_file))
+        if not query_str:
+            sys.exit(1)
+        try:
+            query_node = parse_query(query_str)
+            query_str_for_report = query_str
+            if pretty_print:
+                print(" Using query:")
+                print(pretty_print(query_node))
+        except Exception as e:
+            print(f"❌ Query parse error: {e}")
+            sys.exit(1)
+        # Deprecation note
+        print("⚠️  validation_logic in config is ignored in query mode.")
+    else:
+        print("⚠️  --search-terms is deprecated; switch to --query-file in the next release.")
+        search_blocks = load_and_validate_search_terms(args.search_terms)
+        if not search_blocks:
+            sys.exit(1)
     
     print()
     
     # Run validation
-    results = run_validation(args.input, search_blocks, config)
+    results = run_validation(args.input, search_blocks, config, query_node=query_node)
     if not results:
         sys.exit(1)
     
     print()
     
     # Generate outputs
-    if not generate_outputs(results, args.output, search_blocks, config):
+    if not generate_outputs(results, args.output, search_blocks, config, query_string=query_str_for_report):
         sys.exit(1)
     
     print()

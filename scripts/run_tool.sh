@@ -8,6 +8,7 @@ IN_DIR="${1:-./input_pdfs}"
 OUT_DIR="${2:-./results}"
 TERMS="${3:-./search_terms.txt}"
 CONF="${4:-./config.json}"
+QUERY_FILE="${5:-}"
 
 REPO_ROOT="$(cd "$(dirname "$0")"/.. && pwd)"
 ENTRY="$REPO_ROOT/run_screening.py"
@@ -24,10 +25,18 @@ mkdir -p "$OUT_DIR"
 echo "[INFO] Running ULST with:"
 echo "  --input        $IN_DIR"
 echo "  --output       $OUT_DIR"
-echo "  --search-terms $TERMS"
+if [[ -n "$QUERY_FILE" ]]; then
+  echo "  --query-file   $QUERY_FILE"
+else
+  echo "  --search-terms $TERMS"
+fi
 echo "  --config       $CONF"
 
-"$PY" "$ENTRY" --input "$IN_DIR" --output "$OUT_DIR" --search-terms "$TERMS" --config "$CONF"
+if [[ -n "$QUERY_FILE" ]]; then
+  "$PY" "$ENTRY" --input "$IN_DIR" --output "$OUT_DIR" --query-file "$QUERY_FILE" --config "$CONF"
+else
+  "$PY" "$ENTRY" --input "$IN_DIR" --output "$OUT_DIR" --search-terms "$TERMS" --config "$CONF"
+fi
 
 HTML="$OUT_DIR/validation_report.html"
 JSON="$OUT_DIR/validation_results.json"

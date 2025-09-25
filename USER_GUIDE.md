@@ -1,31 +1,31 @@
-# Universal Literature Screening Toolkit - Comprehensive User Guide
+# Universal Literature Screening Toolkit — Comprehensive User Guide
 
-*Complete documentation for researchers and students using the Universal Literature Screening Toolkit v2.0*
+Complete documentation for researchers and students using the Universal Literature Screening Toolkit v2.1 (query-first workflow).
 
 ---
 
 ## 📚 Table of Contents
 
 1. [Introduction](#introduction)
-2. [Installation & Setup](#installation--setup)
-3. [Testing Your Installation](#testing-your-installation)
-4. [Basic Usage](#basic-usage)
-5. [Advanced Configuration](#advanced-configuration)
-6. [Search Terms Guide](#search-terms-guide)
-7. [Understanding Results](#understanding-results)
-8. [Troubleshooting](#troubleshooting)
-9. [Research Workflows](#research-workflows)
-10. [FAQ](#frequently-asked-questions)
+2. Installation & Setup
+3. Testing Your Installation
+4. Basic Usage (query.txt)
+5. Boolean Query Syntax and Tips
+6. Advanced Configuration
+7. Understanding Results
+8. Troubleshooting
+9. Research Workflows
+10. FAQ
 
 ---
 
 ## Introduction
 
-The Universal Literature Screening Toolkit automates the initial screening phase of systematic literature reviews. Instead of manually reading hundreds of abstracts, you define search criteria and let the toolkit identify papers that meet your inclusion criteria.
+The Universal Literature Screening Toolkit automates the initial screening phase of systematic literature reviews. Instead of manually reading hundreds of abstracts, you write one Boolean query and let the toolkit identify papers that meet your inclusion criteria.
 
 ### What It Does
 - **Extracts text** from PDF papers (title, abstract, keywords)
-- **Applies search criteria** using configurable logic (AND/OR)
+- **Applies search criteria** via a Boolean query (AND/OR/NOT, parentheses, phrases, wildcards)
 - **Generates professional reports** with validation results
 - **Organizes papers** into include/exclude folders
 - **Saves time** - process hundreds of papers in minutes
@@ -65,7 +65,7 @@ chmod +x scripts/setup_unix.sh scripts/run_tool.sh scripts/run_tests.sh
 ./scripts/setup_unix.sh
 
 # 3. Test installation  
-./scripts/run_tests.ps1  # Use Python equivalent if no PowerShell
+python -m pytest tests -q
 ```
 
 ### Manual Setup (Alternative)
@@ -94,7 +94,7 @@ python -m pytest tests/ -v
 
 ### Windows Testing
 ```powershell
-# Run comprehensive test suite (38 tests)
+# Run comprehensive test suite
 .\scripts\run_tests.ps1
 
 # Run with detailed output
@@ -113,7 +113,7 @@ python -m pytest tests/ -v
 
 ### Expected Results
 ```
-============ 38 passed, 5 warnings in 1.96s =============
+[ OK ] All tests passed successfully!
 [ OK ] All tests passed successfully! ✅
 ```
 
@@ -121,7 +121,7 @@ python -m pytest tests/ -v
 
 ---
 
-## Basic Usage
+## Basic Usage (query-first)
 
 ### Step 1: Prepare Your PDFs
 ```
@@ -132,40 +132,35 @@ input_pdfs/
 └── ...
 ```
 
-### Step 2: Define Search Criteria
-Edit `search_terms.txt`:
+### Step 2: Define Search Criteria as a Boolean query
+Create a file named `query.txt` with one Boolean expression (lines starting with `#` are comments and ignored):
+
 ```
-BLOCK 1: Core Concept
-artificial intelligence, machine learning, "deep learning"
-
-BLOCK 2: Application Domain  
-healthcare, medical*, clinical
-
-BLOCK 3: Study Type
-systematic review, meta-analysis, "randomized controlled trial"
+# Example: AI in clinical context; include study designs; exclude purely economic papers
+("artificial intelligence" OR "machine learning" OR "deep learning")
+AND (healthcare OR medical* OR clinical)
+AND ("systematic review" OR "randomized controlled trial" OR meta-analysis)
+AND NOT (economics OR cost*)
 ```
 
 ### Step 3: Run Screening
 
-#### Windows (Recommended)
+#### Windows (PowerShell)
 ```powershell
-# Use defaults (input_pdfs → results)
-.\scripts\run_tool.ps1
+# Use defaults (input_pdfs → results) with query file
+.\scripts\run_tool.ps1 -QueryFile "query.txt"
 
 # Custom paths
-.\scripts\run_tool.ps1 -InputPath "my_pdfs" -OutputPath "my_results" -SearchTermsPath "my_terms.txt"
-
-# JSON extraction only (no PDF processing)
-.\scripts\run_tool.ps1 -JsonOnly
+.\scripts\run_tool.ps1 -InputPath "my_pdfs" -OutputPath "my_results" -QueryFile "my_query.txt"
 ```
 
-#### Cross-Platform
+#### Cross-Platform (macOS/Linux)
 ```bash
 # Unix/Linux/macOS
-./scripts/run_tool.sh input_pdfs results search_terms.txt config.json
+./scripts/run_tool.sh --input input_pdfs --output results --query-file query.txt
 
 # Manual execution
-python run_screening.py --input input_pdfs --output results --search-terms search_terms.txt
+python run_screening.py --input input_pdfs --output results --query-file query.txt
 ```
 
 ### Step 4: Review Results
@@ -180,28 +175,28 @@ results/
 
 ---
 
+## Boolean Query Syntax and Tips
+
+- Operators: NOT > AND > OR
+- Parentheses group sub-expressions: (A OR B) AND C
+- Phrases: use double quotes, e.g., "ecosystem services"
+- Wildcards: trailing asterisk expands variations, e.g., model* matches model, models, modeling, modelling
+- Comments: lines starting with # are ignored in query files
+
+Examples:
+
+- Core + context: (forest* OR woodland*) AND (management OR planning)
+- Include BES concept, exclude economics: ("ecosystem service*" OR biodiversity) AND NOT economics
+
+Deprecation note: The legacy block-based --search-terms mode is still available for one transition release but will be removed. When using --query-file, validation_logic in config.json is ignored.
+
 ## Advanced Configuration
 
 ### Configuration File (config.json)
 
-#### Validation Logic
-```json
-{
-  "validation_logic": {
-    "default_operator": "AND",    // "AND" | "OR"
-    "block_combinations": {
-      "blocks": ["Block 3A", "Block 3B"],
-      "operator": "OR",
-      "combined_name": "Combined Ecosystem Services"
-    }
-  }
-}
-```
+#### Validation Logic (legacy)
 
-**Understanding Logic:**
-- **AND**: Paper must match ALL blocks (stricter)
-- **OR**: Paper must match ANY block (more inclusive)
-- **Block Combinations**: Special rules for specific blocks
+If you use --query-file, this section does not apply. For legacy --search-terms users only, see prior versions of the guide.
 
 #### Domain Customization
 ```json
@@ -227,73 +222,9 @@ results/
 
 ---
 
-## Search Terms Guide
+## Search Terms Guide (legacy)
 
-### Basic Syntax
-```
-BLOCK 1: Block Name
-term1, term2, term3
-```
-
-### Advanced Patterns
-
-#### Wildcards (*)
-```
-BLOCK 1: Technology Terms
-comput*, algorith*, automat*
-```
-*Matches: computer, computing, computational, algorithm, algorithms, automate, automation, etc.*
-
-#### Exact Phrases
-```
-BLOCK 2: Study Methods
-"systematic review", "randomized controlled trial", "meta analysis"
-```
-*Matches: Only exact phrases, not individual words*
-
-#### Combined Patterns
-```
-BLOCK 3: Mixed Terms
-"artificial intelligence", machine learning, AI, neural network*
-```
-
-### Domain-Specific Examples
-
-#### Medical Research
-```
-BLOCK 1: Medical Condition
-diabetes*, "type 2 diabetes", "diabetes mellitus", diabetic*
-
-BLOCK 2: Intervention
-treatment*, therapy*, intervention*, medication*, drug*
-
-BLOCK 3: Study Design
-"randomized controlled trial", "clinical trial", "cohort study", RCT
-```
-
-#### Environmental Science
-```
-BLOCK 1: Environmental Context
-climate*, ecosystem*, biodiversity*, environment*
-
-BLOCK 2: Impact Assessment
-impact*, effect*, consequence*, change*, variation*
-
-BLOCK 3: Geographic Scale
-global*, regional*, local*, landscape*, catchment*
-```
-
-#### Technology Research
-```
-BLOCK 1: Technology
-"artificial intelligence", "machine learning", "deep learning", AI, ML
-
-BLOCK 2: Application
-healthcare, medical*, clinical*, diagnostic*, therapeutic*
-
-BLOCK 3: Validation
-performance*, accuracy*, precision*, recall*, validation*
-```
+This section described the legacy block-based format and is retained only for transition. New users should prefer Boolean queries with --query-file.
 
 ---
 
@@ -310,35 +241,24 @@ Total Papers Analyzed: 150
 ```
 
 #### Detailed Results Table
-| Paper | Result | Blocks Passed | Details |
-|-------|---------|---------------|---------|
-| paper1.pdf | ✅ INCLUDED | 3/3 | All blocks matched |
-| paper2.pdf | ❌ EXCLUDED | 1/3 | Missing Block 2, Block 3 |
+| Paper | Result | Matched | Details |
+|-------|--------|---------|---------|
+| paper1.pdf | ✅ INCLUDED | forest*, management | Evidence snippet in abstract |
+| paper2.pdf | ❌ EXCLUDED | — | — |
 
-#### Block Performance
-```
-🎯 Search Block Results
-Block 1 (Core Concept): 89 matches (59.3%)
-Block 2 (Application): 45 matches (30.0%)
-Block 3 (Study Type): 34 matches (22.7%)
-```
+#### Query Summary
+When running in query mode, the report shows your original query string and a compact AST view for traceability.
 
 ### JSON Data Structure
 ```json
 [
   {
     "filename": "paper1.pdf",
-    "overall_result": true,
-    "blocks_passed": 3,
-    "total_blocks": 3,
-    "block_results": [
-      {
-        "block_name": "Block 1: Core Concept",
-        "passed": true,
-        "matches_found": 5,
-        "sample_matches": ["artificial intelligence", "machine learning"]
-      }
-    ]
+    "included": true,
+    "evidence": {
+      "forest": ["…forest management…"],
+      "ecosystem service*": ["…ecosystem services…"]
+    }
   }
 ]
 ```
@@ -351,8 +271,8 @@ Block 3 (Study Type): 34 matches (22.7%)
 - **Check**: Review excluded papers for false negatives
 
 #### Low Inclusion Rate (<5%)
-- **Possible Issue**: Search criteria too restrictive  
-- **Solution**: Add synonyms, use OR logic, check spelling
+- **Possible Issue**: Query too restrictive  
+- **Solution**: Add OR synonyms, use wildcards, remove NOT terms
 - **Check**: Review included papers for relevance
 
 #### Ideal Range: 10-30%
@@ -422,9 +342,8 @@ Set-ExecutionPolicy Bypass -Scope Process
 - **Use OR logic**: In config.json, set default_operator to "OR"
 
 #### "Too many papers included"
-- **Add more blocks**: Increase specificity
-- **Use AND logic**: Require all blocks to match
-- **Refine terms**: Remove overly broad terms
+- **Tighten query**: Add AND conditions, remove very broad terms
+- **Use phrases**: Quote multi-word concepts
 
 ---
 
@@ -434,12 +353,9 @@ Set-ExecutionPolicy Bypass -Scope Process
 **Goal**: Understand literature landscape
 
 ```powershell
-# Use broad, inclusive criteria with OR logic
-# config.json: "default_operator": "OR"
-
-# Example search terms:
-BLOCK 1: Core Topic
-your_topic*, related_term*, synonym*
+# Start broad, inclusive query with OR logic
+# Example:
+(your_topic* OR related_term* OR synonym*)
 
 # Run screening
 .\scripts\run_tool.ps1
@@ -451,18 +367,9 @@ your_topic*, related_term*, synonym*
 **Goal**: Systematic inclusion/exclusion
 
 ```powershell
-# Use refined criteria with AND logic
-# config.json: "default_operator": "AND"
-
-# Example search terms:
-BLOCK 1: Core Concept (specific)
-"exact term", specific_concept*
-
-BLOCK 2: Methodology
-"study design", method*, approach*
-
-BLOCK 3: Population/Domain
-target_population*, specific_domain*
+# Refine with AND logic
+# Example:
+("exact term" OR specific_concept*) AND ("study design" OR method* OR approach*) AND (target_population* OR specific_domain*)
 
 # Run final screening
 .\scripts\run_tool.ps1
@@ -472,8 +379,8 @@ target_population*, specific_domain*
 **Goal**: Verify screening accuracy
 
 ```bash
-# 1. Run screening
-.\scripts\run_tool.ps1
+# 1. Run screening (Windows example)
+.\scripts\run_tool.ps1 -QueryFile query.txt
 
 # 2. Manually review random sample of included papers
 # 3. Manually review random sample of excluded papers
@@ -510,7 +417,7 @@ databases/
 ### General Usage
 
 **Q: How many papers can the toolkit handle?**
-A: Tested with 1000+ papers. Processing time scales linearly (~1-2 seconds per paper).
+A: Tested with 100+ papers. Processing time scales linearly (~1-2 seconds per paper).
 
 **Q: What file formats are supported?**
 A: PDF only. For other formats, convert to PDF first.
