@@ -1,6 +1,6 @@
 # Universal Literature Screening Toolkit — Comprehensive User Guide
 
-Complete documentation for researchers and students using the Universal Literature Screening Toolkit v1.0.1 (query-first workflow).
+Complete documentation for researchers and students using the Universal Literature Screening Toolkit v1.0.2 (query-first workflow).
 
 ---
 
@@ -204,7 +204,7 @@ If you use --query-file, this section does not apply. For legacy --search-terms 
   "domain_info": {
     "research_area": "Medical AI Literature Review",
     "description": "Systematic review of AI applications in healthcare",
-    "version": "1.0.1"
+    "version": "1.0.2"
   }
 }
 ```

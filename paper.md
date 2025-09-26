@@ -1,6 +1,5 @@
 ---
 title: 'Universal Literature Screening Toolkit: A Domain-Agnostic Tool for Automated, Reproducible Literature Screening'
-doi: 10.5281/zenodo.17202023
 tags:
   - Python
   - systematic review

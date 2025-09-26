@@ -1,0 +1,44 @@
+[
+  {
+    "filename": "40_Thrippleton.pdf",
+    "overall_result": true,
+    "block_results": [
+      {
+        "block_name": "Query",
+        "passed": true,
+        "matches_found": 9,
+        "sample_matches": [
+          "6789) 1 3 European Journal of Forest Research (2020) 139:483–498 h",
+          "change impacts across a large forest enterprise in the Northern Pr",
+          "he Northern Pre‑Alps: dynamic forest modelling as a tool for decis",
+          "large elevational ranges. For management planning, information on site",
+          "s (‘high- impact’ CC). Forest management accelerated the shift towards",
+          "ated the importance of forest management and low browsing for the resi",
+          "e multiple demands for forest ecosystem services (ES, e.g. timber production, ",
+          "future forest development and ecosystem service provisioning in a moun- tain ",
+          "39:483–498 1 3 Calculation of ecosystem services Changes in aboveground biomas"
+        ]
+      }
+    ],
+    "error": null,
+    "total_blocks": 1,
+    "blocks_passed": 1,
+    "validation_date": "2025-09-05"
+  },
+  {
+    "filename": "Hiltner_NaiS_Steinschlagprofil_Bericht_update_final.pdf",
+    "overall_result": false,
+    "block_results": [
+      {
+        "block_name": "Query",
+        "passed": false,
+        "matches_found": 0,
+        "sample_matches": []
+      }
+    ],
+    "error": null,
+    "total_blocks": 1,
+    "blocks_passed": 0,
+    "validation_date": "2025-09-05"
+  }
+]

@@ -1,12 +1,20 @@
-# Citation File Format for Universal Literature Screening Toolkit
+# Citation File Format for Universal Li  authors:
+    - family-names: "Hiltner"
+      given-names: "Ulrike"
+      orcid: "https://orcid.org/0000-0001-5663-7068"
+  version: "1.0.2"
+  date-released: "2025-09-26"
+  url: "https://github.com/uhiltner/universal-literature-screening-toolkit"orcid: "https://orcid.org/0000-0001-5663-7068"
+  version: "1.0.2"
+  date-released: "2025-09-26"ture Screening Toolkit
 # https://citation-file-format.github.io/
 
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 type: software
 title: "Universal Literature Screening Toolkit"
-version: "1.0.1"
-date-released: "2025-09-25"
+version: "1.0.2"
+date-released: "2025-09-26"
 abstract: >
   A domain-agnostic automated literature screening toolkit for systematic reviews 
   and meta-analyses. Supports multi-language pattern matching, configurable 
@@ -20,7 +28,6 @@ authors:
     email: "ulrike.hiltner@usys.ethz.ch"
 repository-code: "https://github.com/uhiltner/universal-literature-screening-toolkit"
 url: "https://github.com/uhiltner/universal-literature-screening-toolkit"
-doi: 10.5281/zenodo.17202023
 license: MIT
 keywords:
   - "systematic review"
@@ -42,5 +49,4 @@ preferred-citation:
       orcid: "https://orcid.org/0000-0001-5663-7068"
   version: "1.0.1"
   date-released: "2025-09-25"
-  doi: "10.5281/zenodo.17202023"
   url: "https://github.com/uhiltner/universal-literature-screening-toolkit"

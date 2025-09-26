@@ -78,16 +78,11 @@ Deprecation note: `--search-terms` and the block-based `search_terms.txt` file f
 If you use this toolkit in your research, please cite it as:
 
 ```bibtex
-@software{hiltner2025universal,
-  author       = {Hiltner, Ulrike},
   title        = {Universal Literature Screening Toolkit},
-  month        = sep,
-  year         = 2025,
-  publisher    = {Zenodo},
-  version      = {1.0.1},
-  doi          = {10.5281/zenodo.17202023},
-  url          = {https://doi.org/10.5281/zenodo.17202023}
-}
+  author       = {Hiltner, Ulrike},
+  year         = {2025},
+  version      = {1.0.2},
+  url          = {https://github.com/uhiltner/universal-literature-screening-toolkit}
 ```
 
 ## Contributing
