@@ -1,6 +1,8 @@
 ﻿#!/usr/bin/env python3
 """
-Universal Literature Screening Toolkit v1.0.0
+Universal Lit    print("="*60)
+    print(" Universal Literature Screening Toolkit v1.0.3")
+    print("   Configurable automated PDF screening for any domain")ture Screening Toolkit v1.0.0
 ===========================================
 
 A configurable tool for systematic literature review and paper screening.
@@ -267,7 +269,7 @@ def generate_outputs(results, output_dir, search_blocks, config, *, query_string
 def main():
     """Main execution function."""
     parser = argparse.ArgumentParser(
-        description="Universal Literature Screening Toolkit v1.0.0",
+        description="Universal Literature Screening Toolkit v1.0.3",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:

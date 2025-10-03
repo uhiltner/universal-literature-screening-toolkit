@@ -129,7 +129,7 @@ def generate_html_report(validation_results, search_blocks, output_dir, query_st
     <div class="header">
         <h1>🌲 Literature Screening Results</h1>
         <p><strong>Generated:</strong> {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
-        <p><strong>Toolkit Version:</strong> 1.0.0</p>
+        <p><strong>Toolkit Version:</strong> 1.0.3</p>
     </div>
     
     <div class="summary">

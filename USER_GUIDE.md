@@ -1205,4 +1205,4 @@ A: No! All processing happens locally on your computer. No data is sent to exter
 
 ---
 
-*This guide covers the complete functionality of the Universal Literature Screening Toolkit v1.0.2. For the latest updates and community contributions, visit the [GitHub repository](https://github.com/uhiltner/universal-literature-screening-toolkit).*
+*This guide covers the complete functionality of the Universal Literature Screening Toolkit v1.0.3. For the latest updates and community contributions, visit the [GitHub repository](https://github.com/uhiltner/universal-literature-screening-toolkit).*
