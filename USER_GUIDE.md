@@ -691,64 +691,241 @@ When running in query mode, the report shows your original query string and a co
 
 ### Installation Issues
 
-#### "Python not found"
-```powershell
-# Check Python installation
-python --version
-# or
-py --version
+#### ❌ "Python not found" or "'python' is not recognized"
 
-# If not found, install from python.org
-# Make sure "Add to PATH" is checked during installation
+**Cause:** Python not installed or not in PATH
+
+**Solutions:**
+```powershell
+# Check if Python is installed
+python --version
+# or try
+py --version
 ```
 
-#### "pip not recognized"
+If neither works:
+1. Download Python from [python.org](https://www.python.org/downloads/)
+2. During installation, **check "Add Python to PATH"** (very important!)
+3. Restart PowerShell/Terminal completely
+4. Try `py --version` instead of `python --version`
+
+#### ❌ "pip not recognized" or "pip not found"
+
+**Cause:** pip not installed or environment issues
+
+**Solutions:**
 ```powershell
-# Re-run setup to fix pip
+# Re-run setup script (fixes pip automatically)
 .\scripts\setup_windows.ps1
 
-# Or manually repair
+# Or manually repair pip
 C:\uls_env\Scripts\python.exe -m ensurepip --upgrade
 ```
 
-#### "Execution Policy" errors
+#### ❌ "Execution Policy" error in PowerShell
+
+**Cause:** Windows blocks unsigned scripts by default for security
+
+**Solution:**
 ```powershell
-# Allow scripts for current session only
+# Allow scripts for current session only (safe)
 Set-ExecutionPolicy Bypass -Scope Process
 
 # Then re-run setup
 .\scripts\setup_windows.ps1
 ```
 
+**Note:** This only affects the current PowerShell window and doesn't change system-wide security settings.
+
+#### ❌ Setup script fails or hangs
+
+**Solutions:**
+1. Close all PowerShell/Terminal windows
+2. Delete the `uls_env` folder if it exists
+3. Re-run the setup script
+4. Check internet connection (needed for downloading packages)
+
+---
+
+### Folder and File Issues
+
+#### ❌ "No PDFs found in input_pdfs"
+
+**Check these:**
+- ✅ Folder is named exactly `input_pdfs` (not `Input_PDFs`, `input-pdfs`, or `InputPDFs`)
+- ✅ PDFs are directly in the folder (not in a subfolder)
+- ✅ Files have `.pdf` extension (not `.PDF`, `.pdf.txt`, or other extensions)
+- ✅ Folder is in the same directory as `run_screening.py`
+
+**Example of correct structure:**
+```
+universal-literature-screening-toolkit/
+├─ run_screening.py
+├─ input_pdfs/              ← Must be exactly this name
+│  ├─ paper1.pdf           ← PDFs directly here
+│  └─ paper2.pdf
+└─ query.txt
+```
+
+#### ❌ "query.txt not found"
+
+**Check these:**
+- ✅ File is named exactly `query.txt` (not `Query.txt`, `query.txt.txt`, or other names)
+- ✅ File is in the same folder as `run_screening.py`
+- ✅ File is not empty
+
+**Alternative:** Specify custom path:
+```powershell
+.\scripts\run_tool.ps1 -QueryFile "path/to/my_custom_query.txt"
+```
+
+---
+
 ### Processing Issues
 
-#### "No PDFs found"
-- Check `input_pdfs` folder exists
-- Verify PDFs are directly in folder (not subfolders)
-- Ensure files have `.pdf` extension
+#### ⚠️ "Some PDFs failed to process"
 
-#### "Text extraction failed"
-- **Some PDFs are scanned images**: Use OCR tools first
-- **Encrypted PDFs**: Remove password protection
-- **Corrupt PDFs**: Check file integrity
+**This is normal!** Some PDFs can't be processed due to:
 
-#### "No matches found"
-- **Check spelling** in search terms
-- **Too restrictive**: Try OR logic instead of AND
-- **Add synonyms**: Include alternative terminology
-- **Use wildcards**: `treat*` instead of `treatment`
+1. **Encrypted/Password-protected PDFs**
+   - **Solution:** Remove password protection before screening
+   - Tools: Adobe Acrobat, online PDF unlockers
 
-### Result Issues
+2. **Corrupted/Damaged PDFs**
+   - **Solution:** Try re-downloading the file
+   - Test: Can you open it normally in a PDF reader?
 
-#### "All papers excluded"
-- **Review search terms**: May be too specific
-- **Check sample papers manually**: Verify they should match
-- **Try broader terms**: Add synonyms and variations
-- **Use OR logic**: In config.json, set default_operator to "OR"
+3. **Scanned Images (no extractable text)**
+   - **Solution:** Use OCR (Optical Character Recognition) first
+   - Tools: Adobe Acrobat Pro, Tesseract, online OCR tools
 
-#### "Too many papers included"
-- **Tighten query**: Add AND conditions, remove very broad terms
-- **Use phrases**: Quote multi-word concepts
+4. **Unusual/Non-standard PDF format**
+   - **Solution:** Open in Adobe Reader and "Save As" to re-save
+
+**Check the report:** The HTML report lists exactly which PDFs failed and why.
+
+#### ❌ "Text extraction failed"
+
+**Common causes:**
+- PDF contains only images (scanned documents)
+- PDF has copy/paste protection enabled
+- PDF uses non-standard encoding
+- Corrupt PDF file
+
+**Solutions:**
+- Use OCR tools for scanned PDFs
+- Remove restrictions/protection
+- Try opening and re-saving in Adobe Reader
+- Verify file integrity (can you open it normally?)
+
+---
+
+### Query and Results Issues
+
+#### ❌ "No papers matched the query" (0 included)
+
+**Cause:** Query is too restrictive
+
+**Solutions (in order of preference):**
+
+1. **Add more synonyms with OR:**
+   ```
+   # Instead of:
+   forest*
+   
+   # Try:
+   forest* OR woodland* OR silvicultur* OR tree*
+   ```
+
+2. **Use wildcards for variations:**
+   ```
+   # Instead of:
+   management
+   
+   # Try:
+   manage* OR manag*
+   ```
+
+3. **Remove NOT clauses temporarily:**
+   ```
+   # Instead of:
+   forest* AND NOT economics
+   
+   # Try just:
+   forest*
+   ```
+
+4. **Test one concept at a time:**
+   Start with the most specific concept and add conditions gradually
+
+5. **Verify PDFs contain expected text:**
+   Open a PDF you expect to match and search for your terms manually
+
+#### ⚠️ "Too many papers matched" (>80% included)
+
+**Cause:** Query is too broad
+
+**Solutions:**
+
+1. **Add more AND conditions:**
+   ```
+   # Instead of:
+   forest*
+   
+   # Try:
+   forest* AND management AND "ecosystem service*"
+   ```
+
+2. **Use exact phrases:**
+   ```
+   # Instead of:
+   review
+   
+   # Try:
+   "systematic review" OR "literature review"
+   ```
+
+3. **Add NOT clauses to exclude irrelevant topics:**
+   ```
+   forest* AND NOT (economics OR cost* OR financial*)
+   ```
+
+4. **Make terms more specific:**
+   Replace broad terms with specific concepts from your research question
+
+#### ❌ "Tool included/excluded paper incorrectly"
+
+**Check these:**
+
+1. **Open the HTML report** - See exactly which terms matched
+2. **Check evidence snippets** - Does the match make sense in context?
+3. **Review your query** - Does it capture your intent accurately?
+4. **Test query logic** - Try parts of your query separately
+
+**Remember:** The tool matches text literally. It doesn't understand context or meaning.
+
+---
+
+### Result and Output Issues
+
+#### ❌ "validation_report.html won't open"
+
+**Solutions:**
+- Right-click → "Open with" → Choose your web browser
+- If blocked: Check file isn't quarantined by antivirus
+- Move file out of `results` folder and try again
+
+#### ❌ "Sorted PDFs folder is empty"
+
+**Check:**
+- Did the screening complete successfully?
+- Check the terminal output for errors
+- Verify `results/validation_results.json` exists
+- Re-run with verbose output to see detailed messages
+
+#### ❌ "Can't find my original PDFs"
+
+**Don't worry!** Your original PDFs in `input_pdfs/` are never modified. The sorted PDFs in `results/sorted_pdfs/` are **copies**, not moves.
 
 ---
 
@@ -821,62 +998,182 @@ databases/
 
 ### General Usage
 
-**Q: How many papers can the toolkit handle?**
-A: Tested with 100+ papers. Processing time scales linearly (~1-2 seconds per paper).
+**Q: How many papers can the toolkit handle?**  
+A: Tested with 100+ papers. Processing time scales linearly (~1-2 seconds per paper). For very large collections (1000+), consider processing in batches.
 
-**Q: What file formats are supported?**
-A: PDF only. For other formats, convert to PDF first.
+**Q: What file formats are supported?**  
+A: PDF only. For other formats (Word, HTML, TXT), convert to PDF first using tools like Microsoft Word's "Save as PDF" or online converters.
 
-**Q: Can I use this for non-English papers?**
-A: Yes! The toolkit handles Unicode text in any language.
+**Q: Can I use this for non-English papers?**  
+A: Yes! The toolkit handles Unicode text in any language (German, French, Spanish, Chinese, etc.). Just make sure your query terms match the language of your papers.
 
-**Q: How accurate is the screening?**
-A: Accuracy depends on your search criteria. Well-designed terms achieve 90%+ precision.
+**Q: How accurate is the screening?**  
+A: Accuracy depends on your search criteria. Well-designed queries achieve 90%+ precision. The tool is highly reliable for matching text patterns, but it doesn't understand context—always manually review results.
 
-### Technical Questions
+**Q: Where exactly do I create the `input_pdfs` folder?**  
+A: In the same directory as `run_screening.py`. If you're in `C:\Users\YourName\universal-literature-screening-toolkit\`, create `C:\Users\YourName\universal-literature-screening-toolkit\input_pdfs\`.
 
-**Q: What's the difference between PyMuPDF and pdfplumber?**
-A: Both extract PDF text. PyMuPDF is faster; pdfplumber is more robust for complex layouts.
+**Q: Can PDF files have any name?**  
+A: Yes! Your PDFs can have any filename. Only the folder name (`input_pdfs`) and query file (`query.txt`) must be exact.
 
-**Q: Can I modify the source code?**
-A: Yes! The toolkit is MIT licensed. See CONTRIBUTING.md for guidelines.
+**Q: Can I use subfolders to organize my PDFs?**  
+A: Not by default. The toolkit only reads PDFs directly in `input_pdfs`. (Advanced users can modify `config.json` for recursive searching.)
 
-**Q: How do I cite this toolkit?**
-A: See the Citation section in README.md or CITATION.cff file.
+---
 
-### Research Process
+### Setup and Installation
 
-**Q: Should I use AND or OR logic?**
-A: 
-- **AND**: Stricter, fewer false positives, good for final screening
-- **OR**: More inclusive, fewer false negatives, good for initial screening
+**Q: Do I need to run setup every time?**  
+A: No! Setup is one-time only. After initial setup, just use `.\scripts\run_tool.ps1` or the Python command to run screenings.
 
-**Q: How do I handle duplicate papers?**
-A: Run duplicate detection before screening using tools like Zotero or Mendeley.
+**Q: The script says 'Python not found' but I installed it - what's wrong?**  
+A: Python might not be in your system PATH. Try:
+1. Close and reopen PowerShell/Terminal completely
+2. Use `py --version` instead of `python --version`
+3. Reinstall Python and **check "Add Python to PATH"** during installation
 
-**Q: What about grey literature?**
-A: Works with any PDFs. Ensure consistent formatting across sources.
+**Q: I get 'script execution blocked' - is this dangerous to bypass?**  
+A: No. `Set-ExecutionPolicy Bypass -Scope Process` only affects the current PowerShell window and is safe. It doesn't change system-wide security settings.
 
-**Q: How do I validate my search strategy?**
-A: 
-1. Test with known relevant papers
-2. Manual review of random samples
-3. Compare with expert manual screening
-4. Calculate inter-rater agreement
+**Q: Can I install this on a shared/network drive?**  
+A: It's possible but not recommended. Install on your local drive for best performance and to avoid permission issues.
 
-### Best Practices
+---
 
-**Q: How many search blocks should I use?**
-A: 3-7 blocks typically work well. Too few = overly broad; too many = overly restrictive.
+### Search Query Questions
 
-**Q: Should I include methodology terms?**
-A: Yes, if methodology is part of your inclusion criteria (e.g., "randomized controlled trial").
+**Q: Should I use AND or OR between terms?**  
+A:
+- **OR**: "Find papers with *any* of these terms" → More inclusive, good for initial exploratory screening
+- **AND**: "Find papers with *all* of these terms" → More restrictive, good for focused final screening
 
-**Q: How do I handle abbreviations?**
-A: Include both full terms and abbreviations: `"artificial intelligence", AI, "machine learning", ML`
+**Example:**
+```
+# Inclusive (finds papers about forests OR climate):
+forest* OR climate*
 
-**Q: What about case sensitivity?**
-A: Keep case_sensitive: false (default) for most research applications.
+# Restrictive (finds papers about forests AND climate together):
+forest* AND climate*
+```
+
+**Q: What does the `*` wildcard do?**  
+A: It matches any ending. Examples:
+- `forest*` matches: forest, forests, forestry, forestation, forester, forested
+- `manage*` matches: manage, management, managing, manager, managerial
+
+**Q: How do I search for an exact phrase?**  
+A: Use double quotes: `"ecosystem services"`. This will NOT match "ecosystem service" (singular) or "services to ecosystems" (different order).
+
+**Q: Can I use parentheses to group terms?**  
+A: Yes! Parentheses control logic precedence:
+```
+# This means: (forest OR woodland) AND (management OR planning)
+(forest* OR woodland*) AND (management OR planning)
+
+# Without parentheses, logic can be ambiguous
+```
+
+**Q: How do I handle abbreviations?**  
+A: Include both full terms and abbreviations with OR:
+```
+("artificial intelligence" OR AI OR "machine learning" OR ML)
+```
+
+**Q: What about case sensitivity?**  
+A: By default, searches are case-insensitive (`forest` matches `Forest`, `FOREST`, `forest`). This is recommended for most research. Advanced users can change this in `config.json`.
+
+---
+
+### Results and Output
+
+**Q: Why did the tool include/exclude a specific paper?**  
+A: Open `validation_report.html` - it shows exactly which terms matched in each paper, with evidence snippets from the text showing where the matches occurred.
+
+**Q: Can I re-run with a different query without re-processing PDFs?**  
+A: Currently no - each run extracts text from PDFs again. (This feature is planned for future versions.)
+
+**Q: Where are my original PDFs after screening?**  
+A: Your originals in `input_pdfs/` are **never modified or moved**. The PDFs in `results/sorted_pdfs/` are copies, not moves. Your originals are safe!
+
+**Q: No papers matched my query - is the tool broken?**  
+A: Probably not! Your query is likely too restrictive. See the [Troubleshooting section](#troubleshooting) for strategies to adjust your query. Try searching for one term at a time to verify the tool is working.
+
+**Q: Can I combine results from multiple screening runs?**  
+A: Yes, but you need to do it manually or write a custom script. Each run creates a separate `results` folder. You can specify different output folders with `--output` parameter.
+
+---
+
+### PDF Processing
+
+**Q: Why did some PDFs fail to process?**  
+A: Common reasons:
+1. **Encrypted/Password-protected** - Remove protection first
+2. **Corrupted file** - Try re-downloading
+3. **Scanned image (no extractable text)** - Needs OCR preprocessing
+4. **Unusual PDF format** - Try opening and re-saving in Adobe Reader
+
+**Q: How do I know which PDFs failed and why?**  
+A: Check the HTML report - there's a "Failed PDFs" section at the bottom listing each file with the specific reason for failure.
+
+**Q: Can the tool process scanned PDFs (images)?**  
+A: Not directly. Scanned PDFs need OCR (Optical Character Recognition) first to convert images to text. Try:
+- Adobe Acrobat Pro (paid)
+- Tesseract OCR (free, open-source)
+- Online OCR tools
+
+**Q: Some of my papers are in German/French/Chinese - will this work?**  
+A: Yes! The toolkit handles any Unicode text. Just make sure your query includes terms in the same language as your papers. You can even mix languages in your query if needed.
+
+---
+
+### Research Workflow
+
+**Q: Should I manually review all included papers?**  
+A: **Yes, absolutely!** Automated screening is the first step to filter out obviously irrelevant papers. Always manually review included papers to make final inclusion decisions for your review.
+
+**Q: How do I validate my search strategy?**  
+A:
+1. **Test with known papers**: Include 5-10 papers you know should be included/excluded
+2. **Manual review samples**: Randomly sample included and excluded papers
+3. **Compare with expert screening**: Have another researcher screen a subset
+4. **Calculate metrics**: Compute precision, recall, and inter-rater agreement
+
+**Q: How do I handle duplicate papers?**  
+A: Run duplicate detection **before** screening using tools like:
+- Zotero (free)
+- Mendeley (free)
+- Covidence (paid)
+
+**Q: What about grey literature from multiple sources?**  
+A: Works with any PDFs regardless of source! Just ensure all PDFs are in the `input_pdfs` folder. The toolkit doesn't care where PDFs came from.
+
+---
+
+### Technical and Advanced Questions
+
+**Q: What's the difference between PyMuPDF and pdfplumber?**  
+A: Both extract PDF text. PyMuPDF (fitz) is faster; pdfplumber is more robust for complex layouts and tables. The toolkit tries both automatically for best results.
+
+**Q: Can I modify the source code?**  
+A: Yes! The toolkit is MIT licensed (open source). See CONTRIBUTING.md for development guidelines. Feel free to fork, modify, and contribute back!
+
+**Q: How do I cite this toolkit?**  
+A: See the Citation section in README.md or use the CITATION.cff file for automatic citation formatting in tools like Zotero.
+
+**Q: How many search blocks should I use? (legacy mode)**  
+A: For legacy block-based search (deprecated): 3-7 blocks typically work well. Too few = overly broad; too many = overly restrictive. **Note:** Query mode is now recommended.
+
+**Q: Should I include methodology terms in my query?**  
+A: Yes, if methodology is part of your inclusion criteria. Examples:
+- `"randomized controlled trial" OR RCT`
+- `"systematic review" OR "meta-analysis"`
+- `"qualitative study" OR "case study"`
+
+**Q: Can I process PDFs on a schedule or in batch mode?**  
+A: Yes! You can create scheduled tasks (Windows Task Scheduler, cron on Linux/Mac) to run the toolkit automatically. Use the Python command directly for scripting.
+
+**Q: Does the toolkit store or send my data anywhere?**  
+A: No! All processing happens locally on your computer. No data is sent to external servers. Your PDFs and results stay completely private.
 
 ---
 
@@ -884,23 +1181,28 @@ A: Keep case_sensitive: false (default) for most research applications.
 
 ### Getting Help
 1. **Check this guide** for comprehensive solutions
-2. **Review troubleshooting section** for common issues  
-3. **Run tests** to verify installation: `.\scripts\run_tests.ps1`
-4. **Open GitHub issue** for bugs or feature requests
-5. **Check examples folder** for domain-specific templates
+2. **Review [Troubleshooting section](#troubleshooting)** for common issues  
+3. **Run tests** to verify installation: `.\scripts\run_tests.ps1` (Windows) or `python3 -m pytest tests -q` (Mac/Linux)
+4. **Open GitHub issue** for bugs or feature requests: [GitHub Issues](https://github.com/uhiltner/universal-literature-screening-toolkit/issues)
+5. **Check examples folder** for domain-specific query templates
 
 ### Contributing
-- **Bug reports**: Use GitHub issues with error messages
-- **Feature requests**: Describe your research use case
-- **Code contributions**: See CONTRIBUTING.md
-- **Documentation**: Help improve this guide
+- **Bug reports**: Use GitHub issues with error messages and steps to reproduce
+- **Feature requests**: Describe your research use case and why the feature would help
+- **Code contributions**: See CONTRIBUTING.md for development workflow
+- **Documentation**: Help improve this guide by submitting corrections or additions
 
 ### Academic Use
 - **Cite the toolkit** in your publications (see CITATION.cff)
-- **Share search strategies** with the community
-- **Report validation studies** to improve the tool
-- **Collaborate** on domain-specific templates
+- **Share search strategies** with the community to help others in your field
+- **Report validation studies** to improve the tool and establish best practices
+- **Collaborate** on domain-specific templates and extensions
+
+### Version History
+- **v1.0.2** (Current) - Documentation improvements, enhanced query mode
+- **v1.0.1** - Bug fixes and stability improvements  
+- **v1.0.0** - Initial release with query mode as recommended workflow
 
 ---
 
-*This guide covers the complete functionality of the Universal Literature Screening Toolkit v0.90.0. For the latest updates and community contributions, visit the [GitHub repository](https://github.com/uhiltner/universal-literature-screening-toolkit).*
+*This guide covers the complete functionality of the Universal Literature Screening Toolkit v1.0.2. For the latest updates and community contributions, visit the [GitHub repository](https://github.com/uhiltner/universal-literature-screening-toolkit).*
