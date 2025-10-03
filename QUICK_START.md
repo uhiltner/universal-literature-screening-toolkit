@@ -1,172 +1,328 @@
-# 🚀 Quick Start Guide# 🚀 Quick Start Guide — Universal Literature Screening Toolkit# 🚀 Quick Start Guide — Universal Literature Screening Toolkit# 🚀 Quick Start Guide — Universal Literature Screening Toolkit
+# 🚀 Quick Start Guide# 🚀 Quick Start Guide — Universal Literature Screening Toolkit
 
 
 
-**Get your first screening done in 15 minutes.** This tutorial covers the essential steps to install and run the toolkit.
-
-
-
-💡 **For troubleshooting, FAQ, and advanced features**, see the [USER_GUIDE.md](USER_GUIDE.md).**Welcome!** This quick tutorial will guide you through your first screening in about 15-20 minutes, even if you've never used command-line tools before.
+Get your first screening done in 15 minutes. For troubleshooting, FAQ, and advanced features, see [USER_GUIDE.md](USER_GUIDE.md).**Get your first screening done.** This tutorial covers the essential steps to install and run the toolkit.
 
 
 
 ---
 
+💡 **For troubleshooting, FAQ, and advanced features**, see the [USER_GUIDE.md](USER_GUIDE.md).**Welcome!** This quick tutorial will guide you through your first screening in about 15-20 minutes, even if you've never used command-line tools before.
 
+## What You'll Do
 
-## What You'll Do (2-Minute Overview)**What you'll learn:****Welcome!** This guide will help you screen your first batch of research papers in about 10 minutes, even if you've never used a command line tool before.**Welcome!** This guide will help you screen your first batch of research papers in about 10 minutes, even if you've never used a command line tool before.
+---
 
+1. **Install** → Run automated setup script
 
+2. **Prepare PDFs** → Put papers in `input_pdfs/` folder## What You'll Do 
+
+3. **Write Query** → Create `query.txt` with search criteria
+
+4. **Run Screening** → Execute the tool**What you'll learn:****Welcome!** This guide will help you screen your first batch of research papers in about 10 minutes, even if you've never used a command line tool before.**Welcome!** This guide will help you screen your first batch of research papers in about 10 minutes, even if you've never used a command line tool before.
+
+5. **View Results** → Open HTML report
 
 1. **Install** → Run automated setup script (~5 min)- How to install the toolkit (one-time setup)
 
+---
+
 2. **Prepare PDFs** → Put papers in `input_pdfs/` folder (~2 min)
+
+## 1. Installation
 
 3. **Write Query** → Create `query.txt` with search criteria (~3 min)- How to organize your PDF files
 
+### Windows
+
 4. **Run Screening** → Execute the tool (~1 min + processing time)
+
+Open PowerShell (`Win+X` → PowerShell), navigate to toolkit folder:
 
 5. **View Results** → Open HTML report (~2 min)- How to write a search query
 
-
-
-**Total time:** ~15 minutes + processing (1-2 seconds per PDF)- How to run your first screening**What you'll learn:****What you'll learn:**
-
-
-
----- Where to find your results
-
-
-
-## 1. Installation (5 Minutes)- How to install the toolkit (one-time setup)- How to install the toolkit (one-time setup)
-
-
-
-### Windows**💡 Tip:** This is a lean tutorial focusing on the essential steps. For detailed explanations, troubleshooting, and advanced features, see the comprehensive [USER_GUIDE.md](USER_GUIDE.md).
-
-
-
-Open PowerShell (`Win+X` → PowerShell), navigate to the toolkit folder, and run:- How to organize your PDF files- How to organize your PDF files
-
-
-
-```powershell---
+```powershell
 
 cd C:\Users\YourName\Downloads\universal-literature-screening-toolkit
 
-Set-ExecutionPolicy Bypass -Scope Process- How to write a simple search query- How to write a simple search query
+Set-ExecutionPolicy Bypass -Scope Process
 
-.\scripts\setup_windows.ps1
+.\scripts\setup_windows.ps1**Total time:** ~15 minutes + processing (1-2 seconds per PDF)- How to run your first screening**What you'll learn:****What you'll learn:**
 
-.\scripts\run_tests.ps1## What You'll Do
+.\scripts\run_tests.ps1
 
 ```
 
-- How to run the screening and view results- How to run the screening and view results
+
+
+✅ **Expected:** "All tests passed successfully!"---- Where to find your results
+
+
 
 ### macOS/Linux
 
-Here's a quick overview of the screening process:
 
-Open Terminal and run:
+
+Open Terminal:## 1. Installation (5 Minutes)- How to install the toolkit (one-time setup)- How to install the toolkit (one-time setup)
 
 
 
 ```bash
 
-cd ~/Downloads/universal-literature-screening-toolkit1. **Install the toolkit** → Set up Python and required libraries (one-time, ~5 minutes)
+cd ~/Downloads/universal-literature-screening-toolkit
 
-chmod +x scripts/setup_unix.sh scripts/run_tool.sh scripts/run_tests.sh
+chmod +x scripts/setup_unix.sh scripts/run_tool.sh scripts/run_tests.sh### Windows**💡 Tip:** This is a lean tutorial focusing on the essential steps. For detailed explanations, troubleshooting, and advanced features, see the comprehensive [USER_GUIDE.md](USER_GUIDE.md).
 
-./scripts/setup_unix.sh2. **Prepare your PDFs** → Organize research papers in a folder (~2 minutes)**Need more details?** See the full USER_GUIDE.md for advanced features and troubleshooting.**Need more details?** See the full USER_GUIDE.md for advanced features and troubleshooting.
+./scripts/setup_unix.sh
 
 python3 -m pytest tests -q
 
-```3. **Write your query** → Define which papers to include/exclude (~3 minutes)
-
-
-
-✅ **Expected output:** "All tests passed successfully!"4. **Run the screening** → Let the toolkit process your papers (~1-2 seconds per paper)## Troubleshooting (plain language)
-
-
-
-❌ **Having issues?** See [Troubleshooting](USER_GUIDE.md#troubleshooting) in USER_GUIDE.md5. **Review results** → Check the HTML report and sorted papers (~5 minutes)
-
-
-
-------
-
-
-
-## 2. Prepare Your PDFs (2 Minutes)**What is this toolkit?** Think of it as an automated assistant that reads all your research papers and tells you which ones match your specific criteria—saving you hours of manual screening work.
-
-
-
-### Create Input Folder### Setup Issues
-
-
-
-**Windows:**---
-
-```powershell
-
-New-Item -ItemType Directory -Name "input_pdfs" -Force## 📋 What You'll Need
-
 ```
 
-## Step 1: Install and Verify
+Open PowerShell (`Win+X` → PowerShell), navigate to the toolkit folder, and run:- How to organize your PDF files- How to organize your PDF files
 
-**macOS/Linux:**
-
-```bash**❌ "Python not found" or "'python' is not recognized"**
-
-mkdir -p input_pdfs
-
-```### 📁 Understanding Folder Structure
+✅ **Expected:** Tests passed
 
 
 
-### Add Your PDFsBefore starting, make sure you have:- **Cause**: Python not installed or not in PATH
+❌ **Issues?** See [Troubleshooting](USER_GUIDE.md#troubleshooting) in USER_GUIDE.md
 
-
-
-Copy all PDF files you want to screen into the `input_pdfs/` folder.The toolkit needs files organized in a specific way. Here's what your folder should look like:
-
-
-
-**Rules:**- **A computer** running Windows, macOS, or Linux- **Solution**: 
-
-- ✅ All PDFs directly in `input_pdfs/` (no subfolders)
-
-- ✅ Any file names are fine```
-
-- ⚠️ Folder name must be exactly `input_pdfs`
-
-universal-literature-screening-toolkit/     ← Main folder (you'll download/clone this)- **PDF files** of the research papers you want to screen  1. Download Python from [python.org](https://www.python.org/downloads/)
+```powershell---
 
 ---
 
-├─ input_pdfs/                              ← You'll create this folder for your PDFs
+cd C:\Users\YourName\Downloads\universal-literature-screening-toolkit
 
-## 3. Write Your Query (3 Minutes)
+## 2. Prepare PDFs
 
-│  ├─ paper1.pdf                           ← Your PDF files (any names are fine)- **Internet connection** for the one-time setup  2. During installation, **check "Add Python to PATH"**
+Set-ExecutionPolicy Bypass -Scope Process- How to write a simple search query- How to write a simple search query
 
-### Create Query File
+### Create Input Folder
 
-│  ├─ paper2.pdf
+.\scripts\setup_windows.ps1
 
-Create a file named `query.txt` in the toolkit folder with your search criteria.
+**Windows:**
 
-│  └─ paper3.pdf- **15 minutes** for installation and your first screening  3. Restart PowerShell
+```powershell.\scripts\run_tests.ps1## What You'll Do
 
-**Simple example:**
+New-Item -ItemType Directory -Name "input_pdfs" -Force
 
-```├─ query.txt                                ← You'll create this file with your search query
+``````
+
+
+
+**macOS/Linux:**- How to run the screening and view results- How to run the screening and view results
+
+```bash
+
+mkdir -p input_pdfs### macOS/Linux
+
+```
+
+Here's a quick overview of the screening process:
+
+### Add PDFs
+
+Open Terminal and run:
+
+Copy all PDF files into the `input_pdfs/` folder.
+
+
+
+**Rules:**
+
+- All PDFs directly in `input_pdfs/` (no subfolders)```bash
+
+- Any file names work
+
+- Folder must be named exactly `input_pdfs`cd ~/Downloads/universal-literature-screening-toolkit1. **Install the toolkit** → Set up Python and required libraries (one-time, ~5 minutes)
+
+
+
+---chmod +x scripts/setup_unix.sh scripts/run_tool.sh scripts/run_tests.sh
+
+
+
+## 3. Write Query./scripts/setup_unix.sh2. **Prepare your PDFs** → Organize research papers in a folder (~2 minutes)**Need more details?** See the full USER_GUIDE.md for advanced features and troubleshooting.**Need more details?** See the full USER_GUIDE.md for advanced features and troubleshooting.
+
+
+
+Create `query.txt` in the toolkit folder.python3 -m pytest tests -q
+
+
+
+**Simple example:**```3. **Write your query** → Define which papers to include/exclude (~3 minutes)
+
+```
 
 forest* AND climate*
 
+```
+
+✅ **Expected output:** "All tests passed successfully!"4. **Run the screening** → Let the toolkit process your papers (~1-2 seconds per paper)## Troubleshooting (plain language)
+
+**Complex example:**
+
+```
+
+(forest* OR woodland*) AND ("ecosystem service*" OR biodiversity) AND NOT economics
+
+```❌ **Having issues?** See [Troubleshooting](USER_GUIDE.md#troubleshooting) in USER_GUIDE.md5. **Review results** → Check the HTML report and sorted papers (~5 minutes)
+
+
+
+**Syntax:**
+
+- `*` = wildcard (e.g., `forest*` matches forest, forests, forestry)
+
+- `"phrase"` = exact phrase------
+
+- `AND` = both required
+
+- `OR` = either required
+
+- `NOT` = exclude
+
+- `(parentheses)` = group terms## 2. Prepare Your PDFs (2 Minutes)**What is this toolkit?** Think of it as an automated assistant that reads all your research papers and tells you which ones match your specific criteria—saving you hours of manual screening work.
+
+
+
+More examples: [Query Syntax Guide](USER_GUIDE.md#query-syntax)
+
+
+
+---### Create Input Folder### Setup Issues
+
+
+
+## 4. Run Screening
+
+
+
+**Windows:****Windows:**---
+
+```powershell
+
+.\scripts\run_tool.ps1 -QueryFile "query.txt"```powershell
+
+```
+
+New-Item -ItemType Directory -Name "input_pdfs" -Force## 📋 What You'll Need
+
+**macOS/Linux:**
+
+```bash```
+
+./scripts/run_tool.sh --query-file "query.txt"
+
+```## Step 1: Install and Verify
+
+
+
+**Alternative (all platforms):****macOS/Linux:**
+
+```bash
+
+python run_screening.py --input input_pdfs --output results --query-file query.txt```bash**❌ "Python not found" or "'python' is not recognized"**
+
+```
+
+mkdir -p input_pdfs
+
+---
+
+```### 📁 Understanding Folder Structure
+
+## 5. View Results
+
+
+
+Open `results/validation_report.html` in your web browser.
+
+### Add Your PDFsBefore starting, make sure you have:- **Cause**: Python not installed or not in PATH
+
+**Results structure:**
+
+```
+
+results/
+
+├─ validation_report.html    ← Your reportCopy all PDF files you want to screen into the `input_pdfs/` folder.The toolkit needs files organized in a specific way. Here's what your folder should look like:
+
+├─ validation_results.json   ← Raw data
+
+└─ sorted_pdfs/
+
+   ├─ include/               ← Matched papers
+
+   └─ exclude/               ← Excluded papers**Rules:**- **A computer** running Windows, macOS, or Linux- **Solution**: 
+
+```
+
+- ✅ All PDFs directly in `input_pdfs/` (no subfolders)
+
+**Report shows:**
+
+- Summary statistics (total, included, excluded)- ✅ Any file names are fine```
+
+- Included papers with matched terms and evidence
+
+- Your search query- ⚠️ Folder name must be exactly `input_pdfs`
+
+
+
+---universal-literature-screening-toolkit/     ← Main folder (you'll download/clone this)- **PDF files** of the research papers you want to screen  1. Download Python from [python.org](https://www.python.org/downloads/)
+
+
+
+## Next Steps---
+
+
+
+✅ You've completed your first screening!├─ input_pdfs/                              ← You'll create this folder for your PDFs
+
+
+
+**Now:**## 3. Write Your Query (3 Minutes)
+
+1. Review included papers
+
+2. Refine query if needed│  ├─ paper1.pdf                           ← Your PDF files (any names are fine)- **Internet connection** for the one-time setup  2. During installation, **check "Add Python to PATH"**
+
+3. Run again with improved criteria
+
+### Create Query File
+
+**Learn more:**
+
+- [USER_GUIDE.md](USER_GUIDE.md) - Comprehensive reference│  ├─ paper2.pdf
+
+  - Troubleshooting
+
+  - FAQCreate a file named `query.txt` in the toolkit folder with your search criteria.
+
+  - Advanced query techniques
+
+  - Configuration options│  └─ paper3.pdf- **15 minutes** for installation and your first screening  3. Restart PowerShell
+
+  - Best practices
+
+**Simple example:**
+
+**Get help:**
+
+- [USER_GUIDE.md](USER_GUIDE.md) - Documentation```├─ query.txt                                ← You'll create this file with your search query
+
+- [GitHub Issues](https://github.com/uhiltner/universal-literature-screening-toolkit/issues) - Report bugs
+
+forest* AND climate*
+
+---
+
 ```├─ scripts/                                 ← Helper scripts (already included)  4. Try `py --version` instead of `python --version`
+
+Happy screening! 📚✨
 
 
 
@@ -306,7 +462,8 @@ results/# Replace the path if you put the toolkit somewhere else│  ├─ pape
 
 
 
-### Improve Your Results**What does this do?** Windows blocks scripts for security by default. This command allows scripts to run in this PowerShell window only—it's safe and doesn't change your computer's security settings permanently.
+### Improve Your Results
+**What does this do?** Windows blocks scripts for security by default. This command allows scripts to run in this PowerShell window only—it's safe and doesn't change your computer's security settings permanently.
 
 
 

@@ -129,10 +129,9 @@ If you use this toolkit in your research, please cite it as:
   title        = {Universal Literature Screening Toolkit},
   month        = sep,
   year         = 2025,
-  publisher    = {Zenodo},
-  version      = {0.90.0},
+  version      = {1.0.0},
   doi          = {10.5281/zenodo.17063676},
-  url          = {https://doi.org/10.5281/zenodo.17063676}
+  url          = {https://github.com/uhiltner/universal-literature-screening-toolkit}
 }
 ```
 
