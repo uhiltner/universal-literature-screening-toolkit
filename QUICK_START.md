@@ -1,180 +1,357 @@
-# 🚀 Quick Start Guide — Universal Literature Screening Toolkit# 🚀 Quick Start Guide — Universal Literature Screening Toolkit# 🚀 Quick Start Guide — Universal Literature Screening Toolkit
+# 🚀 Quick Start Guide# 🚀 Quick Start Guide — Universal Literature Screening Toolkit# 🚀 Quick Start Guide — Universal Literature Screening Toolkit# 🚀 Quick Start Guide — Universal Literature Screening Toolkit
 
 
 
-**Welcome!** This quick tutorial will guide you through your first screening in about 15-20 minutes, even if you've never used command-line tools before.
+**Get your first screening done in 15 minutes.** This tutorial covers the essential steps to install and run the toolkit.
 
 
 
-**What you'll learn:****Welcome!** This guide will help you screen your first batch of research papers in about 10 minutes, even if you've never used a command line tool before.**Welcome!** This guide will help you screen your first batch of research papers in about 10 minutes, even if you've never used a command line tool before.
+💡 **For troubleshooting, FAQ, and advanced features**, see the [USER_GUIDE.md](USER_GUIDE.md).**Welcome!** This quick tutorial will guide you through your first screening in about 15-20 minutes, even if you've never used command-line tools before.
 
-- How to install the toolkit (one-time setup)
 
-- How to organize your PDF files
-
-- How to write a search query
-
-- How to run your first screening**What you'll learn:****What you'll learn:**
-
-- Where to find your results
-
-- How to install the toolkit (one-time setup)- How to install the toolkit (one-time setup)
-
-**💡 Tip:** This is a lean tutorial focusing on the essential steps. For detailed explanations, troubleshooting, and advanced features, see the comprehensive [USER_GUIDE.md](USER_GUIDE.md).
-
-- How to organize your PDF files- How to organize your PDF files
 
 ---
 
-- How to write a simple search query- How to write a simple search query
 
-## What You'll Do
 
-- How to run the screening and view results- How to run the screening and view results
-
-Here's a quick overview of the screening process:
+## What You'll Do (2-Minute Overview)**What you'll learn:****Welcome!** This guide will help you screen your first batch of research papers in about 10 minutes, even if you've never used a command line tool before.**Welcome!** This guide will help you screen your first batch of research papers in about 10 minutes, even if you've never used a command line tool before.
 
 
 
-1. **Install the toolkit** → Set up Python and required libraries (one-time, ~5 minutes)
+1. **Install** → Run automated setup script (~5 min)- How to install the toolkit (one-time setup)
 
-2. **Prepare your PDFs** → Organize research papers in a folder (~2 minutes)**Need more details?** See the full USER_GUIDE.md for advanced features and troubleshooting.**Need more details?** See the full USER_GUIDE.md for advanced features and troubleshooting.
+2. **Prepare PDFs** → Put papers in `input_pdfs/` folder (~2 min)
 
-3. **Write your query** → Define which papers to include/exclude (~3 minutes)
+3. **Write Query** → Create `query.txt` with search criteria (~3 min)- How to organize your PDF files
 
-4. **Run the screening** → Let the toolkit process your papers (~1-2 seconds per paper)## Troubleshooting (plain language)
+4. **Run Screening** → Execute the tool (~1 min + processing time)
 
-5. **Review results** → Check the HTML report and sorted papers (~5 minutes)
-
----
-
-**What is this toolkit?** Think of it as an automated assistant that reads all your research papers and tells you which ones match your specific criteria—saving you hours of manual screening work.
-
-### Setup Issues
-
----
-
-## 📋 What You'll Need
-
-## Step 1: Install and Verify
-
-**❌ "Python not found" or "'python' is not recognized"**
-
-### 📁 Understanding Folder Structure
-
-Before starting, make sure you have:- **Cause**: Python not installed or not in PATH
-
-The toolkit needs files organized in a specific way. Here's what your folder should look like:
-
-- **A computer** running Windows, macOS, or Linux- **Solution**: 
-
-```
-
-universal-literature-screening-toolkit/     ← Main folder (you'll download/clone this)- **PDF files** of the research papers you want to screen  1. Download Python from [python.org](https://www.python.org/downloads/)
-
-├─ input_pdfs/                              ← You'll create this folder for your PDFs
-
-│  ├─ paper1.pdf                           ← Your PDF files (any names are fine)- **Internet connection** for the one-time setup  2. During installation, **check "Add Python to PATH"**
-
-│  ├─ paper2.pdf
-
-│  └─ paper3.pdf- **15 minutes** for installation and your first screening  3. Restart PowerShell
-
-├─ query.txt                                ← You'll create this file with your search query
-
-├─ scripts/                                 ← Helper scripts (already included)  4. Try `py --version` instead of `python --version`
-
-│  ├─ setup_windows.ps1
-
-│  └─ run_tool.ps1---
-
-└─ run_screening.py                         ← Main program (already included)
-
-```**❌ "Execution Policy" error in PowerShell**
+5. **View Results** → Open HTML report (~2 min)- How to write a search query
 
 
 
-**Important to know:**## Step 1: Install the Toolkit (One-Time Setup)- **Cause**: Windows blocks unsigned scripts by default
-
-- ✅ Your **PDF files can have any names** you want
-
-- ⚠️ The **folder `input_pdfs` must be named exactly** that (lowercase, with underscore)- **Solution**: Run `Set-ExecutionPolicy Bypass -Scope Process` before setup
-
-- ⚠️ The **query file must be named `query.txt`** (unless you specify a different name later)
-
-- 📍 Everything must be in the same location as `run_screening.py`### 📁 Understanding the Folder Structure- **Note**: This only affects the current PowerShell window (safe)
+**Total time:** ~15 minutes + processing (1-2 seconds per PDF)- How to run your first screening**What you'll learn:****What you'll learn:**
 
 
 
-### Windows Setup (PowerShell)
+---- Where to find your results
 
 
 
-**What is PowerShell?** It's a command-line tool built into Windows. Don't worry—you just need to copy and paste a few commands!The toolkit needs files organized in a specific way. Here's what it looks like:**❌ "pip not found" or installation fails**
+## 1. Installation (5 Minutes)- How to install the toolkit (one-time setup)- How to install the toolkit (one-time setup)
 
 
 
-**Step 1: Open PowerShell**- **Cause**: pip not installed or environment issues
+### Windows**💡 Tip:** This is a lean tutorial focusing on the essential steps. For detailed explanations, troubleshooting, and advanced features, see the comprehensive [USER_GUIDE.md](USER_GUIDE.md).
 
-- Press `Windows Key + X` on your keyboard
 
-- Click "Windows PowerShell" or "Terminal"```- **Solution**: Re-run `.\scripts\setup_windows.ps1` which fixes pip automatically
 
-- A blue or black window will open
+Open PowerShell (`Win+X` → PowerShell), navigate to the toolkit folder, and run:- How to organize your PDF files- How to organize your PDF files
 
-universal-literature-screening-toolkit/     ← Main folder (you downloaded this)
 
-**Step 2: Navigate to the toolkit folder**
 
-```powershell├─ input_pdfs/                              ← Put your PDF files here (you'll create this)### Folder and File Issues
-
-# Replace "YourName" with your actual Windows username
-
-# Replace the path if you put the toolkit somewhere else│  ├─ paper1.pdf
+```powershell---
 
 cd C:\Users\YourName\Downloads\universal-literature-screening-toolkit
 
-```│  ├─ paper2.pdf**❌ "No PDFs found in input_pdfs"**
+Set-ExecutionPolicy Bypass -Scope Process- How to write a simple search query- How to write a simple search query
+
+.\scripts\setup_windows.ps1
+
+.\scripts\run_tests.ps1## What You'll Do
+
+```
+
+- How to run the screening and view results- How to run the screening and view results
+
+### macOS/Linux
+
+Here's a quick overview of the screening process:
+
+Open Terminal and run:
 
 
 
-**Tip:** If you don't know where you unzipped the toolkit, right-click the folder in File Explorer and select "Copy as path", then paste it after `cd `.│  └─ paper3.pdf- **Check 1**: Folder named exactly `input_pdfs` (not `Input_PDFs` or `input-pdfs`)
+```bash
+
+cd ~/Downloads/universal-literature-screening-toolkit1. **Install the toolkit** → Set up Python and required libraries (one-time, ~5 minutes)
+
+chmod +x scripts/setup_unix.sh scripts/run_tool.sh scripts/run_tests.sh
+
+./scripts/setup_unix.sh2. **Prepare your PDFs** → Organize research papers in a folder (~2 minutes)**Need more details?** See the full USER_GUIDE.md for advanced features and troubleshooting.**Need more details?** See the full USER_GUIDE.md for advanced features and troubleshooting.
+
+python3 -m pytest tests -q
+
+```3. **Write your query** → Define which papers to include/exclude (~3 minutes)
 
 
 
-**Step 3: Allow PowerShell to run the installer**├─ query.txt                                ← Your search query (you'll create this)- **Check 2**: PDFs are directly in the folder (not in a subfolder)
+✅ **Expected output:** "All tests passed successfully!"4. **Run the screening** → Let the toolkit process your papers (~1-2 seconds per paper)## Troubleshooting (plain language)
+
+
+
+❌ **Having issues?** See [Troubleshooting](USER_GUIDE.md#troubleshooting) in USER_GUIDE.md5. **Review results** → Check the HTML report and sorted papers (~5 minutes)
+
+
+
+------
+
+
+
+## 2. Prepare Your PDFs (2 Minutes)**What is this toolkit?** Think of it as an automated assistant that reads all your research papers and tells you which ones match your specific criteria—saving you hours of manual screening work.
+
+
+
+### Create Input Folder### Setup Issues
+
+
+
+**Windows:**---
 
 ```powershell
 
-Set-ExecutionPolicy Bypass -Scope Process├─ scripts/                                 ← Helper programs (already included)- **Check 3**: Files have `.pdf` extension (not `.PDF` or `.pdf.txt`)
+New-Item -ItemType Directory -Name "input_pdfs" -Force## 📋 What You'll Need
+
+```
+
+## Step 1: Install and Verify
+
+**macOS/Linux:**
+
+```bash**❌ "Python not found" or "'python' is not recognized"**
+
+mkdir -p input_pdfs
+
+```### 📁 Understanding Folder Structure
+
+
+
+### Add Your PDFsBefore starting, make sure you have:- **Cause**: Python not installed or not in PATH
+
+
+
+Copy all PDF files you want to screen into the `input_pdfs/` folder.The toolkit needs files organized in a specific way. Here's what your folder should look like:
+
+
+
+**Rules:**- **A computer** running Windows, macOS, or Linux- **Solution**: 
+
+- ✅ All PDFs directly in `input_pdfs/` (no subfolders)
+
+- ✅ Any file names are fine```
+
+- ⚠️ Folder name must be exactly `input_pdfs`
+
+universal-literature-screening-toolkit/     ← Main folder (you'll download/clone this)- **PDF files** of the research papers you want to screen  1. Download Python from [python.org](https://www.python.org/downloads/)
+
+---
+
+├─ input_pdfs/                              ← You'll create this folder for your PDFs
+
+## 3. Write Your Query (3 Minutes)
+
+│  ├─ paper1.pdf                           ← Your PDF files (any names are fine)- **Internet connection** for the one-time setup  2. During installation, **check "Add Python to PATH"**
+
+### Create Query File
+
+│  ├─ paper2.pdf
+
+Create a file named `query.txt` in the toolkit folder with your search criteria.
+
+│  └─ paper3.pdf- **15 minutes** for installation and your first screening  3. Restart PowerShell
+
+**Simple example:**
+
+```├─ query.txt                                ← You'll create this file with your search query
+
+forest* AND climate*
+
+```├─ scripts/                                 ← Helper scripts (already included)  4. Try `py --version` instead of `python --version`
+
+
+
+**Complex example:**│  ├─ setup_windows.ps1
+
+```
+
+(forest* OR woodland*) AND ("ecosystem service*" OR biodiversity) AND NOT economics│  └─ run_tool.ps1---
 
 ```
 
 └─ run_screening.py                         ← Main program (already included)
 
-**What does this do?** Windows blocks scripts for security by default. This command allows scripts to run in this PowerShell window only—it's safe and doesn't change your computer's security settings permanently.
+### Query Syntax
 
-```**❌ "query.txt not found"**
+```**❌ "Execution Policy" error in PowerShell**
 
-**Step 4: Run the automated setup**
+- `*` = wildcard (e.g., `forest*` matches forest, forests, forestry)
 
-```powershell- **Check 1**: File is named exactly `query.txt` (not `Query.txt` or `query.txt.txt`)
+- `"exact phrase"` = match exact phrase
 
-.\scripts\setup_windows.ps1
+- `AND` = both terms required
 
-```**Important Notes:**- **Check 2**: File is in the same folder as `run_screening.py`
+- `OR` = either term required**Important to know:**## Step 1: Install the Toolkit (One-Time Setup)- **Cause**: Windows blocks unsigned scripts by default
+
+- `NOT` = exclude papers with this term
+
+- `(parentheses)` = group terms- ✅ Your **PDF files can have any names** you want
 
 
+
+💡 **More examples:** See [Query Syntax Guide](USER_GUIDE.md#query-syntax) in USER_GUIDE.md- ⚠️ The **folder `input_pdfs` must be named exactly** that (lowercase, with underscore)- **Solution**: Run `Set-ExecutionPolicy Bypass -Scope Process` before setup
+
+
+
+---- ⚠️ The **query file must be named `query.txt`** (unless you specify a different name later)
+
+
+
+## 4. Run the Screening (1 Minute)- 📍 Everything must be in the same location as `run_screening.py`### 📁 Understanding the Folder Structure- **Note**: This only affects the current PowerShell window (safe)
+
+
+
+### Windows
+
+```powershell
+
+.\scripts\run_tool.ps1 -QueryFile "query.txt"### Windows Setup (PowerShell)
+
+```
+
+
+
+### macOS/Linux
+
+```bash**What is PowerShell?** It's a command-line tool built into Windows. Don't worry—you just need to copy and paste a few commands!The toolkit needs files organized in a specific way. Here's what it looks like:**❌ "pip not found" or installation fails**
+
+./scripts/run_tool.sh --query-file "query.txt"
+
+```
+
+
+
+### Alternative (All Platforms)**Step 1: Open PowerShell**- **Cause**: pip not installed or environment issues
+
+```bash
+
+python run_screening.py --input input_pdfs --output results --query-file query.txt- Press `Windows Key + X` on your keyboard
+
+```
+
+- Click "Windows PowerShell" or "Terminal"```- **Solution**: Re-run `.\scripts\setup_windows.ps1` which fixes pip automatically
+
+**Processing time:** ~1-2 seconds per PDF
+
+- A blue or black window will open
+
+---
+
+universal-literature-screening-toolkit/     ← Main folder (you downloaded this)
+
+## 5. View Results (2 Minutes)
+
+**Step 2: Navigate to the toolkit folder**
+
+Open `results/validation_report.html` in your web browser.
+
+```powershell├─ input_pdfs/                              ← Put your PDF files here (you'll create this)### Folder and File Issues
+
+### Results Structure
+
+# Replace "YourName" with your actual Windows username
+
+```
+
+results/# Replace the path if you put the toolkit somewhere else│  ├─ paper1.pdf
+
+├─ validation_report.html      ← Your screening report
+
+├─ validation_results.json     ← Raw datacd C:\Users\YourName\Downloads\universal-literature-screening-toolkit
+
+└─ sorted_pdfs/
+
+   ├─ include/                 ← Papers that matched```│  ├─ paper2.pdf**❌ "No PDFs found in input_pdfs"**
+
+   └─ exclude/                 ← Papers that didn't match
+
+```
+
+
+
+### The Report Shows**Tip:** If you don't know where you unzipped the toolkit, right-click the folder in File Explorer and select "Copy as path", then paste it after `cd `.│  └─ paper3.pdf- **Check 1**: Folder named exactly `input_pdfs` (not `Input_PDFs` or `input-pdfs`)
+
+
+
+- **Summary:** Total papers, included/excluded counts
+
+- **Included papers table:** Which terms matched, text snippets
+
+- **Your query:** Search criteria used**Step 3: Allow PowerShell to run the installer**├─ query.txt                                ← Your search query (you'll create this)- **Check 2**: PDFs are directly in the folder (not in a subfolder)
+
+
+
+**Next:** Manually review the included papers to confirm they're relevant.```powershell
+
+
+
+---Set-ExecutionPolicy Bypass -Scope Process├─ scripts/                                 ← Helper programs (already included)- **Check 3**: Files have `.pdf` extension (not `.PDF` or `.pdf.txt`)
+
+
+
+## Next Steps```
+
+
+
+🎉 **You've completed your first screening!**└─ run_screening.py                         ← Main program (already included)
+
+
+
+### Improve Your Results**What does this do?** Windows blocks scripts for security by default. This command allows scripts to run in this PowerShell window only—it's safe and doesn't change your computer's security settings permanently.
+
+
+
+1. Review the included papers```**❌ "query.txt not found"**
+
+2. Refine your query if needed
+
+3. Run screening again**Step 4: Run the automated setup**
+
+
+
+### Learn More```powershell- **Check 1**: File is named exactly `query.txt` (not `Query.txt` or `query.txt.txt`)
+
+
+
+See [USER_GUIDE.md](USER_GUIDE.md) for:.\scripts\setup_windows.ps1
+
+- **Troubleshooting** → Common errors and solutions
+
+- **FAQ** → Quick answers to common questions```**Important Notes:**- **Check 2**: File is in the same folder as `run_screening.py`
+
+- **Advanced Query Techniques** → Complex search strategies
+
+- **Configuration Options** → Customize the toolkit
+
+- **Best Practices** → Tips from experienced users
 
 **What happens now?** The script will:- ✅ Your **PDF files can have any names** you want- **Solution**: Specify custom path: `--query-file "path/to/my_query.txt"`
 
+### Get Help
+
 - Check if Python is installed (if not, it will guide you to install it)
 
-- Create a safe, isolated environment for the toolkit- ⚠️ The **folder names must be exact**: `input_pdfs` (not `Input_PDFs` or `pdfs`)
+- 📖 [USER_GUIDE.md](USER_GUIDE.md) - Comprehensive documentation
 
-- Install required software libraries
+- 🐛 [GitHub Issues](https://github.com/uhiltner/universal-literature-screening-toolkit/issues) - Report bugs- Create a safe, isolated environment for the toolkit- ⚠️ The **folder names must be exact**: `input_pdfs` (not `Input_PDFs` or `pdfs`)
 
-- This takes 2-3 minutes- ⚠️ The **query file must be named**: `query.txt` (unless you specify otherwise)### Processing Issues
+
+
+---- Install required software libraries
+
+
+
+**Happy screening!** 📚✨- This takes 2-3 minutes- ⚠️ The **query file must be named**: `query.txt` (unless you specify otherwise)### Processing Issues
+
 
 
 
