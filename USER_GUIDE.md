@@ -228,6 +228,244 @@ This section described the legacy block-based format and is retained only for tr
 
 ---
 
+## Refining Search Strings
+
+One of the most common challenges in systematic literature screening is getting the search query "just right". Too broad and you'll spend hours manually reviewing irrelevant papers. Too narrow and you'll miss important work. This section provides practical strategies for refining your queries based on your initial results.
+
+### Dealing with No Matches (0% inclusion)
+
+**Symptom**: Your screening returns 0 or very few included papers (< 5%).
+
+**Common Causes**:
+1. Query is too restrictive (too many AND conditions)
+2. Missing synonyms or variations of key terms
+3. NOT clauses eliminating relevant papers
+4. Exact phrases that don't match actual paper wording
+
+**Solutions to Try** (in order):
+
+1. **Add Synonyms with OR Logic**
+   ```
+   # Before (too narrow)
+   forest AND management
+   
+   # After (more inclusive)
+   (forest* OR woodland* OR silvicultur* OR forestry) AND (management OR planning OR governance)
+   ```
+
+2. **Use Wildcards Liberally**
+   ```
+   # Before
+   model AND simulation
+   
+   # After
+   model* AND simulat*
+   # Matches: model, models, modeling, modelling, simulate, simulation, simulations
+   ```
+
+3. **Remove NOT Clauses Temporarily**
+   ```
+   # Before
+   forest* AND management AND NOT economics
+   
+   # After (test without NOT first)
+   forest* AND management
+   # Then manually filter economics papers if needed
+   ```
+
+4. **Replace Exact Phrases with Flexible Terms**
+   ```
+   # Before (too specific)
+   "climate adapted management" AND "ecosystem services"
+   
+   # After (more flexible)
+   (climate* AND adapt* AND management) AND (ecosystem* AND service*)
+   ```
+
+5. **Test Individual Concepts First**
+   ```
+   # Step 1: Test each concept separately
+   forest*                          # Should match most papers
+   management                       # Should match many papers
+   "ecosystem service*"             # Test this specific phrase
+   
+   # Step 2: Combine concepts that work
+   (forest*) AND (management OR planning)
+   ```
+
+### Dealing with Too Many Matches (>80% inclusion)
+
+**Symptom**: Your screening includes almost everything (> 80% inclusion rate).
+
+**Common Causes**:
+1. Query is too broad (too many OR conditions, not enough AND)
+2. Very general terms that match almost any paper
+3. Missing specificity for your research question
+
+**Solutions to Try** (in order):
+
+1. **Add More AND Conditions**
+   ```
+   # Before (too broad)
+   forest* OR management
+   
+   # After (more specific)
+   forest* AND management AND ("ecosystem service*" OR biodiversity)
+   ```
+
+2. **Use Exact Phrases for Precise Concepts**
+   ```
+   # Before
+   carbon AND offset
+   
+   # After
+   "carbon offset*" AND ("voluntary market*" OR "carbon credit*")
+   ```
+
+3. **Add Methodological Requirements**
+   ```
+   # Before
+   forest* AND management
+   
+   # After
+   forest* AND management AND ("systematic review" OR "meta-analysis" OR "randomized controlled trial")
+   ```
+
+4. **Add NOT Clauses for Common False Positives**
+   ```
+   # Before
+   forest* AND management
+   
+   # After
+   forest* AND management AND NOT (furniture OR timber OR wood* AND product*)
+   ```
+
+5. **Narrow to Specific Contexts**
+   ```
+   # Before
+   biodiversity
+   
+   # After
+   biodiversity AND (tropical OR rainforest OR "cloud forest") AND conservation
+   ```
+
+### Adapting Queries for Domain-Specific Literature
+
+**The Swiss Grey Literature Problem** (Based on real user feedback):
+
+**Scenario**: Mirko was searching for Swiss grey literature about voluntary carbon offset markets in forests. His query included explicit requirements for "voluntary offset market*" terms, but Swiss documents often assume this context implicitly and don't state it explicitly.
+
+**Original Query** (too restrictive for Swiss context):
+```
+(forest*) AND 
+(IFM OR "improved forest management" OR reserve OR "adapted management") AND 
+("voluntary offset market*" OR "voluntary offset*" OR "voluntary market*") AND 
+(quantification* OR baseline* OR additionality)
+```
+
+**Problem**: Swiss regulations and reports discuss carbon offsets in forests but don't always use "voluntary" because it's understood in their context.
+
+**Solutions**:
+
+1. **Create Domain-Specific Variants**
+   ```
+   # Generic International Query
+   (forest*) AND ("voluntary carbon*" OR "carbon credit*") AND quantification*
+   
+   # Swiss-Adapted Query (remove "voluntary" requirement)
+   (forest*) AND (carbon AND (offset* OR credit* OR "Zertifikat*")) AND (quantification* OR baseline*)
+   ```
+
+2. **Use Language-Specific Terms**
+   ```
+   # Add German/French/Italian terms for Swiss context
+   (forest* OR Wald* OR "forêt*" OR "foresta*") AND 
+   (carbon OR CO2 OR Kohlenstoff OR carbone) AND 
+   (offset* OR Zertifikat* OR "crédit carbone")
+   ```
+
+3. **Make Implicit Concepts Explicit with OR**
+   ```
+   # Before (requires explicit mention)
+   "voluntary carbon market*"
+   
+   # After (allows implicit or explicit)
+   ("voluntary carbon market*" OR "carbon credit*" OR "offset* project*" OR climate* AND financ*)
+   ```
+
+4. **Test with Known Relevant Papers First**
+   - Take 3-5 Swiss papers you know should be included
+   - Run your query and check if they match
+   - If not, examine which terms are missing and adjust
+
+5. **Regional vs. Global Queries**
+   ```
+   # Strategy: Create separate queries for different literature types
+   
+   # Query A: International peer-reviewed (strict)
+   (forest*) AND ("voluntary carbon market*") AND quantification* AND additionality
+   
+   # Query B: Swiss grey literature (relaxed)
+   (Wald* OR forest*) AND (CO2 OR carbon) AND (Zertifikat* OR credit* OR offset*)
+   ```
+
+### General Refinement Strategies
+
+**Strategy 1: Iterative Refinement**
+```
+Run 1: Broad query → Review results → Identify patterns
+Run 2: Add specificity → Review again → Adjust
+Run 3: Final query → Full screening
+```
+
+**Strategy 2: Benchmark with Known Papers**
+1. Collect 10-20 papers you *know* should be included
+2. Test your query against these benchmarks
+3. If <80% of benchmarks match, refine the query
+4. Iterate until 90%+ benchmark coverage
+
+**Strategy 3: Pilot Testing**
+1. Create a small test set (~20-30 diverse papers)
+2. Run multiple query variants
+3. Manually review results to see which query works best
+4. Apply winning query to full dataset
+
+**Strategy 4: Consult Domain Experts**
+- Ask field experts: "What key terms would YOU search for?"
+- Review existing systematic reviews in your field
+- Check their search strategies and adapt
+
+### When to Stop Refining
+
+**Good Signs** (query is ready):
+- Inclusion rate: 10-40% (balanced)
+- Manual review of included papers: >85% truly relevant
+- Manual review of excluded papers: >90% correctly excluded
+- Query matches your known benchmark papers
+
+**Warning Signs** (keep refining):
+- <5% or >80% inclusion rate
+- Many obviously irrelevant papers included
+- Known relevant papers are excluded
+- Colleagues disagree with screening results
+
+### Pro Tips
+
+1. **Document Your Refinement Process**: Keep notes on what you tried and why. This is important for the "Methods" section of your systematic review paper.
+
+2. **Version Your Queries**: Save each iteration as `query_v1.txt`, `query_v2.txt`, etc. This creates an audit trail.
+
+3. **Test Edge Cases**: Make sure your query handles:
+   - Hyphenated terms: `eco-system` vs `ecosystem`
+   - Plural variations: `service` vs `services`
+   - British/American spelling: `analyse` vs `analyze`
+
+4. **Balance Precision and Recall**: You'll never get 100% of both. Decide what's more important for your review:
+   - High precision (few false positives) → Stricter query with AND
+   - High recall (few false negatives) → Broader query with OR
+
+---
+
 ## Understanding Results
 
 ### HTML Report Sections

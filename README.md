@@ -1,6 +1,6 @@
 # Universal Literature Screening Toolkit (ULST)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17202023.svg)](https://doi.org/10.5281/zenodo.17202023)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17063676.svg)](https://doi.org/10.5281/zenodo.17063676)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![JOSS Status](https://joss.theoj.org/papers/10.21105/joss.XXXXX/status.svg)](https://joss.theoj.org/papers/10.21105/joss.XXXXX)
 [![PyPI version](https://badge.fury.io/py/universal-literature-screening-toolkit.svg)](https://badge.fury.io/py/universal-literature-screening-toolkit)
@@ -78,16 +78,21 @@ Deprecation note: `--search-terms` and the block-based `search_terms.txt` file f
 If you use this toolkit in your research, please cite it as:
 
 ```bibtex
-  title        = {Universal Literature Screening Toolkit},
+@software{hiltner2025universal,
   author       = {Hiltner, Ulrike},
-  year         = {2025},
-  version      = {1.0.2},
-  url          = {https://github.com/uhiltner/universal-literature-screening-toolkit}
+  title        = {Universal Literature Screening Toolkit},
+  month        = sep,
+  year         = 2025,
+  publisher    = {Zenodo},
+  version      = {0.90.0},
+  doi          = {10.5281/zenodo.17063676},
+  url          = {https://doi.org/10.5281/zenodo.17063676}
+}
 ```
 
 ## Contributing
 
-Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) and the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+We welcome contributions. Please read [CONTRIBUTING.md](CONTRIBUTING.md) and our [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ## License
 

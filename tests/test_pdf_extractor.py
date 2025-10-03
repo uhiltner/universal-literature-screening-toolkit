@@ -51,7 +51,8 @@ class TestPDFExtraction:
             
             # No PDF files in input directory
             result = extract_pdfs_to_json(str(input_dir), str(output_dir))
-            assert result == 0
+            # Now returns (count, failed_list) tuple
+            assert result[0] == 0
     
     def test_extract_corrupt_pdf_handled_gracefully(self):
         """Test that corrupt PDF files are handled without crashing."""
@@ -68,8 +69,12 @@ class TestPDFExtraction:
             # Should handle gracefully without crashing
             result = extract_pdfs_to_json(str(input_dir), str(output_dir))
             
-            # Result should be 0 since extraction failed
-            assert result == 0
+            # Result should be (0, [failed_list]) since extraction failed
+            assert result[0] == 0
+            # Should have one failed PDF in the list
+            assert len(result[1]) == 1
+            assert result[1][0]['filename'] == 'corrupt.pdf'
+            assert 'PDF_CORRUPTED' in result[1][0]['error_code']
             
             # No JSON should be created for the corrupt file
             json_files = list(output_dir.glob("*.json"))

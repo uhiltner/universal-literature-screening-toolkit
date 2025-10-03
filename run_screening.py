@@ -27,7 +27,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent / "scripts"))
 from search_parser import parse_search_terms
 from validator import validate_papers, load_config
-from report_generator import generate_html_report, sort_pdf_files
+from report_generator import generate_reports, generate_html_report, sort_pdf_files
 
 # Optional: new query parser
 try:
@@ -160,8 +160,15 @@ def display_configuration(config):
     print(f"   Encoding: {text_proc.get('encoding', 'utf-8')}")
 
 def run_validation(input_dir, search_blocks, config, *, query_node=None):
-    """Run the validation process."""
+    """Run the validation process.
+    
+    Returns:
+        tuple: (validation_results, failed_pdfs_list) where failed_pdfs_list contains
+               dicts with 'filename', 'error_code', 'error_message'
+    """
     print("🔍 Starting validation process...")
+    
+    failed_pdfs = []
     
     try:
         # Step 1: Check if we need to extract PDFs first
@@ -182,13 +189,16 @@ def run_validation(input_dir, search_blocks, config, *, query_node=None):
             # Import here to handle missing libraries gracefully
             from pdf_extractor import extract_pdfs_to_json
             
-            extracted_count = extract_pdfs_to_json(input_dir, extraction_dir)
+            extracted_count, failed_pdfs = extract_pdfs_to_json(input_dir, extraction_dir)
             
-            if extracted_count == 0:
-                raise Exception("PDF extraction failed - no text could be extracted")
+            if extracted_count == 0 and len(failed_pdfs) == len(pdf_files):
+                raise Exception("PDF extraction failed - no text could be extracted from any PDF")
             
             json_source_dir = str(extraction_dir)
             print(f"✅ Extracted text from {extracted_count} PDF files")
+            
+            if failed_pdfs:
+                print(f"⚠️  {len(failed_pdfs)} PDF(s) failed extraction (see report for details)")
         
         elif json_files:
             print(f"📝 Using existing JSON files ({len(json_files)} found)")
@@ -202,27 +212,29 @@ def run_validation(input_dir, search_blocks, config, *, query_node=None):
         excluded = total_papers - included
         
         print(f"✅ Validation complete!")
-        print(f"   Total papers: {total_papers}")
+        print(f"   Successfully processed: {total_papers}")
+        if failed_pdfs:
+            print(f"   Failed extraction: {len(failed_pdfs)}")
         print(f"   Included: {included}")
         print(f"   Excluded: {excluded}")
         
-        return results
+        return results, failed_pdfs
         
     except Exception as e:
         print(f"❌ Validation failed: {e}")
-        return None
+        return None, failed_pdfs
 
-def generate_outputs(results, output_dir, search_blocks, config, *, query_string: str | None = None):
+def generate_outputs(results, output_dir, search_blocks, config, *, query_string: str | None = None, failed_pdfs: list | None = None):
     """Generate all output files and reports."""
     print(" Generating reports and organizing results...")
     
     output_path = Path(output_dir)
     
     try:
-        # Generate HTML report
+        # Generate HTML report with failed PDFs section
         if config.get("output_settings", {}).get("html_report", True):
             html_file = output_path / "validation_report.html"
-            generate_html_report(results, search_blocks, output_path, query_string=query_string)
+            generate_html_report(results, search_blocks, output_path, query_string=query_string, failed_pdfs=failed_pdfs)
             print(f" HTML report: {html_file}")
         
         # Save JSON results
@@ -231,6 +243,13 @@ def generate_outputs(results, output_dir, search_blocks, config, *, query_string
             with open(json_file, "w", encoding="utf-8") as f:
                 json.dump(results, f, ensure_ascii=False, indent=2)
             print(f" JSON results: {json_file}")
+        
+        # Save failed PDFs to separate file if any failed
+        if failed_pdfs:
+            failed_json = output_path / "failed_pdfs.json"
+            with open(failed_json, "w", encoding="utf-8") as f:
+                json.dump(failed_pdfs, f, ensure_ascii=False, indent=2)
+            print(f" Failed PDFs report: {failed_json}")
         
         # Sort PDFs (if available)
         try:
@@ -317,14 +336,14 @@ Examples:
     print()
     
     # Run validation
-    results = run_validation(args.input, search_blocks, config, query_node=query_node)
+    results, failed_pdfs = run_validation(args.input, search_blocks, config, query_node=query_node)
     if not results:
         sys.exit(1)
     
     print()
     
     # Generate outputs
-    if not generate_outputs(results, args.output, search_blocks, config, query_string=query_str_for_report):
+    if not generate_outputs(results, args.output, search_blocks, config, query_string=query_str_for_report, failed_pdfs=failed_pdfs):
         sys.exit(1)
     
     print()

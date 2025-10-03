@@ -65,8 +65,11 @@ class TestReportGeneration:
             assert "Literature Screening Results" in content
             assert "paper1.pdf" in content
             assert "paper2.pdf" in content
-            # Check the actual format used by the generator
-            assert "Total Papers Analyzed:</strong> 2" in content
+            # Check the actual format used by the generator (new format uses \n for line breaks)
+            assert "Successfully Processed:" in content
+            assert "2" in content
+            assert "Papers Included:" in content
+            assert "Papers Excluded:" in content
 
 
 class TestSummaryStatistics:
@@ -90,8 +93,11 @@ class TestSummaryStatistics:
             
             with open(stats_file, 'r', encoding='utf-8') as f:
                 stats = json.load(f)
-            
-            assert stats["total_papers"] == 3
+
+            # Check new field names
+            assert stats["successfully_processed"] == 3
+            assert stats["included_papers"] == 2
+            assert stats["excluded_papers"] == 1
             assert stats["included_papers"] == 2
             assert stats["excluded_papers"] == 1
             assert stats["inclusion_rate"] == 66.7
@@ -191,5 +197,7 @@ class TestReportIntegration:
             # Verify content consistency
             with open(output_dir / "summary_statistics.json", 'r') as f:
                 stats = json.load(f)
-            assert stats["total_papers"] == 1
+            # Check new field names
+            assert stats["successfully_processed"] == 1
+            assert stats["included_papers"] == 1
             assert stats["included_papers"] == 1
