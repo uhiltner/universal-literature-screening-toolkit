@@ -8,6 +8,52 @@
 
 The Universal Literature Screening Toolkit (ULST) is a configurable, cross-platform Python application designed to automate the initial screening phase of systematic literature reviews. It provides a domain-agnostic framework for processing large volumes of research papers against user-defined criteria, significantly accelerating evidence synthesis while maintaining methodological rigor.
 
+---
+
+## 🚀 New to This Tool? Start Here!
+
+**First time using the toolkit?** Welcome! Here's how to get started:
+
+### Getting the Toolkit
+
+**Option 1: Download as ZIP (Easiest for beginners)**
+1. Click the green `<> Code` button at the top of this page
+2. Select "Download ZIP"
+3. Extract the ZIP file to a location on your computer (e.g., `Downloads` folder)
+
+**Option 2: Clone with Git (For users familiar with Git)**
+```bash
+git clone https://github.com/uhiltner/universal-literature-screening-toolkit.git
+```
+
+### Reading Documentation Files
+
+This toolkit includes documentation in **Markdown format** (`.md` files). These are plain text files with simple formatting.
+
+**How to read Markdown files:**
+
+- **In your web browser**: If you're viewing this on GitHub, just click on any `.md` file and it will display nicely formatted
+- **In VS Code** (free editor): Download [VS Code](https://code.visualstudio.com/), open the file, press `Ctrl+Shift+V` (Windows/Linux) or `Cmd+Shift+V` (Mac) to see the formatted preview
+- **Other Markdown readers**: [Typora](https://typora.io/), [MarkText](https://github.com/marktext/marktext), or online viewers like [Dillinger](https://dillinger.io/)
+- **As plain text**: You can also open `.md` files in Notepad (Windows), TextEdit (Mac), or any text editor
+
+### Which Documentation Should I Read?
+
+This toolkit has **three levels of documentation**—choose based on your needs:
+
+| Document | Purpose | Best For | Reading Time |
+|----------|---------|----------|--------------|
+| **README.md** (this file) | Overview and technical details | Understanding what the tool does and how it works | 10 min |
+| **[QUICK_START.md](QUICK_START.md)** | Step-by-step tutorial for your first screening | Complete beginners who want to get started quickly | 15-20 min |
+| **[USER_GUIDE.md](USER_GUIDE.md)** | Comprehensive reference manual | Detailed explanations, troubleshooting, FAQ, advanced features | Reference |
+
+**👉 Recommended path for beginners:**
+1. Read this README (you're here!) to understand what the tool does
+2. Follow [QUICK_START.md](QUICK_START.md) to run your first screening
+3. Refer to [USER_GUIDE.md](USER_GUIDE.md) when you need help or want to learn advanced features
+
+---
+
 ## Statement of Need
 
 Systematic reviews, particularly those involving gray literature from sources with limited or basic search functionalities, present a significant challenge. Researchers often retrieve a broad collection of documents with no way to apply a complex, rigorous, and reproducible screening methodology. This manual screening process is not only a time-consuming bottleneck but is also prone to inconsistency and subjectivity, undermining the robustness of the research.
