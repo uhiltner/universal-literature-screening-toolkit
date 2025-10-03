@@ -1,6 +1,5 @@
 ---
 title: 'Universal Literature Screening Toolkit: A Domain-Agnostic Tool for Automated, Reproducible Literature Screening'
-doi: 10.5281/zenodo.17063676
 tags:
   - Python
   - systematic review
@@ -28,7 +27,9 @@ The Universal Literature Screening Toolkit (ULST) is a deterministic, cross-plat
 
 # Statement of Need
 
-A primary challenge in conducting systematic literature reviews is the inconsistent search capabilities of academic databases and digital libraries. While platforms like Scopus support complex, multi-faceted search strings, many institutional repositories, government websites, and other sources of peer-reviewed or gray literature offer only basic keyword search functionality. This limitation forces researchers to either use overly broad search terms, retrieving thousands of irrelevant documents, or to manually screen a large corpus of papers with a subjective and error-prone process. This manual "guesswork" is not only a significant time sink but also compromises the rigor and reproducibility required for high-quality evidence synthesis [@page2021prisma].
+A primary challenge in conducting systematic literature reviews is the inconsistent search capabilities of academic databases and digital libraries. While platforms like Scopus and Web of Science support complex, multi-faceted search strings, many institutional repositories, government websites, and other sources of peer-reviewed or gray literature offer only basic keyword search functionality. This limitation forces researchers to either use overly broad search terms, retrieving thousands of irrelevant documents, or to manually screen a large corpus of papers with a subjective and error-prone process. This manual "guesswork" is not only a significant time sink but also compromises the rigor and reproducibility required for high-quality evidence synthesis [@page2021prisma; @higgins2024cochrane].
+
+The challenge of screening literature efficiently while maintaining methodological rigor has been recognized across multiple research domains [@khalil2022tools; @thomas2017living]. Existing automated screening tools are often domain-specific, require substantial technical setup, or lack the flexibility needed for diverse research applications [@marshall2017automating]. Furthermore, many tools rely on cloud-based platforms or require extensive preprocessing, making them unsuitable for researchers working with sensitive data or those with limited technical infrastructure.
 
 The ULST is engineered to solve this specific problem. It decouples the search logic from the source platform, allowing a researcher to apply a sophisticated, pre-defined search string to *any* collection of PDF documents. This ensures that every paper is evaluated against the exact same objective criteria, regardless of where it was sourced. By automating this validation, the ULST eliminates the need for subjective manual checks, speeds up the screening process exponentially, and provides a transparent, auditable record of which papers met the inclusion criteria and why. It empowers researchers to maintain the highest standards of methodological rigor, even when working with documents from sources with limited technical capabilities.
 
@@ -64,10 +65,20 @@ This workflow ensures that the final selection of literature is the product of a
 
 # Acknowledgements
 
-We acknowledge the developers of the PyMuPDF and pdfplumber libraries, whose work provides the foundation for the robust PDF processing capabilities of this toolkit.
+I acknowledge the developers of the PyMuPDF and pdfplumber libraries, whose work provides the foundation for the robust PDF processing capabilities of this toolkit.
+
+# Statement on AI-Assisted Development
+
+During the development of this software, I used AI-assisted coding tools (GitHub Copilot) as a development aid for code implementation tasks. However, the research methodology, software architecture design, domain expertise in systematic literature review processes, and the identification of the core research problem addressed by this toolkit represent original scholarly work. All algorithmic logic, validation approaches, and research applications were conceived and designed through domain expertise in systematic review methodology.
 
 # References
 
-Page, M. J., McKenzie, J. E., Bossuyt, P. M., Boutron, I., Hoffmann, T. C., Mulrow, C. D., ... & Moher, D. (2021). The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. *PLoS medicine*, 18(3), e1003583.
+Higgins, J. P. T., Thomas, J., Chandler, J., Cumpston, M., Li, T., Page, M. J., & Welch, V. A. (Eds.). (2024). *Cochrane Handbook for Systematic Reviews of Interventions* (6.5 ed.). Cochrane. https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current (Accessed online 2025-09-25)
 
-Marshall, I. J., Kuiper, J., & Wallace, B. C. (2015). Automating biomedical evidence synthesis: RobotReviewer. In *Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing (Volume 2: Short Papers)* (pp. 7-12).
+Khalil, H., Ameen, D., & Zarnegar, A. (2022). Tools to support the automation of systematic reviews: a scoping review. *Journal of Clinical Epidemiology*, 144, 22-42. https://doi.org/10.1016/j.jclinepi.2021.12.005
+
+Marshall, I., Kuiper, J., Banner, E., & Wallace, B. C. (2017). Automating Biomedical Evidence Synthesis: RobotReviewer. In M. Bansal & H. Ji (Eds.), *Proceedings of ACL 2017, System Demonstrations* (pp. 7-12). Association for Computational Linguistics.
+
+Page, M. J., McKenzie, J. E., Bossuyt, P. M., Boutron, I., Hoffmann, T. C., Mulrow, C. D., ... & Moher, D. (2021). The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. *BMJ*, 372, n71. https://doi.org/10.1136/bmj.n71
+
+Thomas, J., Noel-Storr, A., Marshall, I., Wallace, B., McDonald, S., Mavergames, C., ... & Elliott, J. H. (2017). Living systematic reviews: 2. Combining human and machine effort. *Journal of Clinical Epidemiology*, 91, 31-37. https://doi.org/10.1016/j.jclinepi.2017.08.011

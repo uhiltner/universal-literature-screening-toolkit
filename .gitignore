@@ -51,6 +51,7 @@ Thumbs.db
 
 # Project specific
 results/
+results_test/
 test_results/
 debug_test.json
 fixed_json/
