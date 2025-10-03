@@ -1,72 +1,158 @@
 # Universal Literature Screening Toolkit — Comprehensive User Guide
 
-Complete documentation for researchers and students using the Universal Literature Screening Toolkit v1.0.2 (query-first workflow).
+**Welcome to the complete guide!** This documentation is designed for researchers at all skill levels, from complete beginners to advanced users.
+
+**Version:** 1.0.2  
+**Last Updated:** October 2025
 
 ---
 
 ## 📚 Table of Contents
 
-1. [Introduction](#introduction)
-2. [Installation & Setup](#installation--setup)
-3. [Testing Your Installation](#testing-your-installation)
-4. [Basic Usage (query.txt)](#basic-usage-query-first)
-5. [Boolean Query Syntax and Tips](#boolean-query-syntax-and-tips)
-6. [Advanced Configuration](#advanced-configuration)
-7. [Understanding Results](#understanding-results)
-8. [Troubleshooting](#troubleshooting)
-9. [Research Workflows](#research-workflows)
-10. [FAQ](#frequently-asked-questions)
+**Getting Started** (For Beginners)
+1. [Introduction](#introduction) - What this toolkit does and why you need it
+2. [Installation & Setup](#installation--setup) - Get the toolkit running on your computer
+3. [Testing Your Installation](#testing-your-installation) - Make sure everything works
+4. [Basic Usage](#basic-usage-query-first) - Screen your first batch of papers
+
+**Core Features** (For All Users)
+5. [Boolean Query Syntax and Tips](#boolean-query-syntax-and-tips) - Master search queries
+6. [Refining Search Strings](#refining-search-strings) - Fix common problems with your searches
+7. [Understanding Results](#understanding-results) - Interpret your screening reports
+
+**Advanced Topics**
+8. [Advanced Configuration](#advanced-configuration) - Customize the toolkit
+9. [Research Workflows](#research-workflows) - Real-world screening strategies
+10. [Troubleshooting](#troubleshooting) - Solve technical problems
+11. [FAQ](#frequently-asked-questions) - Quick answers to common questions
 
 ---
 
 ## Introduction
 
-The Universal Literature Screening Toolkit automates the initial screening phase of systematic literature reviews. Instead of manually reading hundreds of abstracts, you write one Boolean query and let the toolkit identify papers that meet your inclusion criteria.
+### What Does This Toolkit Do?
 
-### What It Does
-- **Extracts text** from PDF papers (title, abstract, keywords)
-- **Applies search criteria** via a Boolean query (AND/OR/NOT, parentheses, phrases, wildcards)
-- **Generates professional reports** with validation results
-- **Organizes papers** into include/exclude folders
-- **Saves time** - process hundreds of papers in minutes
+The Universal Literature Screening Toolkit **automates the tedious first step of systematic literature reviews**. Instead of manually reading hundreds or thousands of research paper abstracts one by one, you:
 
-### What It Doesn't Do
-- **Full-text analysis** (focuses on abstracts for screening speed)
-- **Quality assessment** (that's the next step in your review)
-- **Citation analysis** (use dedicated tools like Zotero)
+1. **Write a search query once** (like "show me papers about forests AND climate change")
+2. **Run the toolkit** (it reads all your PDFs automatically)
+3. **Get organized results** (papers sorted into include/exclude folders with a detailed report)
+
+**In plain English:** This toolkit is like having a research assistant who can read 100 papers in 2 minutes and tell you which ones match your criteria.
+
+### What It DOES Do ✅
+
+1. **Extracts text from PDFs**
+   - Reads the title, abstract, and keywords from each research paper
+   - Works with most standard PDF files
+   
+2. **Applies your search criteria**
+   - Uses Boolean logic (AND/OR/NOT) like advanced database searches
+   - Supports wildcards (`forest*`), exact phrases (`"climate change"`), and complex combinations
+   
+3. **Creates clear reports**
+   - Shows you exactly which papers matched and why
+   - Provides evidence snippets from each paper
+   - Generates both HTML (easy to read) and JSON (for data analysis)
+   
+4. **Organizes your papers**
+   - Automatically sorts PDFs into "include" and "exclude" folders
+   - Keeps your original files safe and unchanged
+   
+5. **Saves massive amounts of time**
+   - Process 100 papers in 2-3 minutes instead of several hours
+   - Consistent, objective application of your criteria
+
+### What It DOESN'T Do ❌
+
+1. **Full-text deep analysis**
+   - Focuses on abstracts and key sections for speed
+   - Not designed to read entire 50-page papers
+   
+2. **Quality assessment of research**
+   - Doesn't judge if a study is "good" or "bad"
+   - You still need to critically evaluate included papers
+   
+3. **Citation network analysis**
+   - Use dedicated tools like Zotero, Mendeley, or Covidence for reference management
+   
+4. **Replace human judgment**
+   - Automated screening is the first step, not the final decision
+   - Always manually review your included papers
 
 ---
 
 ## Installation & Setup
 
-### Quick Setup (Recommended)
+**Good news:** Installation is straightforward and only takes about 5 minutes. We've created automated scripts that do most of the work for you.
+
+**What you'll need:**
+- A computer (Windows, macOS, or Linux)
+- Internet connection (for downloading software)
+- About 500 MB of free disk space
+
+### Quick Setup (Recommended for Beginners)
 
 #### Windows Users
-```powershell
-# 1. Open PowerShell and navigate to toolkit folder
-cd path\to\universal-literature-screening-toolkit
 
-# 2. Allow scripts for this session
+**Follow these steps exactly:**
+
+```powershell
+# Step 1: Open PowerShell
+#   Press Windows Key + X, then select "Windows PowerShell"
+
+# Step 2: Navigate to toolkit folder (replace YourName with your username)
+cd C:\Users\YourName\Downloads\universal-literature-screening-toolkit
+
+# Step 3: Allow the script to run (this is safe - only affects this window)
 Set-ExecutionPolicy Bypass -Scope Process
 
-# 3. Run automated setup (creates isolated environment)
+# Step 4: Run automated setup (installs Python environment and all needed software)
 .\scripts\setup_windows.ps1
 
-# 4. Test installation
+# Step 5: Test that everything works
 .\scripts\run_tests.ps1
 ```
 
+**What happens during setup:**
+- Creates an isolated Python environment (won't affect other programs)
+- Installs PDF processing libraries
+- Sets up the testing framework
+- Takes 2-3 minutes total
+
+**Success looks like:**
+You'll see `✅ All tests passed successfully!` at the end.
+
 #### macOS/Linux Users
+
+**Follow these steps exactly:**
+
 ```bash
-# 1. Make scripts executable (first time only)
+# Step 1: Open Terminal
+#   macOS: Press Cmd+Space, type "Terminal", press Enter
+#   Linux: Press Ctrl+Alt+T
+
+# Step 2: Navigate to toolkit folder
+cd ~/Downloads/universal-literature-screening-toolkit
+
+# Step 3: Make scripts executable (first time only)
 chmod +x scripts/setup_unix.sh scripts/run_tool.sh scripts/run_tests.sh
 
-# 2. Run automated setup
+# Step 4: Run automated setup
 ./scripts/setup_unix.sh
 
-# 3. Test installation  
-python -m pytest tests -q
+# Step 5: Test installation  
+python3 -m pytest tests -q
 ```
+
+**What happens during setup:**
+- Creates an isolated Python environment
+- Installs PDF processing libraries  
+- Sets up the testing framework
+- Takes 2-3 minutes total
+
+**Success looks like:**
+You'll see test results with no errors.
 
 ### Manual Setup (Alternative)
 If you prefer manual control or the scripts don't work:
@@ -90,40 +176,103 @@ python -m pytest tests/ -v
 
 ## Testing Your Installation
 
-**Always test your installation before starting research!**
+**Why test?** Testing ensures everything is installed correctly before you start working with your actual research papers. It only takes 30 seconds!
 
-### Windows Testing
+### Running Tests
+
+**Windows Testing:**
 ```powershell
-# Run comprehensive test suite
+# Basic test (recommended for beginners)
 .\scripts\run_tests.ps1
 
-# Run with detailed output
+# Detailed output (if you want to see everything)
 .\scripts\run_tests.ps1 -Verbose
-
-# Test specific components
-.\scripts\run_tests.ps1 -Specific test_pdf_extractor.py -Verbose
 ```
 
-### What Tests Cover
-- **PDF text extraction** (PyMuPDF and pdfplumber libraries)
-- **Search term parsing** (wildcards, quoted phrases, regex)
-- **Validation logic** (AND/OR operators, block combinations)
-- **Report generation** (HTML and JSON outputs)
-- **Error handling** (corrupt files, missing data)
+**macOS/Linux Testing:**
+```bash
+# Basic test
+python3 -m pytest tests -q
 
-### Expected Results
-```
-[ OK ] All tests passed successfully!
-[ OK ] All tests passed successfully! ✅
+# Detailed output
+python3 -m pytest tests -v
 ```
 
-*Note: The 5 warnings are harmless PyMuPDF deprecation warnings - your installation is perfect!*
+### What Gets Tested
+
+The test suite checks that all major components work correctly:
+
+1. **PDF Text Extraction**
+   - Tests the ability to read text from PDF files
+   - Checks both primary (PyMuPDF) and backup (pdfplumber) methods
+   
+2. **Search Query Processing**
+   - Verifies wildcards work (`forest*` matching `forest`, `forests`, etc.)
+   - Tests exact phrases (`"climate change"`)
+   - Checks Boolean operators (AND, OR, NOT)
+   
+3. **Validation Logic**
+   - Ensures papers are correctly classified as include/exclude
+   - Tests complex query combinations
+   
+4. **Report Generation**
+   - Confirms HTML and JSON files are created properly
+   - Checks that evidence snippets appear correctly
+   
+5. **Error Handling**
+   - Tests behavior with corrupted files
+   - Checks handling of missing or incomplete data
+
+### What Success Looks Like
+
+**Windows:**
+```
+✅ All tests passed successfully!
+```
+
+**macOS/Linux:**
+```
+===================== test session starts ======================
+collected 25 items
+
+tests/test_pdf_extractor.py .....                        [ 20%]
+tests/test_validator.py .........                         [ 56%]
+tests/test_report_generator.py .....                     [ 76%]
+tests/test_toolkit.py ......                             [100%]
+
+===================== 25 passed in 3.2s ======================
+```
+
+**Don't worry about warnings!** You might see 5-10 warnings about PyMuPDF deprecation. These are harmless - the toolkit still works perfectly. Warnings are not errors.
+
+**If tests fail:** See the [Troubleshooting](#troubleshooting) section below.
 
 ---
 
-## Basic Usage (query-first)
+## Basic Usage (Query-First)
+
+**This is the heart of the toolkit!** Follow these 4 simple steps to screen your papers.
 
 ### Step 1: Prepare Your PDFs
+
+**Create the input folder:**
+
+Create a folder called `input_pdfs` in the same location as `run_screening.py`:
+
+**Windows:**
+```powershell
+New-Item -ItemType Directory -Name "input_pdfs" -Force
+```
+
+**macOS/Linux:**
+```bash
+mkdir -p input_pdfs
+```
+
+**Add your PDF files:**
+
+Copy all your research paper PDFs into this folder. The structure should look like:
+
 ```
 input_pdfs/
 ├── paper1.pdf
@@ -132,15 +281,33 @@ input_pdfs/
 └── ...
 ```
 
-### Step 2: Define Search Criteria as a Boolean query
-Create a file named `query.txt` with one Boolean expression (lines starting with `#` are comments and ignored):
+**Important:**
+- ✅ Files can have any names
+- ✅ Put all PDFs directly in `input_pdfs` (no subfolders)
+- ✅ Works with any number of PDFs (tested with 100+)
 
+### Step 2: Write Your Search Query
+
+**Create a file named `query.txt` in the toolkit folder** (same place as `run_screening.py`).
+
+**What is a query?** Think of it like a Google search, but more powerful. You're telling the toolkit exactly what to look for in each paper.
+
+**Simple example:**
 ```
-# Example: AI in clinical context; include study designs; exclude purely economic papers
-("artificial intelligence" OR "machine learning" OR "deep learning")
-AND (healthcare OR medical* OR clinical)
-AND ("systematic review" OR "randomized controlled trial" OR meta-analysis)
-AND NOT (economics OR cost*)
+forest* AND climate*
+```
+This finds papers that mention both "forest" (or forests, forestry, etc.) AND "climate" (or climatic, etc.)
+
+**Real-world example for a systematic review:**
+```
+# My systematic review on forest ecosystem services
+# Lines starting with # are comments and are ignored
+
+(forest* OR woodland* OR silvicultur*) 
+AND 
+("ecosystem service*" OR biodiversity OR "natural capital") 
+AND NOT 
+(economics OR cost-benefit)
 ```
 
 ### Step 3: Run Screening
